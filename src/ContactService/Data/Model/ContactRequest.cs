@@ -10,12 +10,12 @@ namespace ContactService.Data.Model
     {
         public int Id { get; set; }
         
-		[ForeignKey("Tenant")]
+        [ForeignKey("Tenant")]
         public int? TenantId { get; set; }
         
-		[Index("NameIndex", IsUnique = false)]
+        [Index("NameIndex", IsUnique = false)]
         [Column(TypeName = "VARCHAR")]        
-		public string Name { get; set; }
+        public string Name { get; set; }
 
         public string Email { get; set; }
 
@@ -23,13 +23,13 @@ namespace ContactService.Data.Model
 
         public DateTime CreatedOn { get; set; }
         
-		public DateTime LastModifiedOn { get; set; }
+        public DateTime LastModifiedOn { get; set; }
         
-		public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         
-		public string LastModifiedBy { get; set; }
+        public string LastModifiedBy { get; set; }
         
-		public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual Tenant Tenant { get; set; }
     }
