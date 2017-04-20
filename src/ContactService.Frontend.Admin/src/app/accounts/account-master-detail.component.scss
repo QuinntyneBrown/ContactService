@@ -1,0 +1,20 @@
+@import "../../styles/base/_all";
+
+ce-account-master-detail {
+    display:block;
+	@extend .view-card;
+
+    ce-account-edit-embed,
+    ce-account-list-embed {
+        float:left;
+        display:inline-block;
+        position:relative;
+        width:50%;
+    }
+}
+
+ce-account-master-detail::after {
+    clear:both;
+    display:block;
+    content:" ";
+}

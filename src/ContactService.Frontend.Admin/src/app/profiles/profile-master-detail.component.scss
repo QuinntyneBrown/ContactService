@@ -1,0 +1,20 @@
+@import "../../styles/base/_all";
+
+ce-profile-master-detail {
+    display:block;
+	@extend .view-card;
+
+    ce-profile-edit-embed,
+    ce-profile-list-embed {
+        float:left;
+        display:inline-block;
+        position:relative;
+        width:50%;
+    }
+}
+
+ce-profile-master-detail::after {
+    clear:both;
+    display:block;
+    content:" ";
+}
