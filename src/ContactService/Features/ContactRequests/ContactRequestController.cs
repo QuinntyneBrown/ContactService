@@ -23,6 +23,7 @@ namespace ContactService.Features.ContactRequests
 
         [Route("add")]
         [HttpPost]
+        [AllowAnonymous]
         [ResponseType(typeof(AddOrUpdateContactRequestResponse))]
         public async Task<IHttpActionResult> Add(AddOrUpdateContactRequestRequest request)
         {

@@ -24,7 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>2.2</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
     <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="dist\app.js" />
     <Content Include="index.html" />
     <Content Include="lib\moment.min.js" />
     <Content Include="lib\native-shim.js" />
@@ -371,7 +372,9 @@
     <Content Include="src\app\users\users.component.scss">
       <DependentUpon>users.component.ts</DependentUpon>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="src\app\pagination\paged-list.scss" />
     <Content Include="src\styles\base\_all.scss" />
     <Content Include="src\styles\base\_grid-settings.scss" />
@@ -536,9 +539,7 @@
     <TypeScriptCompile Include="src\app\contact-requests\index.ts" />
     <TypeScriptCompile Include="src\app\contact-requests\contact-request.model.ts" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ContactService\ContactService.csproj">
       <Project>{a8711bc3-f343-4e44-b045-349942559795}</Project>
@@ -550,6 +551,9 @@
     <Content Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
+    <Content Include="dist\app.js.map" />
+    <None Include="Properties\PublishProfiles\contact-service - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\contact-service - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
