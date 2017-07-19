@@ -1,6 +1,6 @@
 ﻿export const environment = {
     production: true,
     applicationContextName: "ContactServiceApp",
-    baseUrl: "http://ContactService.azurewebsites.net",
+    baseUrl: "http://contact.quinntynebrown.com",
     useUrlRouting: true
 };

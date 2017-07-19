@@ -157,6 +157,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
@@ -173,8 +175,6 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -263,6 +263,18 @@
     </Content>
     <Content Include="src\app\contact-requests\contact-request-master-detail.component.scss">
       <DependentUpon>contact-request-master-detail.component.ts</DependentUpon>
+    </Content>
+    <Content Include="src\app\contacts\contact-edit-embed.component.css">
+      <DependentUpon>contact-edit-embed.component.html</DependentUpon>
+    </Content>
+    <Content Include="src\app\contacts\contact-item-embed.component.css">
+      <DependentUpon>contact-item-embed.component.html</DependentUpon>
+    </Content>
+    <Content Include="src\app\contacts\contact-master-detail.component.css">
+      <DependentUpon>contact-master-detail.component.html</DependentUpon>
+    </Content>
+    <Content Include="src\app\contacts\contact-paginated-list-embed.component.css">
+      <DependentUpon>contact-paginated-list-embed.component.html</DependentUpon>
     </Content>
     <Content Include="src\app\profiles\profile-edit-embed.component.html">
       <DependentUpon>profile-edit-embed.component.ts</DependentUpon>
@@ -385,6 +397,10 @@
     <Content Include="src\styles\base\select.scss" />
     <Content Include="src\styles\base\view-card.scss" />
     <Content Include="webpack.config.js" />
+    <Content Include="src\app\contacts\contact-edit-embed.component.html" />
+    <Content Include="src\app\contacts\contact-paginated-list-embed.component.html" />
+    <Content Include="src\app\contacts\contact-item-embed.component.html" />
+    <Content Include="src\app\contacts\contact-master-detail.component.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -411,13 +427,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -426,6 +435,18 @@
   </Target>
   -->
   <ItemGroup>
+    <TypeScriptCompile Include="src\app\contacts\contact-edit-embed.component.ts">
+      <DependentUpon>contact-edit-embed.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\contacts\contact-item-embed.component.ts">
+      <DependentUpon>contact-item-embed.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\contacts\contact-master-detail.component.ts">
+      <DependentUpon>contact-master-detail.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\contacts\contact-paginated-list-embed.component.ts">
+      <DependentUpon>contact-paginated-list-embed.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\environment.ts" />
     <TypeScriptCompile Include="src\app\index.ts" />
     <TypeScriptCompile Include="src\app\pagination\ipaged-list.d.ts" />
@@ -538,6 +559,10 @@
     <TypeScriptCompile Include="src\app\contact-requests\contact-request.service.ts" />
     <TypeScriptCompile Include="src\app\contact-requests\index.ts" />
     <TypeScriptCompile Include="src\app\contact-requests\contact-request.model.ts" />
+    <TypeScriptCompile Include="src\app\contacts\contact.actions.ts" />
+    <TypeScriptCompile Include="src\app\contacts\contact.service.ts" />
+    <TypeScriptCompile Include="src\app\contacts\index.ts" />
+    <TypeScriptCompile Include="src\app\contacts\contact.model.ts" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -548,10 +573,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
-    <Content Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
     <Content Include="dist\app.js.map" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\contact-service - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\contact-service - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
@@ -565,4 +590,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
 </Project>

@@ -1,0 +1,15 @@
+ce-contact-edit-embed {    
+    display:block;
+    margin-bottom:40px;
+}
+
+ce-contact-edit-embed h2,
+ce-contact-edit-embed .contact-create {
+    cursor:pointer;
+
+}
+
+ce-contact-edit-embed .contact-description {
+    height:300px;
+    margin-bottom:30px;
+}

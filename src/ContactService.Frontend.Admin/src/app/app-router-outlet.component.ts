@@ -9,6 +9,7 @@ export class AppRouterOutletComponent extends RouterOutlet {
     connectedCallback() {
         this.setRoutes([
             { path: "/", name: "contact-request-master-detail", authRequired: true },
+            { path: "/contacts", name: "contact-master-detail", authRequired: true },
             { path: "/register", name: "account-register" },
             { path: "/login", name: "login" },
             { path: "/error", name: "error" },

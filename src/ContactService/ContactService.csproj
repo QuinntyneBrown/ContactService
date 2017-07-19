@@ -32,11 +32,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AWSSDK.Core.3.3.10.1\lib\net45\AWSSDK.Core.dll</HintPath>
+      <HintPath>..\..\packages\AWSSDK.Core.3.3.10.6\lib\net45\AWSSDK.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AWSSDK.S3.3.3.5.10\lib\net45\AWSSDK.S3.dll</HintPath>
+      <HintPath>..\..\packages\AWSSDK.S3.3.3.5.11\lib\net45\AWSSDK.S3.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="container, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -225,6 +225,9 @@
     <Compile Include="Data\Helpers\SoftDeleteQueryVisitor.cs" />
     <Compile Include="Data\Model\ILoggable.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
+    <Compile Include="Features\Contacts\ContactsHub.cs" />
+    <Compile Include="Features\Core\BaseApiController.cs" />
+    <Compile Include="Features\Core\BaseHub.cs" />
     <Compile Include="Features\Core\Cache.cs" />
     <Compile Include="Features\Core\CacheProvider.cs" />
     <Compile Include="Features\Core\DateExtensions.cs" />
@@ -294,9 +297,15 @@
     <Compile Include="Features\ContactRequests\RemoveContactRequestCommand.cs" />
     <Compile Include="Features\ContactRequests\ContactRequestApiModel.cs" />
     <Compile Include="Features\ContactRequests\ContactRequestController.cs" />
+    <Compile Include="Data\Model\Contact.cs" />
+    <Compile Include="Features\Contacts\AddOrUpdateContactCommand.cs" />
+    <Compile Include="Features\Contacts\GetContactsQuery.cs" />
+    <Compile Include="Features\Contacts\GetContactByIdQuery.cs" />
+    <Compile Include="Features\Contacts\RemoveContactCommand.cs" />
+    <Compile Include="Features\Contacts\ContactApiModel.cs" />
+    <Compile Include="Features\Contacts\ContactsController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\ContactRequests\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +313,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\packages\AWSSDK.S3.3.3.5.10\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+    <Analyzer Include="..\..\packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

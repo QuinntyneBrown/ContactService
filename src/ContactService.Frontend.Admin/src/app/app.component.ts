@@ -10,6 +10,7 @@ export class AppComponent extends HTMLElement {
     ) {
         super();
     }
+
     connectedCallback() {
         this._storage.put({ name: TENANT_KEY, value: "489902a0-a39d-4556-94b4-544d33d5ff5b" });
         this.innerHTML = `<style>${styles}</style>${template}`;

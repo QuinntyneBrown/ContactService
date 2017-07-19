@@ -1,0 +1,37 @@
+{
+  "name": "contactservice",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "watch": "webpack --watch"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "4.3.0",
+    "@angular/common": "4.3.0",
+    "@angular/compiler": "4.3.0",
+    "@angular/compiler-cli": "4.3.0",
+    "@angular/core": "4.3.0",
+    "@angular/forms": "4.3.0",
+    "@angular/http": "4.3.0",
+    "@angular/platform-browser": "4.3.0",
+    "@angular/platform-browser-dynamic": "4.3.0",
+    "@angular/platform-server": "4.3.0",
+    "@angular/router": "4.3.0",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "6.0.60",
+    "angular2-template-loader": "0.6.2",
+    "awesome-typescript-loader": "3.2.1",
+    "core-js": "2.4.1",
+    "html-loader": "0.4.5",
+    "live-server": "1.2.0",
+    "node-sass": "4.5.3",
+    "raw-loader": "0.5.1",
+    "rxjs": "5.4.2",
+    "sass-loader": "6.0.6",
+    "typescript": "2.4.0",
+    "webfontloader": "1.6.28",
+    "webpack": "3.1.0",
+    "zone.js": "0.8.12"
+  }
+}

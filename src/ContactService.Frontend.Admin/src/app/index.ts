@@ -1,5 +1,6 @@
 export * from "./accounts";
 export * from "./contact-requests";
+export * from "./contacts";
 export * from "./pagination";
 export * from "./profiles";
 export * from "./router";
