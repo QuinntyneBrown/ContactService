@@ -1,10 +1,8 @@
-using MediatR;
 using ContactService.Data;
 using ContactService.Features.Core;
+using MediatR;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Data.Entity;
 
 namespace ContactService.Features.Contacts
@@ -42,7 +40,5 @@ namespace ContactService.Features.Contacts
             private readonly ContactServiceContext _context;
             private readonly ICache _cache;
         }
-
     }
-
 }

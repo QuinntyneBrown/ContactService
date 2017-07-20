@@ -1,6 +1,7 @@
 ﻿using ContactService.Features.Core;
 using ContactService.Security;
 using MediatR;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
@@ -48,7 +49,7 @@ namespace ContactService
 
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            config.Filters.Add(new AuthorizeAttribute());
+            config.Filters.Add(new System.Web.Http.AuthorizeAttribute());
 
             var jSettings = new JsonSerializerSettings();
             jSettings.Formatting = Formatting.Indented;
@@ -56,7 +57,11 @@ namespace ContactService
             jSettings.ContractResolver = new SignalRContractResolver();
             config.Formatters.JsonFormatter.SerializerSettings = jSettings;
 
+            var serializer = JsonSerializer.Create(jSettings);
+
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => serializer);
 
             config.MapHttpAttributeRoutes();
         }

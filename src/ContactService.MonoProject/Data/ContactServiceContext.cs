@@ -16,7 +16,6 @@ namespace ContactService.Data
         DbSet<Account> Accounts { get; set; }
         DbSet<Profile> Profiles { get; set; }
         DbSet<Contact> Contacts { get; set; }
-        DbSet<ContactRequest> ContactRequests { get; set; }
 
         Task<int> SaveChangesAsync();
     }
@@ -36,7 +35,7 @@ namespace ContactService.Data
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<ContactRequest> ContactRequests { get; set; }
+
         public DbSet<Contact> Contacts { get; set; }
 
         public override int SaveChanges()

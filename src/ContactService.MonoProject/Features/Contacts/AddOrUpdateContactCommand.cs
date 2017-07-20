@@ -3,10 +3,10 @@ using ContactService.Data;
 using ContactService.Data.Model;
 using ContactService.Features.Core;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Data.Entity;
+using Microsoft.AspNet.SignalR;
+using ContactService.Events;
 
 namespace ContactService.Features.Contacts
 {
@@ -22,10 +22,11 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, ICache cache, IEventHubProvider eventHubProvider)
             {
                 _context = context;
                 _cache = cache;
+                _hubContext = eventHubProvider.Get();
             }
 
             public async Task<Response> Handle(Request request)
@@ -40,14 +41,29 @@ namespace ContactService.Features.Contacts
                 }
 
                 entity.Name = request.Contact.Name;
+
+                entity.Email = request.Contact.Email;
+
+                entity.Firstname = request.Contact.Firstname;
+
+                entity.Lastname = request.Contact.Lastname;
+
+                entity.PhoneNumber = request.Contact.PhoneNumber;
+
+                entity.City = request.Contact.City;
+
+                entity.StreetAddress = request.Contact.StreetAddress;
                 
                 await _context.SaveChangesAsync();
+                
+                _hubContext.Clients.All.events(new EntityAddedEvent(request,entity));
 
                 return new Response();
             }
 
             private readonly ContactServiceContext _context;
             private readonly ICache _cache;
+            private readonly IHubContext _hubContext;
         }
     }
 }

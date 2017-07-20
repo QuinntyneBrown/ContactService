@@ -1,0 +1,25 @@
+<h1>Create Contact</h1>
+
+<form novalidate [formGroup]="form">
+
+    <label>Email</label>
+    <input type="text" placeholder="Email" id="email" formControlName="email" />
+
+    <label>Firstname</label>
+    <input type="text" placeholder="Firstname" id="firstname" formControlName="firstname" />
+
+    <label>Lastname</label>
+    <input type="text" placeholder="Lastname" id="lastname" formControlName="lastname" />
+
+    <label>Street Address</label>
+    <input type="text" placeholder="Street Address" id="streetAddress" formControlName="streetAddress" />
+
+    <label>City</label>
+    <input type="text" placeholder="City" id="city" formControlName="city" />
+
+    <label>Phone Number</label>
+    <input type="text" placeholder="Phone Number" id="phoneNumber" formControlName="phoneNumber" />
+
+    <button type="submit" (click)="tryToSave.emit({ detail:{ contact: form.value } })">Save</button>
+
+</form> 
