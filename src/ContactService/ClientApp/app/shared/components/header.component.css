@@ -1,7 +1,9 @@
 :host {
-    display:block;
+    display:grid;
     color:#fff;
     background-color:#000;
+    grid-template-columns: 200px 1fr;
+
 }
 
 h1 {
@@ -10,4 +12,22 @@ h1 {
     font-size:1.15em;
     line-height:3em;
     font-weight:100;
+    grid-column:1;
+}
+
+ul {
+    grid-column: 2;
+    text-align:right;
+    margin: 0px 20px;
+}
+
+ul li {
+    list-style:none;
+    display:inline-block;    
+}
+
+a {
+    color:#fff;
+    text-decoration:none;   
+    line-height:42px; 
 }

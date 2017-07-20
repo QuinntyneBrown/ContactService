@@ -18,7 +18,7 @@ const providers = [
     EventHub,
     AuthGuardService,
     AuthenticationService,
-    LoginRedirectService,
+    LoginRedirectService,    
     Storage
 ];
 

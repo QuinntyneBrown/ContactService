@@ -1,16 +1,20 @@
-﻿import { constants } from "../constants";
-import { Injectable } from "@angular/core";
+﻿import {constants} from "../constants";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class Storage {
     constructor() {
         this.onPageHide = this.onPageHide.bind(this);
         window.addEventListener("pagehide", this.onPageHide);
+        this.items$ = new BehaviorSubject<any>(this.items);
     }
 
     private onPageHide() {
-        localStorage.setItem(constants.STORAGE_KEY, JSON.stringify(this._items));
+        localStorage.setItem(constants.STORAGE_KEY, JSON.stringify(this._items));        
     }
+
+    public items$: BehaviorSubject<any>;
 
     private _items = null;
 
@@ -26,7 +30,8 @@ export class Storage {
     }
 
     public set items(value: Array<any>) {
-        this._items = value;
+        this._items = value;        
+        this.items$.next(this.items);
     }
 
     public get = (options: { name: string }) => {
@@ -54,6 +59,8 @@ export class Storage {
             this.items = items;
             items = null;
         }
+
+        this.items$.next(this.items);
     }
 
     public clear = () => {

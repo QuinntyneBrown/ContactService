@@ -14,6 +14,9 @@ export class LoginPageComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
+
+        this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: null });
+
         const loginCredentials = this._storage.get({ name: constants.LOGIN_CREDENTIALS });
 
         if (loginCredentials && loginCredentials.rememberMe) {                      
