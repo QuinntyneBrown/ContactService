@@ -24,23 +24,25 @@ export class ContactEditComponent {
         this.tryToSave = new EventEmitter();
     }
 
-    ngAfterContentInit() {
-        this.form.patchValue({
-            email: this.contact.email,
-            firstName: this.contact.firstName,
-            lastName: this.contact.lastName,
-            streetAddress: this.contact.streetAddress,
-            city: this.contact.city,
-            phoneNumber: this.contact.phoneNumber
-        });
-    }
-
     @Output()
     public tryToSave: EventEmitter<any>;
 
-    @Input()
-    public contact: any = {};
+    private _contact: any = {};
 
+    @Input("contact")
+    public set contact(value) {
+        this._contact = value;
+
+        this.form.patchValue({
+            email: this._contact.email,
+            firstName: this._contact.firstName,
+            lastName: this._contact.lastName,
+            streetAddress: this._contact.streetAddress,
+            city: this._contact.city,
+            phoneNumber: this._contact.phoneNumber
+        });
+    }
+   
     public form = new FormGroup({
         email: new FormControl('', [Validators.required]),
         firstname: new FormControl('', [Validators.required]),

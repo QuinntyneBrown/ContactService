@@ -12,7 +12,7 @@ export class ContactListItemComponent {
     public contact: any = {};
     
     @Output()
-    public select: EventEmitter<any> = new EventEmitter();
+    public edit: EventEmitter<any> = new EventEmitter();
 
     @Output()
     public delete: EventEmitter<any> = new EventEmitter();        

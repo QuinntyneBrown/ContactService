@@ -10,7 +10,7 @@ export class ContactListComponent {
     public contacts: Array<any> = [];
 
     @Output()
-    public select: EventEmitter<any> = new EventEmitter();
+    public edit: EventEmitter<any> = new EventEmitter();
 
     @Output()
     public delete: EventEmitter<any> = new EventEmitter();
