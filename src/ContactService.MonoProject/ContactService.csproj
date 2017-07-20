@@ -312,7 +312,7 @@
     <Compile Include="Data\Model\Tenant.cs" />
     <Compile Include="Data\Model\User.cs" />
     <Compile Include="Events\Constants.cs" />
-    <Compile Include="Events\EntityAddedEvent.cs" />
+    <Compile Include="Events\EntityAddedOrUpdatedEvent.cs" />
     <Compile Include="Events\EntityDeletedEvent.cs" />
     <Compile Include="Events\EventHub.cs" />
     <Compile Include="Events\EventHubProvider.cs" />

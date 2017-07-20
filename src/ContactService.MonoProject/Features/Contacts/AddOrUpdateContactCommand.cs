@@ -56,7 +56,9 @@ namespace ContactService.Features.Contacts
                 
                 await _context.SaveChangesAsync();
                 
-                _hubContext.Clients.All.events(new EntityAddedEvent(request,entity));
+                _hubContext.Clients.All.events(new EntityAddedOrUpdatedEvent(request,entity));
+
+                _cache.Remove($"[Contacts] Get { request.TenantUniqueId}");
 
                 return new Response();
             }

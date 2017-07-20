@@ -5,15 +5,15 @@ using System.Web;
 
 namespace ContactService.Events
 {
-    public class EntityAddedEvent
+    public class EntityAddedOrUpdatedEvent
     {
-        public EntityAddedEvent(dynamic request, dynamic entity)
+        public EntityAddedOrUpdatedEvent(dynamic request, dynamic entity)
         {
             Request = request;
             Entity = entity;
         }
 
-        public string Type { get; set; } = Constants.ENTITY_ADDED;
+        public string Type { get; set; } = Constants.ENTITY_ADDED_OR_UPDATED;
 
         public dynamic Request { get; set; }
 
