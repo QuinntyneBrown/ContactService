@@ -24,7 +24,7 @@ namespace ContactService.Features.Users
         [Route("add")]
         [HttpPost]
         [ResponseType(typeof(AddOrUpdateUserResponse))]
-        public async Task<IHttpActionResult> Add(AddOrUpdateUserRequest request)
+        public async Task<IHttpActionResult> Add(Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));
@@ -33,7 +33,7 @@ namespace ContactService.Features.Users
         [Route("update")]
         [HttpPut]
         [ResponseType(typeof(AddOrUpdateUserResponse))]
-        public async Task<IHttpActionResult> Update(AddOrUpdateUserRequest request)
+        public async Task<IHttpActionResult> Update(Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));

@@ -1,0 +1,6 @@
+<ce-contact-edit (tryToSave)="tryToSave($event)"
+                 [contact]="contact"></ce-contact-edit>
+<ce-contact-list [contacts]="contacts" 
+                 (delete)="tryToDelete($event)"
+                 (edit)="tryToEdit($event)">
+</ce-contact-list>

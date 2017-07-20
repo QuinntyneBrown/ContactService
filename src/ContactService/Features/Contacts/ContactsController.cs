@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ContactService.Features.Core;
+using Microsoft.AspNet.SignalR;
+using ContactService.Events;
 
 namespace ContactService.Features.Contacts
 {
-    [Authorize]
+    [System.Web.Http.Authorize]
     [RoutePrefix("api/contacts")]
     public class ContactController : BaseApiController
     {
@@ -21,7 +23,8 @@ namespace ContactService.Features.Contacts
         public async Task<IHttpActionResult> Add(AddOrUpdateContactCommand.Request request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            await _mediator.Send(request);
+            return Ok();
         }
 
         [Route("update")]

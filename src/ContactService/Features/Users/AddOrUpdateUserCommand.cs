@@ -11,7 +11,7 @@ namespace ContactService.Features.Users
 {
     public class AddOrUpdateUserCommand
     {
-        public class AddOrUpdateUserRequest : IRequest<AddOrUpdateUserResponse>
+        public class Request : IRequest<AddOrUpdateUserResponse>
         {
             public UserApiModel User { get; set; }
 			public int? TenantId { get; set; }
@@ -19,7 +19,7 @@ namespace ContactService.Features.Users
 
         public class AddOrUpdateUserResponse { }
 
-        public class AddOrUpdateUserHandler : IAsyncRequestHandler<AddOrUpdateUserRequest, AddOrUpdateUserResponse>
+        public class AddOrUpdateUserHandler : IAsyncRequestHandler<Request, AddOrUpdateUserResponse>
         {
             public AddOrUpdateUserHandler(ContactServiceContext context, ICache cache)
             {
@@ -27,7 +27,7 @@ namespace ContactService.Features.Users
                 _cache = cache;
             }
 
-            public async Task<AddOrUpdateUserResponse> Handle(AddOrUpdateUserRequest request)
+            public async Task<AddOrUpdateUserResponse> Handle(Request request)
             {
                 var entity = await _context.Users
                     .SingleOrDefaultAsync(x => x.Id == request.User.Id && x.TenantId == request.TenantId);

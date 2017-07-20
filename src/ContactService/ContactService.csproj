@@ -1,23 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A8711BC3-F343-4E44-B045-349942559795}</ProjectGuid>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ContactService</RootNamespace>
     <AssemblyName>ContactService</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
+    <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
+    <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
+    <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
+    <TypeScritModuleResolution>Classic</TypeScritModuleResolution>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +44,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -67,6 +86,7 @@
       <HintPath>..\..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Data.Edm.5.8.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
       <Private>True</Private>
@@ -155,33 +175,34 @@
       <HintPath>..\..\packages\Swashbuckle.Core.5.3.2\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Device" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
@@ -199,11 +220,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Unity.WebApi, Version=5.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Unity.WebAPI.5.2.3\lib\net45\Unity.WebApi.dll</HintPath>
       <Private>True</Private>
@@ -218,14 +240,101 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientApp\app\app.component.css">
+      <DependentUpon>app.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\app.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-edit.component.css">
+      <DependentUpon>contact-edit.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\contacts\contact-list-item.component.css">
+      <DependentUpon>contact-list-item.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\contacts\contact-list.component.css">
+      <DependentUpon>contact-list.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\contacts\contact-master-detail.component.css">
+      <DependentUpon>contact-master-detail.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\contacts\contact-master-detail.component.html" />
+    <Content Include="ClientApp\app\shared\components\header.component.css">
+      <DependentUpon>header.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\shared\components\header.component.html" />
+    <Content Include="ClientApp\app\shared\styles\forms.css" />
+    <Content Include="ClientApp\app\users\login-page.component.css">
+      <DependentUpon>login-page.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\users\login-page.component.html" />
+    <Content Include="ClientApp\app\users\login.component.css">
+      <DependentUpon>login.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\users\login.component.html" />
+    <Content Include="ClientApp\app\users\register-page.component.css">
+      <DependentUpon>register-page.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\users\register-page.component.html" />
+    <Content Include="index.html" />
+    <Content Include="libs\jquery.signalR-2.2.1.js" />
+    <Content Include="tsconfig.json" />
+    <Content Include="package.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="ClientApp\app\contacts\contact-edit.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-list.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-list-item.component.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="packages.config" />
+    <Content Include="Web.config" />
+    <Content Include="webpack.config.js" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Data\ContactServiceContext.cs" />
     <Compile Include="Data\Helpers\SoftDeleteAttribute.cs" />
     <Compile Include="Data\Helpers\SoftDeleteInterceptor.cs" />
     <Compile Include="Data\Helpers\SoftDeleteQueryVisitor.cs" />
-    <Compile Include="Data\Model\ILoggable.cs" />
     <Compile Include="Data\Migrations\Configuration.cs" />
-    <Compile Include="Features\Contacts\ContactsHub.cs" />
+    <Compile Include="Data\Migrations\RoleConfiguration.cs" />
+    <Compile Include="Data\Migrations\TenantConfiguration.cs" />
+    <Compile Include="Data\Migrations\UserConfiguration.cs" />
+    <Compile Include="Data\Model\Account.cs" />
+    <Compile Include="Data\Model\Contact.cs" />
+    <Compile Include="Data\Model\ILoggable.cs" />
+    <Compile Include="Data\Model\Profile.cs" />
+    <Compile Include="Data\Model\Role.cs" />
+    <Compile Include="Data\Model\Tenant.cs" />
+    <Compile Include="Data\Model\User.cs" />
+    <Compile Include="Events\Constants.cs" />
+    <Compile Include="Events\EntityAddedOrUpdatedEvent.cs" />
+    <Compile Include="Events\EntityDeletedEvent.cs" />
+    <Compile Include="Events\EventHub.cs" />
+    <Compile Include="Events\EventHubProvider.cs" />
+    <Compile Include="Features\Accounts\AccountApiModel.cs" />
+    <Compile Include="Features\Accounts\AccountController.cs" />
+    <Compile Include="Features\Accounts\AddOrUpdateAccountCommand.cs" />
+    <Compile Include="Features\Accounts\AddOrUpdateProfileCommand.cs" />
+    <Compile Include="Features\Accounts\GetAccountByIdQuery.cs" />
+    <Compile Include="Features\Accounts\GetAccountsQuery.cs" />
+    <Compile Include="Features\Accounts\GetProfileByIdQuery.cs" />
+    <Compile Include="Features\Accounts\GetProfilesQuery.cs" />
+    <Compile Include="Features\Accounts\ProfileApiModel.cs" />
+    <Compile Include="Features\Accounts\ProfileController.cs" />
+    <Compile Include="Features\Accounts\RegisterAccountApiModel.cs" />
+    <Compile Include="Features\Accounts\RemoveAccountCommand.cs" />
+    <Compile Include="Features\Accounts\RemoveProfileCommand.cs" />
+    <Compile Include="Features\Contacts\AddOrUpdateContactCommand.cs" />
+    <Compile Include="Features\Contacts\ContactApiModel.cs" />
+    <Compile Include="Features\Contacts\ContactsController.cs" />
+    <Compile Include="Features\Contacts\GetContactByIdQuery.cs" />
+    <Compile Include="Features\Contacts\GetContactsQuery.cs" />
+    <Compile Include="Features\Contacts\RemoveContactCommand.cs" />
     <Compile Include="Features\Core\BaseApiController.cs" />
     <Compile Include="Features\Core\BaseHub.cs" />
     <Compile Include="Features\Core\Cache.cs" />
@@ -246,8 +355,6 @@
     <Compile Include="Features\Core\StringExtensions.cs" />
     <Compile Include="Features\Core\TenantMiddleware.cs" />
     <Compile Include="Features\Core\WebApiUnityActionFilterProvider.cs" />
-    <Compile Include="Features\Notifications\NotificationsConfiguration.cs" />
-    <Compile Include="Features\Notifications\NotificationService.cs" />
     <Compile Include="Features\Users\AddOrUpdateUserCommand.cs" />
     <Compile Include="Features\Users\Constants.cs" />
     <Compile Include="Features\Users\GetUserByIdQuery.cs" />
@@ -255,9 +362,8 @@
     <Compile Include="Features\Users\GetUsersQuery.cs" />
     <Compile Include="Features\Users\RemoveUserCommand.cs" />
     <Compile Include="Features\Users\UserApiModel.cs" />
-    <Compile Include="Data\Model\User.cs" />
-    <Compile Include="Data\Model\Role.cs" />
-    <Compile Include="Data\Model\Tenant.cs" />
+    <Compile Include="Features\Users\UserController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthConfiguration.cs" />
     <Compile Include="Security\AuthenticateCommand.cs" />
     <Compile Include="Security\EncryptionService.cs" />
@@ -269,53 +375,99 @@
     <Compile Include="Security\OAuthProvider.cs" />
     <Compile Include="Security\Roles.cs" />
     <Compile Include="Security\UserManager.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="UnityConfiguration.cs" />
-    <Compile Include="Data\Migrations\UserConfiguration.cs" />
-    <Compile Include="Data\Migrations\RoleConfiguration.cs" />
-    <Compile Include="Data\Migrations\TenantConfiguration.cs" />
-    <Compile Include="Features\Users\UserController.cs" />
-    <Compile Include="Data\Model\Account.cs" />
-    <Compile Include="Data\Model\Profile.cs" />
-    <Compile Include="Features\Accounts\AddOrUpdateAccountCommand.cs" />
-    <Compile Include="Features\Accounts\GetAccountsQuery.cs" />
-    <Compile Include="Features\Accounts\GetAccountByIdQuery.cs" />
-    <Compile Include="Features\Accounts\RemoveAccountCommand.cs" />
-    <Compile Include="Features\Accounts\AccountApiModel.cs" />
-    <Compile Include="Features\Accounts\AccountController.cs" />
-    <Compile Include="Features\Accounts\AddOrUpdateProfileCommand.cs" />
-    <Compile Include="Features\Accounts\GetProfilesQuery.cs" />
-    <Compile Include="Features\Accounts\GetProfileByIdQuery.cs" />
-    <Compile Include="Features\Accounts\RemoveProfileCommand.cs" />
-    <Compile Include="Features\Accounts\ProfileApiModel.cs" />
-    <Compile Include="Features\Accounts\ProfileController.cs" />
-    <Compile Include="Features\Notifications\SendRegistrationConfirmationCommand.cs" />
-    <Compile Include="Features\Accounts\RegisterAccountApiModel.cs" />
-    <Compile Include="Data\Model\ContactRequest.cs" />
-    <Compile Include="Features\ContactRequests\AddOrUpdateContactRequestCommand.cs" />
-    <Compile Include="Features\ContactRequests\GetContactRequestsQuery.cs" />
-    <Compile Include="Features\ContactRequests\GetContactRequestByIdQuery.cs" />
-    <Compile Include="Features\ContactRequests\RemoveContactRequestCommand.cs" />
-    <Compile Include="Features\ContactRequests\ContactRequestApiModel.cs" />
-    <Compile Include="Features\ContactRequests\ContactRequestController.cs" />
-    <Compile Include="Data\Model\Contact.cs" />
-    <Compile Include="Features\Contacts\AddOrUpdateContactCommand.cs" />
-    <Compile Include="Features\Contacts\GetContactsQuery.cs" />
-    <Compile Include="Features\Contacts\GetContactByIdQuery.cs" />
-    <Compile Include="Features\Contacts\RemoveContactCommand.cs" />
-    <Compile Include="Features\Contacts\ContactApiModel.cs" />
-    <Compile Include="Features\Contacts\ContactsController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\app.component.ts">
+      <DependentUpon>app.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\app.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\app.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-edit.component.ts">
+      <DependentUpon>contact-edit.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-list-item.component.ts">
+      <DependentUpon>contact-list-item.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-list.component.ts">
+      <DependentUpon>contact-list.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-master-detail.component.ts">
+      <DependentUpon>contact-master-detail.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\environment.ts" />
+    <TypeScriptCompile Include="ClientApp\app\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\components\header.component.ts">
+      <DependentUpon>header.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\shared\components\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\constants.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\auth-guard.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\authentication.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\http.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\login-redirect.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\event-hub.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\storage.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\shared.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\users\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\users\login-page.component.ts">
+      <DependentUpon>login-page.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\users\login.component.ts">
+      <DependentUpon>login.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\users\register-page.component.ts">
+      <DependentUpon>register-page.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\main.ts" />
+    <TypeScriptCompile Include="ClientApp\polyfills.ts" />
+    <TypeScriptCompile Include="ClientApp\app\users\users.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contacts.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\index.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58691</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58691/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

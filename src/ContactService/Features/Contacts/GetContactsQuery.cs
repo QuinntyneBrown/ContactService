@@ -30,10 +30,10 @@ namespace ContactService.Features.Contacts
 
             public async Task<Response> Handle(Request request)
             {
-                var contacts = await _context.Contacts
+                var contacts = await _cache.FromCacheOrServiceAsync(() => _context.Contacts
                     .Include(x => x.Tenant)
-                    .Where(x => x.Tenant.UniqueId == request.TenantUniqueId )
-                    .ToListAsync();
+                    .Where(x => x.Tenant.UniqueId == request.TenantUniqueId)
+                    .ToListAsync(), $"[Contacts] Get {request.TenantUniqueId}");
 
                 return new Response()
                 {
