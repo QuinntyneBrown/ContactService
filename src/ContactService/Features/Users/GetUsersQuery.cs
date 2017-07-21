@@ -10,16 +10,16 @@ namespace ContactService.Features.Users
 {
     public class GetUsersQuery
     {
-        public class GetUsersRequest : IRequest<GetUsersResponse> { 
+        public class Request : IRequest<Response> { 
             public int? TenantId { get; set; }		
 		}
 
-        public class GetUsersResponse
+        public class Response
         {
             public ICollection<UserApiModel> Users { get; set; } = new HashSet<UserApiModel>();
         }
 
-        public class GetUsersHandler : IAsyncRequestHandler<GetUsersRequest, GetUsersResponse>
+        public class GetUsersHandler : IAsyncRequestHandler<Request, Response>
         {
             public GetUsersHandler(ContactServiceContext context, ICache cache)
             {
@@ -27,13 +27,13 @@ namespace ContactService.Features.Users
                 _cache = cache;
             }
 
-            public async Task<GetUsersResponse> Handle(GetUsersRequest request)
+            public async Task<Response> Handle(Request request)
             {
                 var users = await _context.Users
 				    .Where( x => x.TenantId == request.TenantId )
                     .ToListAsync();
 
-                return new GetUsersResponse()
+                return new Response()
                 {
                     Users = users.Select(x => UserApiModel.FromUser(x)).ToList()
                 };

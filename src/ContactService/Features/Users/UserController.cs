@@ -3,16 +3,12 @@ using MediatR;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using static ContactService.Features.Users.AddOrUpdateUserCommand;
-using static ContactService.Features.Users.GetUsersQuery;
-using static ContactService.Features.Users.GetUserByIdQuery;
-using static ContactService.Features.Users.RemoveUserCommand;
-using static ContactService.Features.Users.GetUserByUsernameQuery;
+
 
 namespace ContactService.Features.Users
 {
     [Authorize]
-    [RoutePrefix("api/user")]
+    [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
         public UserController(IMediator mediator, IUserManager userManager)
@@ -23,8 +19,8 @@ namespace ContactService.Features.Users
 
         [Route("add")]
         [HttpPost]
-        [ResponseType(typeof(AddOrUpdateUserResponse))]
-        public async Task<IHttpActionResult> Add(Request request)
+        [ResponseType(typeof(AddOrUpdateUserCommand.AddOrUpdateUserResponse))]
+        public async Task<IHttpActionResult> Add(AddOrUpdateUserCommand.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));
@@ -32,8 +28,8 @@ namespace ContactService.Features.Users
 
         [Route("update")]
         [HttpPut]
-        [ResponseType(typeof(AddOrUpdateUserResponse))]
-        public async Task<IHttpActionResult> Update(Request request)
+        [ResponseType(typeof(AddOrUpdateUserCommand.AddOrUpdateUserResponse))]
+        public async Task<IHttpActionResult> Update(AddOrUpdateUserCommand.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));
@@ -42,8 +38,8 @@ namespace ContactService.Features.Users
         [Route("get")]
         [AllowAnonymous]
         [HttpGet]
-        [ResponseType(typeof(GetUsersResponse))]
-        public async Task<IHttpActionResult> Get([FromUri]GetUsersQuery.GetUsersRequest request)
+        [ResponseType(typeof(GetUsersQuery.Response))]
+        public async Task<IHttpActionResult> Get([FromUri]GetUsersQuery.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));
@@ -51,8 +47,8 @@ namespace ContactService.Features.Users
 
         [Route("getById")]
         [HttpGet]
-        [ResponseType(typeof(GetUserByIdResponse))]
-        public async Task<IHttpActionResult> GetById([FromUri]GetUserByIdRequest request)
+        [ResponseType(typeof(GetUserByIdQuery.Response))]
+        public async Task<IHttpActionResult> GetById([FromUri]GetUserByIdQuery.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));
@@ -60,8 +56,8 @@ namespace ContactService.Features.Users
 
         [Route("remove")]
         [HttpDelete]
-        [ResponseType(typeof(RemoveUserResponse))]
-        public async Task<IHttpActionResult> Remove([FromUri]RemoveUserRequest request)
+        [ResponseType(typeof(RemoveUserCommand.Response))]
+        public async Task<IHttpActionResult> Remove([FromUri]RemoveUserCommand.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
             return Ok(await _mediator.Send(request));
@@ -70,12 +66,12 @@ namespace ContactService.Features.Users
         [Route("current")]
         [HttpGet]
         [AllowAnonymous]
-        [ResponseType(typeof(GetUserByUsernameResponse))]
+        [ResponseType(typeof(GetUserByUsernameQuery.Response))]
         public async Task<IHttpActionResult> Current()
         {            
             if (!User.Identity.IsAuthenticated)
                 return Ok();
-            var request = new GetUserByUsernameRequest();
+            var request = new GetUserByUsernameQuery.Request();
             request.Username = User.Identity.Name;
             var user = await _userManager.GetUserAsync(User);
             request.TenantId = user.TenantId;

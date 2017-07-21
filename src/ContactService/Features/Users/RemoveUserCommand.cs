@@ -11,15 +11,15 @@ namespace ContactService.Features.Users
 {
     public class RemoveUserCommand
     {
-        public class RemoveUserRequest : IRequest<RemoveUserResponse>
+        public class Request : IRequest<Response>
         {
             public int Id { get; set; }
             public int? TenantId { get; set; }
         }
 
-        public class RemoveUserResponse { }
+        public class Response { }
 
-        public class RemoveUserHandler : IAsyncRequestHandler<RemoveUserRequest, RemoveUserResponse>
+        public class RemoveUserHandler : IAsyncRequestHandler<Request, Response>
         {
             public RemoveUserHandler(ContactServiceContext context, ICache cache)
             {
@@ -27,12 +27,12 @@ namespace ContactService.Features.Users
                 _cache = cache;
             }
 
-            public async Task<RemoveUserResponse> Handle(RemoveUserRequest request)
+            public async Task<Response> Handle(Request request)
             {
                 var user = await _context.Users.SingleAsync(x=>x.Id == request.Id && x.TenantId == request.TenantId);
                 user.IsDeleted = true;
                 await _context.SaveChangesAsync();
-                return new RemoveUserResponse();
+                return new Response();
             }
 
             private readonly ContactServiceContext _context;

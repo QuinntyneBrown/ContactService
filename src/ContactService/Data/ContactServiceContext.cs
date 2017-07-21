@@ -10,13 +10,12 @@ namespace ContactService.Data
 {
     public interface IContactServiceContext
     {
-        DbSet<User> Users { get; set; }
+        DbSet<Account> Accounts { get; set; }        
+        DbSet<Contact> Contacts { get; set; }
+        DbSet<Profile> Profiles { get; set; }
         DbSet<Role> Roles { get; set; }
         DbSet<Tenant> Tenants { get; set; }
-        DbSet<Account> Accounts { get; set; }
-        DbSet<Profile> Profiles { get; set; }
-        DbSet<Contact> Contacts { get; set; }
-
+        DbSet<User> Users { get; set; }
         Task<int> SaveChangesAsync();
     }
 
@@ -30,13 +29,12 @@ namespace ContactService.Data
             Configuration.AutoDetectChangesEnabled = true;
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
-
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public override int SaveChanges()
         {

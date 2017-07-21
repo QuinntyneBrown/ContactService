@@ -261,7 +261,13 @@
       <DependentUpon>header.component.html</DependentUpon>
     </Content>
     <Content Include="ClientApp\app\shared\components\header.component.html" />
+    <Content Include="ClientApp\app\shared\components\pager.component.css">
+      <DependentUpon>pager.component.html</DependentUpon>
+    </Content>
+    <Content Include="ClientApp\app\shared\styles\edit.css" />
     <Content Include="ClientApp\app\shared\styles\forms.css" />
+    <Content Include="ClientApp\app\shared\styles\list-item.css" />
+    <Content Include="ClientApp\app\shared\styles\list.css" />
     <Content Include="ClientApp\app\users\login-page.component.css">
       <DependentUpon>login-page.component.html</DependentUpon>
     </Content>
@@ -287,6 +293,7 @@
     <Content Include="ClientApp\app\contacts\contact-edit.component.html" />
     <Content Include="ClientApp\app\contacts\contact-list.component.html" />
     <Content Include="ClientApp\app\contacts\contact-list-item.component.html" />
+    <Content Include="ClientApp\app\shared\components\pager.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -391,6 +398,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\app.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-store.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-edit.component.ts">
       <DependentUpon>contact-edit.component.html</DependentUpon>
     </TypeScriptCompile>
@@ -409,6 +417,9 @@
       <DependentUpon>header.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\shared\components\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\components\pager.component.ts">
+      <DependentUpon>pager.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\shared\constants.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\auth-guard.service.ts" />
@@ -435,6 +446,8 @@
     <TypeScriptCompile Include="ClientApp\app\contacts\contacts.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contact.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\notifications\notifications.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact.model.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

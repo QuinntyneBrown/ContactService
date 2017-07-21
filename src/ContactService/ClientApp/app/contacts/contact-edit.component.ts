@@ -16,6 +16,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
     templateUrl: "./contact-edit.component.html",
     styleUrls: [
         "../shared/styles/forms.css",
+        "../shared/styles/edit.css",
         "./contact-edit.component.css"],
     selector: "ce-contact-edit"
 })
@@ -35,8 +36,8 @@ export class ContactEditComponent {
 
         this.form.patchValue({
             email: this._contact.email,
-            firstName: this._contact.firstName,
-            lastName: this._contact.lastName,
+            firstname: this._contact.firstname,
+            lastname: this._contact.lastname,
             streetAddress: this._contact.streetAddress,
             city: this._contact.city,
             phoneNumber: this._contact.phoneNumber

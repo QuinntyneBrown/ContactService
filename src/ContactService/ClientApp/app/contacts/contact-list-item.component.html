@@ -1,6 +1,6 @@
-<span class="email" (click)="select.emit({ detail: { contact: contact} })">{{ contact.email }}</span>
-<div class="commands">
-    <span class="actions" (click)="edit.emit({ detail: { contact: contact} })">EDIT</span>
+<span (click)="select.emit({ detail: { contact: contact} })">{{ contact.email }}</span>
+<div>
+    <span (click)="edit.emit({ detail: { contact: contact} })">EDIT</span>
     &nbsp;&nbsp;|&nbsp;&nbsp;
-    <span class="actions" (click)="delete.emit({ detail: { contact: contact} })">DELETE</span>
+    <span (click)="delete.emit({ detail: { contact: contact} })">DELETE</span>
 </div>

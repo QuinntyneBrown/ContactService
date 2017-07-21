@@ -10,17 +10,17 @@ namespace ContactService.Features.Users
 {
     public class GetUserByIdQuery
     {
-        public class GetUserByIdRequest : IRequest<GetUserByIdResponse> { 
+        public class Request : IRequest<Response> { 
             public int Id { get; set; }
 			public int? TenantId { get; set; }
         }
 
-        public class GetUserByIdResponse
+        public class Response
         {
             public UserApiModel User { get; set; } 
         }
 
-        public class GetUserByIdHandler : IAsyncRequestHandler<GetUserByIdRequest, GetUserByIdResponse>
+        public class GetUserByIdHandler : IAsyncRequestHandler<Request, Response>
         {
             public GetUserByIdHandler(ContactServiceContext context, ICache cache)
             {
@@ -28,9 +28,9 @@ namespace ContactService.Features.Users
                 _cache = cache;
             }
 
-            public async Task<GetUserByIdResponse> Handle(GetUserByIdRequest request)
+            public async Task<Response> Handle(Request request)
             {                
-                return new GetUserByIdResponse()
+                return new Response()
                 {
                     User = UserApiModel.FromUser(await _context.Users.SingleAsync(x=>x.Id == request.Id && x.TenantId == request.TenantId))
                 };

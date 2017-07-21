@@ -11,27 +11,27 @@ namespace ContactService.Features.Accounts
 {
     public class GetProfileByIdQuery
     {
-        public class GetProfileByIdRequest : IRequest<GetProfileByIdResponse> { 
+        public class Request : IRequest<Response> { 
             public int Id { get; set; }
             public Guid TenantUniqueId { get; set; }
         }
 
-        public class GetProfileByIdResponse
+        public class Response
         {
             public ProfileApiModel Profile { get; set; } 
         }
 
-        public class GetProfileByIdHandler : IAsyncRequestHandler<GetProfileByIdRequest, GetProfileByIdResponse>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public GetProfileByIdHandler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;
             }
 
-            public async Task<GetProfileByIdResponse> Handle(GetProfileByIdRequest request)
+            public async Task<Response> Handle(Request request)
             {                
-                return new GetProfileByIdResponse()
+                return new Response()
                 {
                     Profile = ProfileApiModel.FromProfile(await _context.Profiles
                     .Include(x => x.Tenant)				

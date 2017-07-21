@@ -20,9 +20,9 @@ namespace ContactService.Features.Accounts
             public ICollection<AccountApiModel> Accounts { get; set; } = new HashSet<AccountApiModel>();
         }
 
-        public class GetAccountsHandler : IAsyncRequestHandler<Request, Response>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public GetAccountsHandler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;

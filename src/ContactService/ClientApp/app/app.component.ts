@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {Storage} from "./shared/services/storage.service";
 import {constants} from "./shared/constants";
 import {Observable} from "rxjs/Observable";
+import {Router, NavigationStart} from "@angular/router";
 
 @Component({
     templateUrl: "./app.component.html",
@@ -9,13 +10,15 @@ import {Observable} from "rxjs/Observable";
     selector: "app"
 })
 export class AppComponent {
-    constructor(private _storage: Storage) {        
-        this.isAuthenticated$ = this._storage.items$.asObservable()
-            .map(x => {
-                const accessToken = this._storage.get({ name: constants.ACCESS_TOKEN_KEY });
-                return accessToken != null && accessToken != "null";
-            }); 
+    constructor(private _storage: Storage, private _router: Router) {
+        this._router.events.subscribe(x => {
+            if (x instanceof NavigationStart && x.url =="/login") {
+                this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: null });                
+            }
+            const accessToken = this._storage.get({ name: constants.ACCESS_TOKEN_KEY });
+            this.isAuthenticated =  accessToken != null && accessToken != "null";
+        });       
     }
     
-    public isAuthenticated$: Observable<any>;
+    public isAuthenticated:boolean;
 }

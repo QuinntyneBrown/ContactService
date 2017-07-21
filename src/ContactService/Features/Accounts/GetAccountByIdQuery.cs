@@ -21,9 +21,9 @@ namespace ContactService.Features.Accounts
             public AccountApiModel Account { get; set; } 
         }
 
-        public class GetAccountByIdHandler : IAsyncRequestHandler<Request, Response>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public GetAccountByIdHandler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;

@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
+import {ContactsActionCreator, ContactsStore} from "./contacts-store";
 import {ContactsService} from "./contacts.service";
-import {EventHub, events, IEvent} from "../shared/services/event-hub";
+import {Contact} from "./contact.model";
 
 @Component({
     templateUrl: "./contact-master-detail.component.html",
@@ -8,43 +9,38 @@ import {EventHub, events, IEvent} from "../shared/services/event-hub";
     selector: "ce-contact-master-detail"
 })
 export class ContactMasterDetailComponent {
-    constructor(private _contactsService: ContactsService,
-        private _eventHub: EventHub
+    constructor(
+        private _contactsActionCreator: ContactsActionCreator,
+        private _contactsService: ContactsService,
+        private _contactsStore: ContactsStore
     ) { }
 
-    async ngOnInit() {
-        var response = await this._contactsService.get();
-        this.contacts = response.contacts;
-        
-        this._eventHub.events$.subscribe(this.handleEvent);
+    public async ngOnInit() {
+        this._contactsActionCreator.get();
+        const response = await this._contactsService.get();
+        this.contacts = response.contacts;        
+    }
+    
+    public tryToSave($event) {
+        // return an id;
+        this._contactsActionCreator.save();
+        this._contactsService.add({ contact: $event.detail.contact });
+        //add or update contacts
     }
 
-    public handleEvent($event: IEvent) {
-
-        if (!$event)
-            return;
-
-        if ($event.type === events.ENTITY_ADDED_OR_UPDATED) {
-
-        }
-
-        if ($event.type === events.ENTITY_DELETED) {
-
-        }
+    public tryToDelete($event) {   
+        this._contactsActionCreator.remove();     
+        this._contactsService.remove({ contact: $event.detail.contact });       
+        // pluck 
     }
 
-    async tryToSave($event) {
-        await this._contactsService.add({ contact: $event.detail.contact });
-    }
-
-    async tryToDelete($event) {        
-        await this._contactsService.remove({ contact: $event.detail.contact });        
-    }
-
-    async tryToEdit($event) {
+    public async tryToEdit($event) {        
         this.contact = $event.detail.contact;
     }
 
-    contacts: Array<any> = [];
-    contact: any = {};
+    public contacts: Array<Contact> = [];
+    public contact: Contact = <Contact>{};
+    public get contacts$() {
+        return this._contactsStore.contacts$.asObservable();
+    }
 }

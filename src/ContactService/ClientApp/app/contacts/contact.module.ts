@@ -8,6 +8,8 @@ import {ContactListItemComponent} from "./contact-list-item.component";
 import {ContactMasterDetailComponent} from "./contact-master-detail.component";
 
 import {ContactsService} from "./contacts.service";
+import {ContactsActionCreator} from "./contacts-store";
+import {ContactsStore} from "./contacts-store";
 
 const declarables = [
     ContactEditComponent,
@@ -15,10 +17,14 @@ const declarables = [
     ContactListItemComponent
 ];
 
-const providers = [ContactsService];
+const providers = [
+    ContactsService,
+    ContactsActionCreator,
+    ContactsStore
+];
 
 @NgModule({
-    imports: [CommonModule, FormsModule, ReactiveFormsModule],
+    imports: [CommonModule,FormsModule,ReactiveFormsModule],
     exports: [declarables],
     declarations: [declarables],
     providers: providers

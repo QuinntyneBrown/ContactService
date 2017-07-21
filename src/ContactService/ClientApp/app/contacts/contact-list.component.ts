@@ -2,7 +2,10 @@ import { Component, Input, Output, EventEmitter, ViewEncapsulation } from "@angu
 
 @Component({
     templateUrl: "./contact-list.component.html",
-    styleUrls: ["./contact-list.component.css"],
+    styleUrls: [
+        "../shared/styles/list.css",
+        "./contact-list.component.css"
+    ],
     selector: "ce-contact-list"
 })
 export class ContactListComponent {

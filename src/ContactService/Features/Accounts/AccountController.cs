@@ -8,7 +8,7 @@ namespace ContactService.Features.Accounts
 {
     [Authorize]
     [RoutePrefix("api/account")]
-    public class AccountController : ApiController
+    public class AccountController : BaseApiController
     {
         public AccountController(IMediator mediator)
         {
@@ -32,7 +32,7 @@ namespace ContactService.Features.Accounts
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
         }
-        
+
         [Route("get")]
         [AllowAnonymous]
         [HttpGet]

@@ -6,4 +6,5 @@
 <ce-contact-list-item *ngFor="let contact of contacts" 
                       [contact]="contact" 
                       (edit)="edit.emit($event)" 
-                      (delete)="delete.emit($event)"></ce-contact-list-item>
+                      (delete)="delete.emit($event)">
+</ce-contact-list-item>
