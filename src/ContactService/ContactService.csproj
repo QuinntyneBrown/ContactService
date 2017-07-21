@@ -250,13 +250,13 @@
     <Content Include="ClientApp\app\contacts\contact-list-item.component.css">
       <DependentUpon>contact-list-item.component.html</DependentUpon>
     </Content>
-    <Content Include="ClientApp\app\contacts\contact-list.component.css">
-      <DependentUpon>contact-list.component.html</DependentUpon>
-    </Content>
     <Content Include="ClientApp\app\contacts\contact-master-detail.component.css">
       <DependentUpon>contact-master-detail.component.html</DependentUpon>
     </Content>
     <Content Include="ClientApp\app\contacts\contact-master-detail.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-paginated-list.component.css">
+      <DependentUpon>contact-paginated-list.component.html</DependentUpon>
+    </Content>
     <Content Include="ClientApp\app\shared\components\header.component.css">
       <DependentUpon>header.component.html</DependentUpon>
     </Content>
@@ -291,9 +291,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="ClientApp\app\contacts\contact-edit.component.html" />
-    <Content Include="ClientApp\app\contacts\contact-list.component.html" />
     <Content Include="ClientApp\app\contacts\contact-list-item.component.html" />
     <Content Include="ClientApp\app\shared\components\pager.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-paginated-list.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -398,15 +398,15 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\app.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-paginated-list.component.ts">
+      <DependentUpon>contact-paginated-list.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\contacts\contacts-store.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-edit.component.ts">
       <DependentUpon>contact-edit.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-list-item.component.ts">
       <DependentUpon>contact-list-item.component.html</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\app\contacts\contact-list.component.ts">
-      <DependentUpon>contact-list.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-master-detail.component.ts">
       <DependentUpon>contact-master-detail.component.html</DependentUpon>

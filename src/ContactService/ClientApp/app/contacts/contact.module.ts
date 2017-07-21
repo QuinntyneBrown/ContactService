@@ -2,8 +2,10 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 
+import {SharedModule} from "../shared/shared.module";
+
 import {ContactEditComponent} from './contact-edit.component';
-import {ContactListComponent} from './contact-list.component';
+import {ContactPaginatedListComponent} from './contact-paginated-list.component';
 import {ContactListItemComponent} from "./contact-list-item.component";
 import {ContactMasterDetailComponent} from "./contact-master-detail.component";
 
@@ -13,7 +15,7 @@ import {ContactsStore} from "./contacts-store";
 
 const declarables = [
     ContactEditComponent,
-    ContactListComponent,
+    ContactPaginatedListComponent,
     ContactListItemComponent
 ];
 
@@ -24,7 +26,7 @@ const providers = [
 ];
 
 @NgModule({
-    imports: [CommonModule,FormsModule,ReactiveFormsModule],
+    imports: [CommonModule,FormsModule,ReactiveFormsModule,SharedModule],
     exports: [declarables],
     declarations: [declarables],
     providers: providers

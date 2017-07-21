@@ -80,3 +80,14 @@ export function validatePagePropertiesAndGetSkipCount(pagingConfig: PagingConfig
 
     return pagingConfig.pageSize * (pagingConfig.page - 1);
 }
+
+
+export function toPageListFromInMemory<T>(entities: Array<T>, page: number, pageSize: number): IPagedList<T> {
+    if (entities == null)
+        throw new Error("entities");
+    var pagingConfig = new PagingConfig(page, pageSize);
+    var skipCount = validatePagePropertiesAndGetSkipCount(pagingConfig);
+    var data = entities.slice(skipCount, pageSize + skipCount);
+    return new PagedList(data, page, pageSize, entities.length);
+}
+
