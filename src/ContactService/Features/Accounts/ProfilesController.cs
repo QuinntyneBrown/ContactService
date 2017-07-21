@@ -7,18 +7,18 @@ using ContactService.Features.Core;
 namespace ContactService.Features.Accounts
 {
     [Authorize]
-    [RoutePrefix("api/account")]
-    public class AccountController : BaseApiController
+    [RoutePrefix("api/profiles")]
+    public class ProfilesController : BaseApiController
     {
-        public AccountController(IMediator mediator)
+        public ProfilesController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [Route("add")]
         [HttpPost]
-        [ResponseType(typeof(AddOrUpdateAccountCommand.Response))]
-        public async Task<IHttpActionResult> Add(AddOrUpdateAccountCommand.Request request)
+        [ResponseType(typeof(AddOrUpdateProfileCommand.Response))]
+        public async Task<IHttpActionResult> Add(AddOrUpdateProfileCommand.Request request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
@@ -26,28 +26,28 @@ namespace ContactService.Features.Accounts
 
         [Route("update")]
         [HttpPut]
-        [ResponseType(typeof(AddOrUpdateAccountCommand.Response))]
-        public async Task<IHttpActionResult> Update(AddOrUpdateAccountCommand.Request request)
+        [ResponseType(typeof(AddOrUpdateProfileCommand.Response))]
+        public async Task<IHttpActionResult> Update(AddOrUpdateProfileCommand.Request request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
         }
-
+        
         [Route("get")]
         [AllowAnonymous]
         [HttpGet]
-        [ResponseType(typeof(GetAccountsQuery.Response))]
+        [ResponseType(typeof(GetProfilesQuery.Response))]
         public async Task<IHttpActionResult> Get()
         {
-            var request = new GetAccountsQuery.Request();
+            var request = new GetProfilesQuery.Request();
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
         }
 
         [Route("getById")]
         [HttpGet]
-        [ResponseType(typeof(GetAccountByIdQuery.Response))]
-        public async Task<IHttpActionResult> GetById([FromUri]GetAccountByIdQuery.Request request)
+        [ResponseType(typeof(GetProfileByIdQuery.Response))]
+        public async Task<IHttpActionResult> GetById([FromUri]GetProfileByIdQuery.Request request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
@@ -55,13 +55,13 @@ namespace ContactService.Features.Accounts
 
         [Route("remove")]
         [HttpDelete]
-        [ResponseType(typeof(RemoveAccountCommand.Response))]
-        public async Task<IHttpActionResult> Remove([FromUri]RemoveAccountCommand.Request request)
+        [ResponseType(typeof(RemoveProfileCommand.Response))]
+        public async Task<IHttpActionResult> Remove([FromUri]RemoveProfileCommand.Request request)
         {
             request.TenantUniqueId = Request.GetTenantUniqueId();
             return Ok(await _mediator.Send(request));
         }
 
-        protected readonly IMediator _mediator;
+        private readonly IMediator _mediator;
     }
 }

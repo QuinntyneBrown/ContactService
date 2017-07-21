@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 
 import {ContactsModule} from "../app/contacts";
+import {NotificationsModule} from "../app/notifications";
 import {SharedModule} from "../app/shared";
 import {UsersModule} from "../app/users/users.module";
 
@@ -21,9 +22,7 @@ const declarables = [
     routedComponents
 ];
 
-const providers = [
-
-];
+const providers = [];
 
 @NgModule({
     imports: [
@@ -35,6 +34,7 @@ const providers = [
         RouterModule,
 
         ContactsModule,
+        NotificationsModule,
         SharedModule,
         UsersModule
 

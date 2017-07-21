@@ -324,7 +324,7 @@
     <Compile Include="Events\EventHub.cs" />
     <Compile Include="Events\EventHubProvider.cs" />
     <Compile Include="Features\Accounts\AccountApiModel.cs" />
-    <Compile Include="Features\Accounts\AccountController.cs" />
+    <Compile Include="Features\Accounts\AccountsController.cs" />
     <Compile Include="Features\Accounts\AddOrUpdateAccountCommand.cs" />
     <Compile Include="Features\Accounts\AddOrUpdateProfileCommand.cs" />
     <Compile Include="Features\Accounts\GetAccountByIdQuery.cs" />
@@ -332,7 +332,7 @@
     <Compile Include="Features\Accounts\GetProfileByIdQuery.cs" />
     <Compile Include="Features\Accounts\GetProfilesQuery.cs" />
     <Compile Include="Features\Accounts\ProfileApiModel.cs" />
-    <Compile Include="Features\Accounts\ProfileController.cs" />
+    <Compile Include="Features\Accounts\ProfilesController.cs" />
     <Compile Include="Features\Accounts\RegisterAccountApiModel.cs" />
     <Compile Include="Features\Accounts\RemoveAccountCommand.cs" />
     <Compile Include="Features\Accounts\RemoveProfileCommand.cs" />
@@ -413,6 +413,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\environment.ts" />
     <TypeScriptCompile Include="ClientApp\app\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\notifications\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\components\header.component.ts">
       <DependentUpon>header.component.html</DependentUpon>
     </TypeScriptCompile>

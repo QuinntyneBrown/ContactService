@@ -1,10 +1,8 @@
+using ContactService.Features.Core;
 using MediatR;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using ContactService.Features.Core;
-using Microsoft.AspNet.SignalR;
-using ContactService.Events;
 
 namespace ContactService.Features.Contacts
 {
@@ -65,6 +63,6 @@ namespace ContactService.Features.Contacts
             return Ok(await _mediator.Send(request));
         }
 
-        protected readonly IMediator _mediator;
+        private readonly IMediator _mediator;
     }
 }
