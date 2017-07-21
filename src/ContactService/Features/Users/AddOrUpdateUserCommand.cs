@@ -1,33 +1,31 @@
-using MediatR;
 using ContactService.Data;
 using ContactService.Data.Model;
 using ContactService.Features.Core;
-using System.Collections.Generic;
+using MediatR;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Data.Entity;
 
 namespace ContactService.Features.Users
 {
     public class AddOrUpdateUserCommand
     {
-        public class Request : IRequest<AddOrUpdateUserResponse>
+        public class Request : IRequest<Response>
         {
             public UserApiModel User { get; set; }
 			public int? TenantId { get; set; }
         }
 
-        public class AddOrUpdateUserResponse { }
+        public class Response { }
 
-        public class AddOrUpdateUserHandler : IAsyncRequestHandler<Request, AddOrUpdateUserResponse>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public AddOrUpdateUserHandler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;
             }
 
-            public async Task<AddOrUpdateUserResponse> Handle(Request request)
+            public async Task<Response> Handle(Request request)
             {
                 var entity = await _context.Users
                     .SingleOrDefaultAsync(x => x.Id == request.User.Id && x.TenantId == request.TenantId);
@@ -37,13 +35,11 @@ namespace ContactService.Features.Users
 
                 await _context.SaveChangesAsync();
 
-                return new AddOrUpdateUserResponse();
+                return new Response();
             }
 
             private readonly ContactServiceContext _context;
             private readonly ICache _cache;
         }
-
     }
-
 }

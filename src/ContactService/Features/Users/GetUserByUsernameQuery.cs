@@ -1,6 +1,6 @@
-﻿using MediatR;
-using ContactService.Data;
+﻿using ContactService.Data;
 using ContactService.Features.Core;
+using MediatR;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
@@ -19,9 +19,9 @@ namespace ContactService.Features.Users
             public UserApiModel User { get; set; }
         }
 
-        public class GetUserByUsernameHandler : IAsyncRequestHandler<Request, Response>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public GetUserByUsernameHandler(IContactServiceContext context, ICache cache)
+            public Handler(IContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;

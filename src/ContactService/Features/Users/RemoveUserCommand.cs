@@ -1,10 +1,7 @@
-using MediatR;
 using ContactService.Data;
-using ContactService.Data.Model;
 using ContactService.Features.Core;
-using System.Collections.Generic;
+using MediatR;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Data.Entity;
 
 namespace ContactService.Features.Users
@@ -19,9 +16,9 @@ namespace ContactService.Features.Users
 
         public class Response { }
 
-        public class RemoveUserHandler : IAsyncRequestHandler<Request, Response>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public RemoveUserHandler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;

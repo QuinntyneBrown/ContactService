@@ -1,14 +1,11 @@
-using MediatR;
 using ContactService.Data;
-using ContactService.Data.Model;
 using ContactService.Features.Core;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Data.Entity;
 using ContactService.Events;
+using MediatR;
 using Microsoft.AspNet.SignalR;
+using System;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace ContactService.Features.Contacts
 {
@@ -22,9 +19,9 @@ namespace ContactService.Features.Contacts
 
         public class Response { }
 
-        public class RemoveContactHandler : IAsyncRequestHandler<Request, Response>
+        public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public RemoveContactHandler(ContactServiceContext context, ICache cache, IEventHubProvider eventHubProvider)
+            public Handler(ContactServiceContext context, ICache cache, IEventHubProvider eventHubProvider)
             {
                 _context = context;
                 _cache = cache;

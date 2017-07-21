@@ -19,7 +19,7 @@ namespace ContactService.Features.Users
 
         [Route("add")]
         [HttpPost]
-        [ResponseType(typeof(AddOrUpdateUserCommand.AddOrUpdateUserResponse))]
+        [ResponseType(typeof(AddOrUpdateUserCommand.Response))]
         public async Task<IHttpActionResult> Add(AddOrUpdateUserCommand.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
@@ -28,7 +28,7 @@ namespace ContactService.Features.Users
 
         [Route("update")]
         [HttpPut]
-        [ResponseType(typeof(AddOrUpdateUserCommand.AddOrUpdateUserResponse))]
+        [ResponseType(typeof(AddOrUpdateUserCommand.Response))]
         public async Task<IHttpActionResult> Update(AddOrUpdateUserCommand.Request request)
         {
             request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
