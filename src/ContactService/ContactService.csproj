@@ -264,6 +264,9 @@
     <Content Include="ClientApp\app\shared\components\pager.component.css">
       <DependentUpon>pager.component.html</DependentUpon>
     </Content>
+    <Content Include="ClientApp\app\shared\components\tabs.component.css">
+      <DependentUpon>tabs.component.html</DependentUpon>
+    </Content>
     <Content Include="ClientApp\app\shared\styles\edit.css" />
     <Content Include="ClientApp\app\shared\styles\forms.css" />
     <Content Include="ClientApp\app\shared\styles\list-item.css" />
@@ -294,6 +297,7 @@
     <Content Include="ClientApp\app\contacts\contact-list-item.component.html" />
     <Content Include="ClientApp\app\shared\components\pager.component.html" />
     <Content Include="ClientApp\app\contacts\contact-paginated-list.component.html" />
+    <Content Include="ClientApp\app\shared\components\tabs.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -401,6 +405,8 @@
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-paginated-list.component.ts">
       <DependentUpon>contact-paginated-list.component.html</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-effects.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-reducers-provider.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contacts-store.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-edit.component.ts">
       <DependentUpon>contact-edit.component.html</DependentUpon>
@@ -411,6 +417,7 @@
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-master-detail.component.ts">
       <DependentUpon>contact-master-detail.component.html</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\contacts\contacts.actions.ts" />
     <TypeScriptCompile Include="ClientApp\app\environment.ts" />
     <TypeScriptCompile Include="ClientApp\app\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\notifications\index.ts" />
@@ -421,10 +428,14 @@
     <TypeScriptCompile Include="ClientApp\app\shared\components\pager.component.ts">
       <DependentUpon>pager.component.html</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\shared\components\tabs.component.ts">
+      <DependentUpon>tabs.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\shared\constants.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\auth-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\authentication.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\dispatcher.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\http.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\login-redirect.service.ts" />

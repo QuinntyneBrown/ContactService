@@ -2,7 +2,8 @@
 import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {constants} from "../constants";
-import {Storage } from "./storage.service";
+import {Storage} from "./storage.service";
+import {Dispatcher} from "./dispatcher";
 import "rxjs/add/observable/fromPromise";
 import "rxjs/add/operator/map";
 

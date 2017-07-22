@@ -22,9 +22,7 @@ export class ContactPaginatedListComponent {
     pageNumber: number = 1;
     _contacts: Array<any> = [];
 
-    public get contacts() {
-        return this._contacts;
-    }
+    public get contacts() { return this._contacts; }
 
     @Input("contacts")
     public set contacts(value) {

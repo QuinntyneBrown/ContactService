@@ -10,7 +10,7 @@ import {
     ElementRef,
 } from "@angular/core";
 
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import {FormGroup,FormControl,Validators} from "@angular/forms";
 
 @Component({
     templateUrl: "./contact-edit.component.html",
