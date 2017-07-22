@@ -1,4 +1,4 @@
-import {Component,Input,Output,EventEmitter} from "@angular/core";
+import {Component,Input, Output, EventEmitter} from "@angular/core";
 import {toPageListFromInMemory,IPagedList} from "../shared/components/pager.component";
 
 @Component({
@@ -9,30 +9,36 @@ import {toPageListFromInMemory,IPagedList} from "../shared/components/pager.comp
     ],
     selector: "ce-contact-paginated-list"
 })
-export class ContactPaginatedListComponent {    
+export class ContactPaginatedListComponent { 
+
+    constructor() {
+        this.select = new EventEmitter();
+        this.delete = new EventEmitter();
+    }
     public setPageNumber($event) {
         this.pageNumber = $event.detail.pageNumber;
         this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);
-        this.edit = new EventEmitter();
-        this.delete = new EventEmitter();
     }
+    private _contacts = [];
 
-    pagedList: IPagedList<any>;
-    pageSize: number = 5;
-    pageNumber: number = 1;
-    _contacts: Array<any> = [];
-
-    public get contacts() { return this._contacts; }
-
+    public get contacts() {
+        return this._contacts;
+    }
     @Input("contacts")
     public set contacts(value) {
         this._contacts = value;
         this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);
     }
 
+    public pagedList: IPagedList<any> = <any>{};
+
     @Output()
-    public edit: EventEmitter<any>;
+    public select: EventEmitter<any>;
 
     @Output()
     public delete: EventEmitter<any>;
+    
+    public pageNumber: number = 1;
+
+    public pageSize: number = 5;
 }

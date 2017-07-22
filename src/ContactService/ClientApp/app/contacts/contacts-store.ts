@@ -1,12 +1,15 @@
 ﻿import {Injectable, Inject} from "@angular/core";
+import {Subject} from "rxjs/subject";
+import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Contact} from "./contact.model";
-import {events,EventHub,IEvent} from "../shared/services/event-hub";
 import {ContactsService} from "./contacts.service";
-import {Dispatcher} from "../shared/services/dispatcher";
+import {Dispatcher,IAction} from "../shared/services/dispatcher";
 import {Storage} from "../shared/services/storage.service";
 import {ContactsEffects} from "./contacts-effects";
 import {ContactsReducersProvider} from "./contacts-reducers-provider";
+
+export {IAction} from "../shared/services/dispatcher"
 
 @Injectable()
 export class ContactsStore extends BehaviorSubject<any> {
@@ -16,45 +19,39 @@ export class ContactsStore extends BehaviorSubject<any> {
         private _contactsEffects: ContactsEffects,
         private _dispatcher: Dispatcher<any>
     ) {
-        super(window["contactsInitialState"]);
-        this._dispatcher.subscribe(action => this.next(action));    
-        this._reducers = _contactsReducersProvider.get();    
+        super({
+            contacts: [],
+            contact: null
+        });
+        this._dispatcher.subscribe((action:IAction) => this.next(action));    
+        this._reducers = _contactsReducersProvider.get();  
+        this.state = {
+            contacts: [],
+            contact: null
+        };  
     }
 
     state;
     _reducers = [];
 
-    next(action) {
-        this.state = this.state || this._storage.get({ name: "contactsState" }) || {} as any;
+    next(action:IAction) {
         
         this._contactsEffects.scan(action);
 
         for (let i = 0; i < this._reducers.length; i++) {
             this.state = this._reducers[i].call(null, this.state, action);
         }
-        this._storage.put({ name: "state", value: this.state });
+        
         super.next(this.state);
     }
 
     dispatch = this._dispatcher.dispatch; 
-}
 
-function contactSaveReducer(action:any, state:any) {
-    return Object.assign({},state);
-}
+    private _select: Subject<{action:IAction,state:any}> = new Subject();
 
-function contactRemoveReducer(action: any, state: any) {
-    return Object.assign({}, state);
-}
-
-function contactAddedOrUpdatedEventReducer(action: any, state: any) {
-    return Object.assign({}, state);
-}
-
-function contactDeletedEventReducer(action: any, state: any) {
-    return Object.assign({}, state);
-}
-
-function contactsLoadedReducer(action: any, state: any) {
-    return Object.assign({}, state);
+    public select(property: string, filter): Observable<any> {    
+        return this._select
+            .filter(filter)
+            .map(x => x.state[property]);
+    }
 }

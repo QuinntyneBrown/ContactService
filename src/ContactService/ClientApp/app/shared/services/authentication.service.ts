@@ -10,6 +10,7 @@ export class AuthenticationService {
 
     public tryToLogin(options: any) {
         Object.assign(options, { grant_type: "password" });
+        
         return this._httpService.postFormEncoded("/api/user/token", options)
             .map(response => {
                 var accessToken = response.json()["access_token"];

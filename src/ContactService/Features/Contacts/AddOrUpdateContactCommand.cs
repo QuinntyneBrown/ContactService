@@ -16,17 +16,18 @@ namespace ContactService.Features.Contacts
         {
             public ContactApiModel Contact { get; set; }
             public Guid TenantUniqueId { get; set; }
+            public Guid CorrelationId { get; set; }
         }
 
         public class Response { }
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, ICache cache, IEventHubProvider eventHubProvider)
+            public Handler(ContactServiceContext context, ICache cache, IDispatcher dispatcher)
             {
                 _context = context;
                 _cache = cache;
-                _hubContext = eventHubProvider.Get();
+                _dispatcher = dispatcher;
             }
 
             public async Task<Response> Handle(Request request)
@@ -56,7 +57,7 @@ namespace ContactService.Features.Contacts
                 
                 await _context.SaveChangesAsync();
                 
-                _hubContext.Clients.All.events(new EntityAddedOrUpdatedEvent(request,entity));
+                _dispatcher.Dispatch<EventHub>(new EntityAddedOrUpdatedEvent(request.CorrelationId, entity));
 
                 _cache.Remove($"[Contacts] Get { request.TenantUniqueId}");
 
@@ -65,7 +66,7 @@ namespace ContactService.Features.Contacts
 
             private readonly ContactServiceContext _context;
             private readonly ICache _cache;
-            private readonly IHubContext _hubContext;
+            private readonly IDispatcher _dispatcher;
         }
     }
 }

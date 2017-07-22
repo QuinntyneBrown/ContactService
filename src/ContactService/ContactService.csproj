@@ -284,6 +284,7 @@
     </Content>
     <Content Include="ClientApp\app\users\register-page.component.html" />
     <Content Include="index.html" />
+    <Content Include="libs\jquery.js" />
     <Content Include="libs\jquery.signalR-2.2.1.js" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
@@ -323,10 +324,10 @@
     <Compile Include="Data\Model\Tenant.cs" />
     <Compile Include="Data\Model\User.cs" />
     <Compile Include="Events\Constants.cs" />
+    <Compile Include="Events\Dispatcher.cs" />
     <Compile Include="Events\EntityAddedOrUpdatedEvent.cs" />
     <Compile Include="Events\EntityDeletedEvent.cs" />
     <Compile Include="Events\EventHub.cs" />
-    <Compile Include="Events\EventHubProvider.cs" />
     <Compile Include="Features\Accounts\AccountApiModel.cs" />
     <Compile Include="Features\Accounts\AccountsController.cs" />
     <Compile Include="Features\Accounts\AddOrUpdateAccountCommand.cs" />
@@ -442,6 +443,7 @@
     <TypeScriptCompile Include="ClientApp\app\shared\services\event-hub.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\storage.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\shared.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\utilities\guid.ts" />
     <TypeScriptCompile Include="ClientApp\app\users\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\users\login-page.component.ts">
       <DependentUpon>login-page.component.html</DependentUpon>

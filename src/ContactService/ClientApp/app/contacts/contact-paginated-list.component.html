@@ -8,3 +8,8 @@
                       (edit)="edit.emit($event)"
                       (delete)="delete.emit($event)">
 </ce-contact-list-item>
+<ce-pager [pageNumber]="pageNumber" 
+          [totalPages]="pagedList.totalPages" 
+          (next)="setPageNumber($event)" 
+          (previous)="setPageNumber($event)">
+</ce-pager>

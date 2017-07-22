@@ -1,6 +1,7 @@
 ﻿import {Injectable} from "@angular/core";
 import {ContactsService} from "./contacts.service";
 import {Dispatcher} from "../shared/services/dispatcher";
+import {contactsActions} from "./contacts.actions";
 
 @Injectable()
 export class ContactsEffects {
@@ -9,7 +10,14 @@ export class ContactsEffects {
         private _dispatcher: Dispatcher<any>
     ) { }
 
-    public scan(action) {
+    public async scan(action) {
+        if (action.type === contactsActions.CONTACT_GET) {
+            const response = await this._contactsService.get();
 
+            this._dispatcher.dispatch({
+                type: contactsActions.CONTACTS_LOADED,
+                payload: { response }
+            });
+        }
     }
 }

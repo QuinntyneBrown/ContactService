@@ -35,7 +35,7 @@ export class LoginPageComponent implements OnInit {
     public get teamName() { return this._storage.get({ name: constants.CURRENT_TEAM_KEY  }).team.name; }
 
     public async tryToLogin($event: { value: { username: string, password: string, rememberMe: boolean } }) {      
-
+        
         this._storage.put({ name: constants.LOGIN_CREDENTIALS, value: $event.value.rememberMe ? $event.value : null });
 
         await this._authenticationService.tryToLogin({ username: $event.value.username, password: $event.value.password }).toPromise();

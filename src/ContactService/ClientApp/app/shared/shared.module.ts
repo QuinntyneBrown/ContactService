@@ -8,13 +8,15 @@ import {HttpService, SecuredHttpService} from "./services/http.service";
 import {LoginRedirectService} from "./services/login-redirect.service";
 import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
+import {Dispatcher} from "./services/dispatcher";
 
 import {HeaderComponent} from "./components/header.component";
-
+import {PagerComponent} from "./components/pager.component";
 
 const providers = [
     HttpService,
     SecuredHttpService,
+    Dispatcher,
     EventHub,
     AuthGuardService,
     AuthenticationService,
@@ -23,7 +25,8 @@ const providers = [
 ];
 
 const declarables = [
-    HeaderComponent
+    HeaderComponent,
+    PagerComponent
 ];
 
 @NgModule({

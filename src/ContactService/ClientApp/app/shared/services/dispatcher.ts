@@ -1,12 +1,17 @@
 ﻿import {Subject} from "rxjs/Subject";
 
-export class Dispatcher<T> extends Subject<T> {
+export interface IAction {
+    type: string;
+    payload: any;
+}
+
+export class Dispatcher<IAction> extends Subject<IAction> {
     constructor() {
         super();
         this.dispatch = this.dispatch.bind(this);
     }
     
-    dispatch(action) {
+    dispatch(action: IAction) {
         return this.next(action);
     }
 }

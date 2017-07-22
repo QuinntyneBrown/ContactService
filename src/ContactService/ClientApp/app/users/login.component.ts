@@ -22,7 +22,9 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 })
 export class LoginComponent implements AfterViewInit { 
 
-    constructor(private _renderer: Renderer, private _elementRef: ElementRef) { }
+    constructor(private _renderer: Renderer, private _elementRef: ElementRef) {
+        this.tryToLogin = new EventEmitter();
+    }
 
     public get usernameNativeElement(): HTMLElement {
         return this._elementRef.nativeElement.querySelector("#username");
@@ -49,11 +51,11 @@ export class LoginComponent implements AfterViewInit {
     @Input()
     public rememberMe: boolean;
 
-    @Output() public tryToLogin: EventEmitter<any> = new EventEmitter();
+    @Output() public tryToLogin: EventEmitter<any>;
 
     public form = new FormGroup({
-        username: new FormControl(this.username, [Validators.required]),
-        password: new FormControl(this.password, [Validators.required]),
-        rememberMe: new FormControl(this.rememberMe,[])
+        username: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required]),
+        rememberMe: new FormControl('',[])
     });
 }

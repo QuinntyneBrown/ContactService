@@ -10,8 +10,9 @@ import {ContactListItemComponent} from "./contact-list-item.component";
 import {ContactMasterDetailComponent} from "./contact-master-detail.component";
 
 import {ContactsService} from "./contacts.service";
-import {ContactsActionCreator} from "./contacts-store";
 import {ContactsStore} from "./contacts-store";
+import {ContactsReducersProvider} from "./contacts-reducers-provider";
+import {ContactsEffects} from "./contacts-effects";
 
 const declarables = [
     ContactEditComponent,
@@ -21,7 +22,8 @@ const declarables = [
 
 const providers = [
     ContactsService,
-    ContactsActionCreator,
+    ContactsReducersProvider,
+    ContactsEffects,
     ContactsStore
 ];
 

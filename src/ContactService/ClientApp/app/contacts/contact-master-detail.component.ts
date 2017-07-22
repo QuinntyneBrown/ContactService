@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
-import {ContactsActionCreator, ContactsStore} from "./contacts-store";
-import {ContactsService} from "./contacts.service";
-import {Contact} from "./contact.model";
+import {guid} from "../shared/utilities/guid";
+import {ContactsStore as Store,IAction} from "./contacts-store";
+import {contactsActions} from "./contacts.actions";
 
 @Component({
     templateUrl: "./contact-master-detail.component.html",
@@ -9,38 +9,56 @@ import {Contact} from "./contact.model";
     selector: "ce-contact-master-detail"
 })
 export class ContactMasterDetailComponent {
-    constructor(
-        private _contactsActionCreator: ContactsActionCreator,
-        private _contactsService: ContactsService,
-        private _contactsStore: ContactsStore
-    ) { }
-
-    public async ngOnInit() {
-        this._contactsActionCreator.get();
-        const response = await this._contactsService.get();
-        this.contacts = response.contacts;        
+    constructor(private _store: Store) {
+        _store.subscribe((state) => {            
+            this.contacts = state.contacts;
+        });
+    }
+    
+    public async ngOnInit() {                
+        this._store.dispatch({
+            type: contactsActions.CONTACT_GET,
+            payload: null
+        });          
     }
     
     public tryToSave($event) {
-        // return an id;
-        this._contactsActionCreator.save();
-        this._contactsService.add({ contact: $event.detail.contact });
-        //add or update contacts
+        const correlationId = guid();
+        this._store.dispatch({
+            type: contactsActions.CONTACT_SAVE,
+            payload: {
+                contact: $event.detail.contact,
+                correlationId
+            }
+        });
+
+        this._store.select("contacts",
+            x => x.action.payload.correlationId == correlationId)
+            .subscribe(contacts => this.contacts = contacts);
     }
 
     public tryToDelete($event) {   
-        this._contactsActionCreator.remove();     
-        this._contactsService.remove({ contact: $event.detail.contact });       
-        // pluck 
+        const correlationId = guid();
+        this._store.dispatch({
+            type: contactsActions.CONTACT_DELETE,
+            payload: {
+                contact: $event.detail.contact,
+                correlationId
+            }
+        });            
     }
 
     public async tryToEdit($event) {        
-        this.contact = $event.detail.contact;
-    }
+        const correlationId = guid();
+        this._store.dispatch({
+            type: contactsActions.CONTACT_EDIT,
+            payload: {
+                contact: $event.detail.contact,
+                correlationId
+            }
+        });       
+    }    
 
-    public contacts: Array<Contact> = [];
-    public contact: Contact = <Contact>{};
-    public get contacts$() {
-        return this._contactsStore.contacts$.asObservable();
-    }
+    contact = {};
+    contacts: Array<any> = [];
 }

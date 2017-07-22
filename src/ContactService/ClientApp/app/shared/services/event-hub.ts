@@ -9,11 +9,7 @@ import "rxjs/add/operator/map";
 
 declare var $: any;
 
-export interface IEvent {
-    type: string;
-}
-
-export const events = {
+export const actions = {
     ENTITY_ADDED_OR_UPDATED: "ENTITY_ADDED_OR_UPDATED",
     ENTITY_DELETED: "ENTITY_DELETED"
 };
@@ -23,14 +19,11 @@ export class EventHub {
     private _eventHubProxy: any;
     private _connection: any;
 
-    constructor(private _storage: Storage) {
-        this.events$ = new BehaviorSubject(null);
+    constructor(private _storage: Storage, private _dispatcher: Dispatcher<any>) {        
         this._connection = this._connection || $.hubConnection(constants.HUB_URL);
         this._connection.qs = { "Bearer": this._storage.get({ name: constants.ACCESS_TOKEN_KEY }) };        
         this._eventHubProxy = this._connection.createHubProxy("eventHub");
-        this._eventHubProxy.on("events", this.events$.next);
+        this._eventHubProxy.on("dispatch", this._dispatcher.dispatch);
         this._connection.start();
-    }
-    
-    public events$: BehaviorSubject<any>;        
+    }        
 }
