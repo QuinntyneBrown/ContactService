@@ -5,9 +5,10 @@
 }
 
 ce-contact-edit {
-    grid-column: 1;
+    grid-column: 2;
 }
 
-ce-contact-list {
-    grid-column: 2;
+ce-contact-paginated-list {
+    grid-column: 1;
+    margin:0px 0px 0px 20px;
 }

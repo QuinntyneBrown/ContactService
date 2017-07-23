@@ -31,7 +31,7 @@ export class ContactsStore extends BehaviorSubject<any> {
                 mode: false
             }
         });
-        this._dispatcher.subscribe(this.next);    
+        this._dispatcher.subscribe(action => this.next(action));    
         this._reducers = _contactsReducersProvider.get();  
     }
 

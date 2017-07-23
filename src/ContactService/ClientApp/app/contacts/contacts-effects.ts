@@ -9,12 +9,12 @@ export class ContactsEffects {
         private _contactsService: ContactsService,
         private _dispatcher: Dispatcher<any>
     ) {
-        this._dispatcher.subscribe(this.next);
+        this._dispatcher.subscribe(action => this.next(action));
     }
 
     public next(action) {
         if (action.type === contactsActions.CONTACT_GET) {
-            this.get();
+            this.getContacts();
         }
 
         if (action.type === contactsActions.CONTACT_ADD_OR_UPDATE) {
@@ -32,7 +32,7 @@ export class ContactsEffects {
         }
     }
 
-    public async get() {
+    public async getContacts() {
         const response = await this._contactsService.get();
 
         this._dispatcher.dispatch({
