@@ -37,7 +37,7 @@ namespace ContactService.Features.Contacts
                     .SingleOrDefaultAsync(x => x.Id == request.Contact.Id && x.Tenant.UniqueId == request.TenantUniqueId);
                 
                 if (entity == null) {
-                    var tenant = await _context.Tenants.SingleAsync(x => x.UniqueId == request.TenantUniqueId);
+                    var tenant = await _cache.FromCacheOrServiceAsync(() => _context.Tenants.SingleAsync(x => x.UniqueId == request.TenantUniqueId),$"[Tenant] {request.TenantUniqueId}");
                     _context.Contacts.Add(entity = new Contact() { TenantId = tenant.Id });
                 }
 

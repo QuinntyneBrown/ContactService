@@ -2,5 +2,6 @@
                  [contact]="contact"></ce-contact-edit>
 <ce-contact-paginated-list [contacts]="contacts"
                            (delete)="tryToDelete($event)"
-                           (edit)="tryToEdit($event)">
+                           (edit)="tryToEdit($event)"
+                           (filterKeyUp)="handleContactsFilterKeyUp($event)">
 </ce-contact-paginated-list>

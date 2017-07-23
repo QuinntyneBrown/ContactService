@@ -1,9 +1,11 @@
 import {Component,Input, Output, EventEmitter} from "@angular/core";
 import {toPageListFromInMemory,IPagedList} from "../shared/components/pager.component";
+import {Observable} from "rxjs/Observable";
 
 @Component({
     templateUrl: "./contact-paginated-list.component.html",
     styleUrls: [
+        "../shared/styles/forms.css",
         "../shared/styles/list.css",
         "./contact-paginated-list.component.css"
     ],
@@ -12,8 +14,9 @@ import {toPageListFromInMemory,IPagedList} from "../shared/components/pager.comp
 export class ContactPaginatedListComponent { 
 
     constructor() {
-        this.select = new EventEmitter();
+        this.edit = new EventEmitter();
         this.delete = new EventEmitter();
+        this.filterKeyUp = new EventEmitter();
     }
     public setPageNumber($event) {
         this.pageNumber = $event.detail.pageNumber;
@@ -33,12 +36,17 @@ export class ContactPaginatedListComponent {
     public pagedList: IPagedList<any> = <any>{};
 
     @Output()
-    public select: EventEmitter<any>;
+    public edit: EventEmitter<any>;
 
     @Output()
     public delete: EventEmitter<any>;
+
+    
+    @Output()
+    public filterKeyUp: EventEmitter<any>;
+
     
     public pageNumber: number = 1;
 
-    public pageSize: number = 5;
+    public pageSize: number = 5;    
 }

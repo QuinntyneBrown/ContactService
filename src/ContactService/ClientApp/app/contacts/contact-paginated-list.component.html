@@ -1,4 +1,6 @@
 <h1>Contact List</h1>
+<label>Filter</label>
+<input type="text" placeholder="Filter" (keyup)="filterKeyUp.emit({ detail: { value: $event.target.value } })" />
 <div>
     <h2>Email</h2>
     <h2>Actions</h2>

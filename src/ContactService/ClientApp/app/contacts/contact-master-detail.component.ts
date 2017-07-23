@@ -10,8 +10,9 @@ import {contactsActions} from "./contacts.actions";
 })
 export class ContactMasterDetailComponent {
     constructor(private _store: Store) {
-        _store.subscribe((state) => {            
-            this.contacts = state.contacts;
+        _store.subscribe((state) => {           
+            this.contacts = state.filter.mode ? state.filter.contacts : state.contacts;
+            this.contact = state.contact;
         });
     }
     
@@ -31,16 +32,13 @@ export class ContactMasterDetailComponent {
                 correlationId
             }
         });
-
-        this._store.select("contacts",
-            x => x.action.payload.correlationId == correlationId)
-            .subscribe(contacts => this.contacts = contacts);
+        
     }
 
     public tryToDelete($event) {   
         const correlationId = guid();
         this._store.dispatch({
-            type: contactsActions.CONTACT_DELETE,
+            type: contactsActions.CONTACT_REMOVE,
             payload: {
                 contact: $event.detail.contact,
                 correlationId
@@ -48,16 +46,31 @@ export class ContactMasterDetailComponent {
         });            
     }
 
-    public async tryToEdit($event) {        
-        const correlationId = guid();
+    public async tryToEdit($event) {                
         this._store.dispatch({
             type: contactsActions.CONTACT_EDIT,
             payload: {
-                contact: $event.detail.contact,
-                correlationId
+                contact: $event.detail.contact                
             }
         });       
     }    
+
+    public handleContactsFilterKeyUp($event) {
+        const correlationId = guid();
+
+        this._store.dispatch({
+            type: contactsActions.CONTACTS_FILTER_KEY_UP,
+            payload: {
+                value: $event.detail.value,
+                correlationId
+            }
+        });
+
+        this._store.filter(x => x.filter.correlationId == correlationId)
+            .subscribe(x => {
+                console.log(x);
+            });
+    }
 
     contact = {};
     contacts: Array<any> = [];

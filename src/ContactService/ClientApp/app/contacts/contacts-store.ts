@@ -17,27 +17,40 @@ export class ContactsStore extends BehaviorSubject<any> {
         private _storage: Storage,
         private _contactsReducersProvider: ContactsReducersProvider,
         private _contactsEffects: ContactsEffects,
-        private _dispatcher: Dispatcher<any>
+        private _dispatcher: Dispatcher<IAction>
     ) {
         super({
             contacts: [],
-            contact: null
+            
+            contact: {},
+            filter: {
+                originalContacts:[],
+                correlationId: null,
+                contacts: [],
+                value: "",
+                mode: false
+            }
         });
-        this._dispatcher.subscribe((action:IAction) => this.next(action));    
+        this._dispatcher.subscribe(this.next);    
         this._reducers = _contactsReducersProvider.get();  
-        this.state = {
-            contacts: [],
-            contact: null
-        };  
     }
 
     state;
     _reducers = [];
 
     next(action:IAction) {
-        
-        this._contactsEffects.scan(action);
 
+        this.state = this.state || {
+            contacts: [],
+            contact: {},
+            filter: {
+                correlationId: null,
+                contacts: [],
+                value: "",
+                mode: false
+            }
+        };
+        
         for (let i = 0; i < this._reducers.length; i++) {
             this.state = this._reducers[i].call(null, this.state, action);
         }
@@ -46,12 +59,4 @@ export class ContactsStore extends BehaviorSubject<any> {
     }
 
     dispatch = this._dispatcher.dispatch; 
-
-    private _select: Subject<{action:IAction,state:any}> = new Subject();
-
-    public select(property: string, filter): Observable<any> {    
-        return this._select
-            .filter(filter)
-            .map(x => x.state[property]);
-    }
 }
