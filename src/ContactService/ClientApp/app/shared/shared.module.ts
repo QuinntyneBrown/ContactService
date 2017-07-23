@@ -12,6 +12,9 @@ import {Dispatcher} from "./services/dispatcher";
 
 import {HeaderComponent} from "./components/header.component";
 import {PagerComponent} from "./components/pager.component";
+import {TabContentComponent} from "./components/tab-content.component";
+import {TabTitleComponent} from "./components/tab-title.component";
+import {TabsComponent} from "./components/tabs.component";
 
 const providers = [
     HttpService,
@@ -26,7 +29,10 @@ const providers = [
 
 const declarables = [
     HeaderComponent,
-    PagerComponent
+    PagerComponent,
+    TabContentComponent,
+    TabTitleComponent,
+    TabsComponent
 ];
 
 @NgModule({
