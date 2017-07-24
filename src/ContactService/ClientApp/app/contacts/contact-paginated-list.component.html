@@ -5,7 +5,7 @@
     <h2>Email</h2>
     <h2>Actions</h2>
 </div>
-<ce-contact-list-item *ngFor="let contact of contacts"
+<ce-contact-list-item *ngFor="let contact of pagedList.data"
                       [contact]="contact"
                       (edit)="edit.emit($event)"
                       (delete)="delete.emit($event)">

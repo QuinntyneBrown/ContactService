@@ -8,7 +8,8 @@ namespace ContactService.Events
             Payload = new
             {
                 CorrelationId = correlationId,
-                Entity = entity
+                Entity = entity,
+                EntityName = entity.GetType().Name
             };
         }
 

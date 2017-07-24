@@ -23,7 +23,10 @@ export class EventHub {
         this._connection = this._connection || $.hubConnection(constants.HUB_URL);
         this._connection.qs = { "Bearer": this._storage.get({ name: constants.ACCESS_TOKEN_KEY }) };        
         this._eventHubProxy = this._connection.createHubProxy("eventHub");
-        this._eventHubProxy.on("dispatch", this._dispatcher.dispatch);
+        this._eventHubProxy.on("dispatch", (value) => {
+            console.log("event hub dispatch");
+            this._dispatcher.dispatch(value);
+        });
         this._connection.start();
     }        
 }

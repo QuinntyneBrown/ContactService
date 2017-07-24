@@ -25,20 +25,13 @@ export class PagerComponent {
 
     public emitNext() {
         let value = 1;
-
-        if (this.pageNumber < this.totalPages) {
-            value = this.pageNumber + 1;
-        }
-
+        if (this.pageNumber < this.totalPages) { value = this.pageNumber + 1; }
         this.next.emit({ detail: { pageNumber: value } });
     }
 
     public emitPrevious() {
         let value = this.totalPages;
-
-        if (this.pageNumber === this.totalPages) {
-            value = 1;
-        }
+        if (this.pageNumber != 1) { value = this.pageNumber - 1; }
         this.next.emit({ detail: { pageNumber: value } });
     }
 }

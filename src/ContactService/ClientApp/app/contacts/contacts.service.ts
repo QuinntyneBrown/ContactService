@@ -20,7 +20,7 @@ export class ContactsService {
             .get(`${this._baseUrl}api/contacts/getById?id=${options.id}`)
     }
 
-    public remove(options: { contact: any, correlationId:any }) {
+    public remove(options: { contact: any, correlationId: any }) {       
         this._http
             .delete(`${this._baseUrl}api/contacts/remove?id=${options.contact.id}&correlationId=${options.correlationId}`);
     }

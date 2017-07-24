@@ -3,6 +3,7 @@ import {Storage} from "./shared/services/storage.service";
 import {constants} from "./shared/constants";
 import {Observable} from "rxjs/Observable";
 import {Router, NavigationStart} from "@angular/router";
+import {EventHub} from "./shared/services/event-hub";
 
 @Component({
     templateUrl: "./app.component.html",
@@ -10,7 +11,7 @@ import {Router, NavigationStart} from "@angular/router";
     selector: "app"
 })
 export class AppComponent {
-    constructor(private _storage: Storage, private _router: Router) {
+    constructor(private _storage: Storage, private _router: Router, private _eventHub: EventHub) {
         this._router.events.subscribe(x => {
             if (x instanceof NavigationStart && x.url =="/login") {
                 this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: null });                

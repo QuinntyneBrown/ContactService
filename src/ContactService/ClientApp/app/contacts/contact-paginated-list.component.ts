@@ -19,6 +19,7 @@ export class ContactPaginatedListComponent {
         this.filterKeyUp = new EventEmitter();
     }
     public setPageNumber($event) {
+        
         this.pageNumber = $event.detail.pageNumber;
         this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);
     }
@@ -30,7 +31,7 @@ export class ContactPaginatedListComponent {
     @Input("contacts")
     public set contacts(value) {
         this._contacts = value;
-        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);
+        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);        
     }
 
     public pagedList: IPagedList<any> = <any>{};

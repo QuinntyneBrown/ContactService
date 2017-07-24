@@ -1,12 +1,12 @@
-import { Component, QueryList, ContentChildren, Inject, forwardRef, AfterContentInit, ElementRef, OnInit } from '@angular/core';
+import {Component,QueryList,ContentChildren,Inject,forwardRef, AfterContentInit, ElementRef, OnInit} from '@angular/core';
 import { TabTitleComponent, UPDATE_ACTIVE_TAB } from "./tab-title.component";
 import { TabContentComponent } from "./tab-content.component";
 
-@Component({
-    selector: 'ce-tabs',
+@Component({    
     host: { 'class': 'tabs' },
     templateUrl: "./tabs.component.html",
-    styleUrls: ["./tabs.component.css"]
+    styleUrls: ["./tabs.component.css"],
+    selector: 'ce-tabs'
 })
 export class TabsComponent implements AfterContentInit, OnInit {
     constructor(private _elementRef: ElementRef) {
@@ -25,15 +25,15 @@ export class TabsComponent implements AfterContentInit, OnInit {
         this._elementRef.nativeElement.addEventListener(UPDATE_ACTIVE_TAB, this.updateActiveTabByTitle);
     }
 
-    ngAfterContentInit() {
-        this.updateActiveTabByTitle({ detail: { tabTitle: this.titles.first } });
+    ngAfterContentInit() {              
+        this.updateActiveTabByTitle({ detail: { tabTitle: this.titles.first }});
 
-        this.titles.changes.subscribe(x => {
+        this.titles.changes.subscribe(x => {       
             this.updateActiveTabByTitle({ detail: { tabTitle: this.titles.first } });
         });
     }
 
-    updateActiveTabByTitle($event: { detail: { tabTitle: TabTitleComponent } }) {
+    updateActiveTabByTitle($event: { detail: { tabTitle: TabTitleComponent } }) {   
         this.updateActiveTab((titleArr) => titleArr.indexOf($event.detail.tabTitle));
     }
 

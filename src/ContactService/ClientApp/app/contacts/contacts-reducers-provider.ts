@@ -12,7 +12,8 @@ export class ContactsReducersProvider {
             //contactDeletedEventReducer,
             contactsLoadedReducer,
             contactsEditReducer,
-            contactsFilterReducer
+            contactsFilterReducer,
+            contactAddedOrUpdated
         ];
     }
 }
@@ -53,6 +54,20 @@ function contactsFilterReducer(state: any, action: any) {
         state.filter.value = action.payload.value;        
         state.filter.contacts = state.contacts.filter(contact => contact.email.indexOf(action.payload.value) > -1);      
         state.filter.mode = action.payload.value.length > 2;   
+    }
+    return Object.assign({}, state);
+}
+
+function contactAddedOrUpdated(state: any, action: any) {
+    if (action.type === contactsActions.ENTITY_ADDED_OR_UPDATED && action.payload.entityName.toLowerCase() === "contact") {        
+        state.contactAddOrUpdateResponse = action.payload;
+    }
+    return Object.assign({}, state);
+}
+
+function contactRemoved(state: any, action: any) {
+    if (action.type === contactsActions.ENTITY_REMOVED && action.payload.entityName.toLowerCase() === "contact") {
+        state.contactRemoveResponse = action.payload;
     }
     return Object.assign({}, state);
 }

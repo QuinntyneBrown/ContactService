@@ -20,9 +20,10 @@ export class ContactsStore extends BehaviorSubject<any> {
         private _dispatcher: Dispatcher<IAction>
     ) {
         super({
-            contacts: [],
-            
+            contacts: [],            
             contact: {},
+            contactAddOrUpdateResponse: {},
+            contactRemoveResponse: {},
             filter: {
                 originalContacts:[],
                 correlationId: null,
@@ -39,10 +40,12 @@ export class ContactsStore extends BehaviorSubject<any> {
     _reducers = [];
 
     next(action:IAction) {
-
+        
         this.state = this.state || {
             contacts: [],
             contact: {},
+            contactAddOrUpdateResponse: {},
+            contactRemoveResponse: {},
             filter: {
                 correlationId: null,
                 contacts: [],
