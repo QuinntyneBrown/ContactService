@@ -35,13 +35,13 @@ export class ContactMasterDetailComponent {
             }
         });
 
-        // add or update list
-
+        
         this.contact = {};
 
         this._store.filter(x => x.contactAddOrUpdateResponse.correlationId == correlationId)
             .subscribe(x => {
-                
+                this.contacts.push(x.contactAddOrUpdateResponse.entity);
+                this.contacts = this.contacts.slice(0);
             });
     }
 
