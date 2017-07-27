@@ -19,6 +19,8 @@ namespace ContactService.Data
         Task<int> SaveChangesAsync();
     }
 
+
+
     public class ContactServiceContext: DbContext, IContactServiceContext
     {
         public ContactServiceContext()

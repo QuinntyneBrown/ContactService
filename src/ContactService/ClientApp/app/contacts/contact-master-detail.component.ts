@@ -4,6 +4,7 @@ import {ContactsStore as Store,IAction} from "./contacts-store";
 import {contactsActions} from "./contacts.actions";
 import {addOrUpdate} from "../shared/utilities/add-or-update";
 import {pluckOut} from "../shared/utilities/pluck-out";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Component({
     templateUrl: "./contact-master-detail.component.html",
@@ -12,9 +13,12 @@ import {pluckOut} from "../shared/utilities/pluck-out";
 })
 export class ContactMasterDetailComponent {
     constructor(private _store: Store) {
+        this.contacts$ = new BehaviorSubject([]);
+
         _store.subscribe((state) => {           
             this.contacts = state.filter.mode ? state.filter.contacts : state.contacts;
             this.contact = state.contact;
+            this.contacts$.next(state.filter.mode ? state.filter.contacts : state.contacts);
         });
     }
     
@@ -27,21 +31,24 @@ export class ContactMasterDetailComponent {
     
     public tryToSave($event) {
         const correlationId = guid();
+        let contact = $event.detail.contact;
+
         this._store.dispatch({
             type: contactsActions.CONTACT_ADD_OR_UPDATE,
             payload: {
-                contact: $event.detail.contact,
+                contact,
                 correlationId
             }
         });
-
         
         this.contact = {};
 
         this._store.filter(x => x.contactAddOrUpdateResponse.correlationId == correlationId)
             .subscribe(x => {
-                this.contacts.push(x.contactAddOrUpdateResponse.entity);
-                this.contacts = this.contacts.slice(0);
+                this.contacts = addOrUpdate({
+                    items: this.contacts,
+                    item: x.contactAddOrUpdateResponse.entity
+                });                
             });
     }
 
@@ -87,4 +94,5 @@ export class ContactMasterDetailComponent {
 
     contact = {};
     contacts: Array<any> = [];
+    contacts$: BehaviorSubject<any>;
 }

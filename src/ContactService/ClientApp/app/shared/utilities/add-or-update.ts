@@ -7,5 +7,8 @@
             exists = true;
         }
     }
-    if (!exists) { options.items.push(options.item); }
+    if (!exists) {
+        options.items.push(options.item);        
+    }
+    return options.items.slice(0);
 }

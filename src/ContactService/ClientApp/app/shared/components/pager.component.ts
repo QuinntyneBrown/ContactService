@@ -38,6 +38,7 @@ export class PagerComponent {
 
 export interface IPagedList<T> {
     data: Array<T>;
+    _data: Array<T>;
     page: number;
     pageSize: number;
     totalCount: number;
@@ -45,7 +46,7 @@ export interface IPagedList<T> {
 }
 
 export class PagedList<T> implements IPagedList<T> {
-    constructor(private _data: Array<T>, private _page: number, private _pageSize: number, private _totalCount: number) { }
+    constructor(public _data: Array<T>, private _page: number, private _pageSize: number, private _totalCount: number) { }
     get data(): Array<T> { return this._data; }
     get page(): number { return this._page; }
     get pageSize(): number { return this._pageSize; }

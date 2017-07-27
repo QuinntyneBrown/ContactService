@@ -35,6 +35,7 @@ export class ContactEditComponent {
         this._contact = value;
 
         this.form.patchValue({
+            id: this._contact.id,
             email: this._contact.email,
             firstname: this._contact.firstname,
             lastname: this._contact.lastname,
@@ -42,9 +43,12 @@ export class ContactEditComponent {
             city: this._contact.city,
             phoneNumber: this._contact.phoneNumber
         });
+
+        alert(this._contact.id);
     }
    
     public form = new FormGroup({
+        id: new FormControl(0, []),
         email: new FormControl('', [Validators.required]),
         firstname: new FormControl('', [Validators.required]),
         lastname: new FormControl('', [Validators.required]),

@@ -1,6 +1,7 @@
-import {Component,Input, Output, EventEmitter} from "@angular/core";
+import {Component,Input, Output, EventEmitter, NgZone} from "@angular/core";
 import {toPageListFromInMemory,IPagedList} from "../shared/components/pager.component";
 import {Observable} from "rxjs/Observable";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Component({
     templateUrl: "./contact-paginated-list.component.html",
@@ -18,8 +19,12 @@ export class ContactPaginatedListComponent {
         this.delete = new EventEmitter();
         this.filterKeyUp = new EventEmitter();
     }
-    public setPageNumber($event) {
-        
+
+    ngOnInit() {
+
+    }
+
+    public setPageNumber($event) {        
         this.pageNumber = $event.detail.pageNumber;
         this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);
     }
@@ -29,10 +34,15 @@ export class ContactPaginatedListComponent {
         return this._contacts;
     }
     @Input("contacts")
-    public set contacts(value) {
+    public set contacts(value) {        
         this._contacts = value;
-        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);        
+        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);   
+        this.pagedList._data = this.pagedList._data.slice(0);
     }
+
+
+    @Input()
+    public contacts$: BehaviorSubject<any>;
 
     public pagedList: IPagedList<any> = <any>{};
 
@@ -45,7 +55,6 @@ export class ContactPaginatedListComponent {
     
     @Output()
     public filterKeyUp: EventEmitter<any>;
-
     
     public pageNumber: number = 1;
 
