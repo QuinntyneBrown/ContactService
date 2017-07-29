@@ -1,4 +1,4 @@
-import { Component, QueryList, ContentChildren, Inject, forwardRef } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
     templateUrl: "./tab-content.component.html",

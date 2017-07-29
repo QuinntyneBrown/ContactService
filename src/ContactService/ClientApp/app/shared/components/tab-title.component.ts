@@ -1,17 +1,6 @@
-import { Component, QueryList, ContentChildren, Inject, forwardRef, ElementRef } from '@angular/core';
+import {Component,ElementRef} from '@angular/core';
 
 export const UPDATE_ACTIVE_TAB:string = "[Tabs] UPDATE_ACTIVE_TAB";
-
-class UpdateActiveTabEvent extends CustomEvent {
-    constructor(tabTitle: TabTitleComponent) {
-        super(UPDATE_ACTIVE_TAB, {
-            bubbles: true,
-            cancelable:true,
-            composed: true,
-            detail: {tabTitle}
-        } as CustomEventInit);
-    }
-}
 
 @Component({
     templateUrl: "./tab-title.component.html",
@@ -25,7 +14,12 @@ export class TabTitleComponent {
     active: boolean = false;
     
     updateActiveTab() {  
-        (this.elementRef.nativeElement as HTMLElement).dispatchEvent(new UpdateActiveTabEvent(this));
+        this.elementRef.nativeElement.dispatchEvent(new CustomEvent(UPDATE_ACTIVE_TAB, {
+            bubbles: true,
+            cancelable: true,
+            composed: true,
+            detail: { tabTitle: this }
+        } as CustomEventInit));
     }
 
     activate() { this.active = true; }
