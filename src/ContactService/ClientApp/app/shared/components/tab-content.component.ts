@@ -9,11 +9,7 @@ import { Component, QueryList, ContentChildren, Inject, forwardRef } from '@angu
 export class TabContentComponent {
     active: boolean = false;
 
-    activate() {
-        this.active = true;
-    }
+    activate() { this.active = true; }
 
-    deactivate() {
-        this.active = false;
-    }
+    deactivate() { this.active = false; }
 }

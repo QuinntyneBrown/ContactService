@@ -42,23 +42,17 @@ export class TabsComponent implements AfterContentInit, OnInit {
     }
 
     private updateActiveTab(nextActiveIndexCb: (titleArr: any[], lastIndex: number) => number) {
-        var titleArr = toArray(this.titles);
-        var contentArr = toArray(this.contents);
-        var lastIndex = titleArr.indexOf(this.activeTitle);
-        var nextIndex = nextActiveIndexCb(titleArr, lastIndex);
-        this.activeTitle = titleArr[nextIndex];
+        const titleArray = this.titles.toArray();
+        const contentArray = this.contents.toArray();
+        const lastIndex = titleArray.indexOf(this.activeTitle);
+        const nextIndex = nextActiveIndexCb(titleArray, lastIndex);
+        this.activeTitle = titleArray[nextIndex];
 
         if (lastIndex !== -1) {
-            titleArr[lastIndex].deactivate();
-            contentArr[lastIndex].deactivate();
+            titleArray[lastIndex].deactivate();
+            contentArray[lastIndex].deactivate();
         }
-        titleArr[nextIndex].activate();
-        contentArr[nextIndex].activate();
+        titleArray[nextIndex].activate();
+        contentArray[nextIndex].activate();
     }
-}
-
-function toArray<T>(query: QueryList<T>): T[] { // won't be needed in the next alpha
-    var result = [];
-    query.map(value => result.push(value));
-    return result;
 }

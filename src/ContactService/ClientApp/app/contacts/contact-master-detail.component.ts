@@ -48,7 +48,9 @@ export class ContactMasterDetailComponent {
                 this.contacts = addOrUpdate({
                     items: this.contacts,
                     item: x.contactAddOrUpdateResponse.entity
-                });                
+                }); 
+
+                this.contacts$.next(this.contacts);
             });
     }
 
@@ -61,6 +63,14 @@ export class ContactMasterDetailComponent {
                 correlationId
             }
         });    
+
+        
+        pluckOut({
+            value: $event.detail.contact.id,
+            items: this.contacts
+        });
+        
+        this.contacts = this.contacts.slice(0);
 
         this._store.filter(x => x.contactRemoveResponse.correlationId == correlationId)
             .subscribe(x => {

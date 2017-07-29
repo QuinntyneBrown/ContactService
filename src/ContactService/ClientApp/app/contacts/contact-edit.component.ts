@@ -43,8 +43,6 @@ export class ContactEditComponent {
             city: this._contact.city,
             phoneNumber: this._contact.phoneNumber
         });
-
-        alert(this._contact.id);
     }
    
     public form = new FormGroup({

@@ -21,7 +21,10 @@ export class ContactPaginatedListComponent {
     }
 
     ngOnInit() {
-
+        this.contacts$.subscribe((value) => {            
+            this.pagedList = toPageListFromInMemory(value, this.pageNumber, this.pageSize);
+            this.pagedList._data = this.pagedList._data.slice(0);
+        });
     }
 
     public setPageNumber($event) {        
@@ -51,7 +54,6 @@ export class ContactPaginatedListComponent {
 
     @Output()
     public delete: EventEmitter<any>;
-
     
     @Output()
     public filterKeyUp: EventEmitter<any>;

@@ -20,21 +20,15 @@ class UpdateActiveTabEvent extends CustomEvent {
     host: { '(click)': 'updateActiveTab()', '[class.is-active]': 'active', 'class': 'tabs__tab' },
 })
 export class TabTitleComponent {
-    constructor(public elementRef: ElementRef) {
+    constructor(public elementRef: ElementRef) { }
 
-    }
     active: boolean = false;
-
-
+    
     updateActiveTab() {  
         (this.elementRef.nativeElement as HTMLElement).dispatchEvent(new UpdateActiveTabEvent(this));
     }
 
-    activate() {
-        this.active = true;
-    }
+    activate() { this.active = true; }
 
-    deactivate() {
-        this.active = false;
-    }
+    deactivate() { this.active = false; }
 }
