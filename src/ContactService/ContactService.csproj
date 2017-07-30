@@ -6,8 +6,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -22,8 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
@@ -244,6 +242,9 @@
       <DependentUpon>app.component.html</DependentUpon>
     </Content>
     <Content Include="ClientApp\app\app.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-edit-page.component.css">
+      <DependentUpon>contact-edit-page.component.html</DependentUpon>
+    </Content>
     <Content Include="ClientApp\app\contacts\contact-edit.component.css">
       <DependentUpon>contact-edit.component.html</DependentUpon>
     </Content>
@@ -254,6 +255,9 @@
       <DependentUpon>contact-master-detail.component.html</DependentUpon>
     </Content>
     <Content Include="ClientApp\app\contacts\contact-master-detail.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-paginated-list-page.component.css">
+      <DependentUpon>contact-paginated-list-page.component.html</DependentUpon>
+    </Content>
     <Content Include="ClientApp\app\contacts\contact-paginated-list.component.css">
       <DependentUpon>contact-paginated-list.component.html</DependentUpon>
     </Content>
@@ -307,6 +311,8 @@
     <Content Include="ClientApp\app\shared\components\tabs.component.html" />
     <Content Include="ClientApp\app\shared\components\tab-content.component.html" />
     <Content Include="ClientApp\app\shared\components\tab-title.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-edit-page.component.html" />
+    <Content Include="ClientApp\app\contacts\contact-paginated-list-page.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -411,6 +417,12 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\app.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\app.routing.ts" />
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-edit-page.component.ts">
+      <DependentUpon>contact-edit-page.component.html</DependentUpon>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\contacts\contact-paginated-list-page.component.ts">
+      <DependentUpon>contact-paginated-list-page.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-paginated-list.component.ts">
       <DependentUpon>contact-paginated-list.component.html</DependentUpon>
     </TypeScriptCompile>
@@ -499,8 +511,7 @@
           <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl></CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
