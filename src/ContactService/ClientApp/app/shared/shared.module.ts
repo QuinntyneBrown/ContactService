@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
+import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 
-import {AuthGuardService} from "./services/auth-guard.service"
+import {AuthGuardService} from "./guards/auth-guard.service"
 import {AuthenticationService} from "./services/authentication.service";
 import {HttpService, SecuredHttpService} from "./services/http.service";
 import {LoginRedirectService} from "./services/login-redirect.service";
@@ -10,6 +11,9 @@ import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
 import {Dispatcher} from "./services/dispatcher";
 import {TenantGuardService} from "./guards/tenant-guard.service";
+
+import {AuthInterceptor} from "./interceptors/auth.interceptor";
+import {TenantInterceptor} from "./interceptors/tenant.interceptor";
 
 import {HeaderComponent} from "./components/header.component";
 import {PagerComponent} from "./components/pager.component";
@@ -26,7 +30,17 @@ const providers = [
     AuthenticationService,
     LoginRedirectService,  
     TenantGuardService,  
-    Storage
+    Storage,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthenticationService,
+        multi: true
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TenantInterceptor,
+        multi: true
+    }
 ];
 
 const declarables = [
@@ -38,7 +52,7 @@ const declarables = [
 ];
 
 @NgModule({
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, HttpClientModule],
     entryComponents: [],
     declarations: [declarables],
     exports:[declarables],

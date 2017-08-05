@@ -8,6 +8,7 @@ using Microsoft.ServiceBus.Messaging;
 
 using static Newtonsoft.Json.JsonConvert;
 using Newtonsoft.Json.Linq;
+using System;
 
 [assembly: OwinStartup(typeof(ContactService.Startup))]
 
@@ -24,13 +25,20 @@ namespace ContactService
                 ApiConfiguration.Install(config, app);
 
                 var contactsEventBusMessageHandler = container.Resolve<Features.Contacts.IContactsEventBusMessageHandler>();
-                var queueClient = container.Resolve<IQueueClient>();
+                
+                var client = SubscriptionClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName, "contact-service");
 
-                queueClient.OnMessage((message) =>
+                client.OnMessage(message =>
                 {
-                    var messageBody = ((BrokeredMessage)message).GetBody<string>();
-                    var messageBodyObject = DeserializeObject<JObject>(messageBody);
-                    contactsEventBusMessageHandler.Handle(messageBodyObject);
+                    try
+                    {
+                        var messageBody = ((BrokeredMessage)message).GetBody<string>();
+                        var messageBodyObject = DeserializeObject<JObject>(messageBody);
+                        contactsEventBusMessageHandler.Handle(messageBodyObject);
+                    } catch(Exception e)
+                    {
+
+                    }
                 });
             });
         }

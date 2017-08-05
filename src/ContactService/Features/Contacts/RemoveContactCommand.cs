@@ -2,6 +2,7 @@ using ContactService.Data;
 using ContactService.Features.Core;
 using MediatR;
 using Microsoft.AspNet.SignalR;
+using Microsoft.ServiceBus.Messaging;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
@@ -38,7 +39,9 @@ namespace ContactService.Features.Contacts
 
                 await _context.SaveChangesAsync();
 
-                _queueClient.Send(new RemovedContactMessage()
+                var client = TopicClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName);
+
+                client.Send(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(new AddedOrUpdatedContactMessage()
                 {
                     Payload = new
                     {
@@ -46,7 +49,7 @@ namespace ContactService.Features.Contacts
                         CorrelationId = request.CorrelationId,
                     },
                     TenantUniqueId = request.TenantUniqueId
-                });
+                })));
 
                 return new Response();
             }

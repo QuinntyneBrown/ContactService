@@ -1,5 +1,5 @@
 ﻿import {Routes, RouterModule} from '@angular/router';
-import {AuthGuardService} from "./shared";
+import {AuthGuardService} from "./shared/guards/auth-guard.service";
 import {LoginPageComponent} from "./users/login-page.component";
 import {ContactPaginatedListPageComponent} from "./contacts/contact-paginated-list-page.component";
 import {ContactEditPageComponent} from "./contacts/contact-edit-page.component";

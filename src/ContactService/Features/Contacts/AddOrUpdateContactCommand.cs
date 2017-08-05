@@ -5,6 +5,7 @@ using MediatR;
 using System;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Microsoft.ServiceBus.Messaging;
 
 namespace ContactService.Features.Contacts
 {
@@ -55,14 +56,18 @@ namespace ContactService.Features.Contacts
                 
                 await _context.SaveChangesAsync();
 
-                _queueClient.Send(new AddedOrUpdatedContactMessage()
+                var client = TopicClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName);
+                
+                client.Send(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(new AddedOrUpdatedContactMessage()
                 {
-                    Payload = new {
+                    Payload = new
+                    {
                         Entity = entity,
                         CorrelationId = request.CorrelationId
                     },
                     TenantUniqueId = request.TenantUniqueId
-                });
+                })));
+
 
                 return new Response();
             }

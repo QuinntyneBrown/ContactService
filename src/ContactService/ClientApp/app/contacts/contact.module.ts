@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {FormsModule,ReactiveFormsModule} from "@angular/forms";
-
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 import {SharedModule} from "../shared/shared.module";
 
 import {ContactEditComponent} from './contact-edit.component';
@@ -21,7 +21,7 @@ const providers = [
 ];
 
 @NgModule({
-    imports: [CommonModule,FormsModule,ReactiveFormsModule,SharedModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, HttpClientModule],
     exports: [declarables],
     declarations: [declarables],
     providers: providers

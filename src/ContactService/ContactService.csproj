@@ -6,7 +6,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion></ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -21,7 +22,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp></NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
@@ -337,7 +339,9 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include="packages.config" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +404,7 @@
     <Compile Include="Features\Core\ILoggerFactory.cs" />
     <Compile Include="Features\Core\ILoggerProvider.cs" />
     <Compile Include="Features\Core\IQueueClient.cs" />
+    <Compile Include="Features\Core\ITopicClient.cs" />
     <Compile Include="Features\Core\Logger.cs" />
     <Compile Include="Features\Core\LoggerFactory.cs" />
     <Compile Include="Features\Core\MemoryCache.cs" />
@@ -483,7 +488,10 @@
     <TypeScriptCompile Include="ClientApp\app\shared\constants.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\guards\tenant-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\index.ts" />
-    <TypeScriptCompile Include="ClientApp\app\shared\services\auth-guard.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\interceptors\auth.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\interceptors\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\interceptors\tenant.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\guards\auth-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\authentication.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\dispatcher.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\http.service.ts" />
@@ -522,6 +530,7 @@
     <TypeScriptCompile Include="ClientApp\app\contacts\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\notifications\notifications.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contact.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\guards\index.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -542,7 +551,8 @@
           <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl></CustomServerUrl>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
