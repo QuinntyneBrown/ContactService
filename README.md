@@ -1,2 +1,2 @@
 # ContactService
-ContactService using ASP.NET Web API 2, Angular, MediatR and TypeScript 2.x
+ContactService using ASP.NET Web API 2, Angular 4, SignalR, MediatR (CQRS), Azure Service Bus, Redis and TypeScript
