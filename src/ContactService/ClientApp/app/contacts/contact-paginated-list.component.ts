@@ -22,9 +22,7 @@ export class ContactPaginatedListComponent {
     }
 
     ngOnInit() {
-        this.contacts$.subscribe((value) => {            
-            this.pagedList = toPageListFromInMemory(value, this.pageNumber, this.pageSize);            
-        });
+        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);
     }
 
     public setPageNumber($event) {        
@@ -39,14 +37,9 @@ export class ContactPaginatedListComponent {
     @Input("contacts")
     public set contacts(value) {        
         this._contacts = value;
-        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);   
-        this.pagedList._data = this.pagedList._data.slice(0);
+        this.pagedList = toPageListFromInMemory(this.contacts, this.pageNumber, this.pageSize);           
     }
-
-
-    @Input()
-    public contacts$: BehaviorSubject<any>;
-
+    
     public pagedList: IPagedList<any> = <any>{};
 
     @Output()

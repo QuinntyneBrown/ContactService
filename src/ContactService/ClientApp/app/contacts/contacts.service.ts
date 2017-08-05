@@ -5,7 +5,7 @@ import {SecuredHttpService} from "../shared/services/http.service";
 export class ContactsService {
     constructor(private _http: SecuredHttpService) { }
 
-    public addOrUpdate(options: {contact:any, correlationId:string}) {
+    public addOrUpdate(options: {contact:any, correlationId?:string}) {
         this._http
             .post(`${this._baseUrl}api/contacts/add`, { contact: options.contact, correlationId: options.correlationId });
     }
@@ -20,7 +20,7 @@ export class ContactsService {
             .get(`${this._baseUrl}api/contacts/getById?id=${options.id}`)
     }
 
-    public remove(options: { contact: any, correlationId: any }) {       
+    public remove(options: { contact: any, correlationId?: any }) {       
         this._http
             .delete(`${this._baseUrl}api/contacts/remove?id=${options.contact.id}&correlationId=${options.correlationId}`);
     }

@@ -10,11 +10,35 @@ import {TenantGuardService} from "./shared/guards/tenant-guard.service";
 export const routes: Routes = [
     {
         path: '',
-        component: ContactMasterDetailComponent,
+        component: ContactPaginatedListPageComponent,
         canActivate: [
             TenantGuardService,
             AuthGuardService
         ]        
+    },
+    {
+        path: 'contacts',
+        component: ContactPaginatedListPageComponent,
+        canActivate: [
+            TenantGuardService,
+            AuthGuardService
+        ]
+    },
+    {
+        path: 'contacts/create',
+        component: ContactEditPageComponent,
+        canActivate: [
+            TenantGuardService,
+            AuthGuardService
+        ]
+    },
+    {
+        path: 'contacts/:id',
+        component: ContactEditPageComponent,
+        canActivate: [
+            TenantGuardService,
+            AuthGuardService
+        ]
     },
     {
         path: 'tenants/set',

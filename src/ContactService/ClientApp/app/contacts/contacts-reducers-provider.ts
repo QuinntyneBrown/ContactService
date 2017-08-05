@@ -58,8 +58,8 @@ function contactsFilterReducer(state: any, action: any) {
     return Object.assign({}, state);
 }
 
-function contactAddedOrUpdated(state: any, action: any) {
-    if (action.type === contactsActions.ENTITY_ADDED_OR_UPDATED && action.payload.entityName.toLowerCase() === "contact") {        
+function contactAddedOrUpdated(state: any, action: any) {    
+    if (action.type === "[Contacts] ContactAddedOrUpdated") {        
         state.contactAddOrUpdateResponse = action.payload;
     }
     return Object.assign({}, state);

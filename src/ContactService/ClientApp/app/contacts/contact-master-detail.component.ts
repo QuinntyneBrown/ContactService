@@ -45,12 +45,10 @@ export class ContactMasterDetailComponent {
 
         this._store.filter(x => x.contactAddOrUpdateResponse.correlationId == correlationId)
             .subscribe(x => {
-                this.contacts = addOrUpdate({
-                    items: this.contacts,
-                    item: x.contactAddOrUpdateResponse.entity
-                }); 
-
-                this.contacts$.next(this.contacts);
+                this._store.dispatch({
+                    type: contactsActions.CONTACT_GET,
+                    payload: null
+                });
             });
     }
 

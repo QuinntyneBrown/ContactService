@@ -29,7 +29,10 @@ namespace ContactService.Features.Contacts
 
             public async Task<Response> Handle(Request request)
             {
-                var entity = await _context.Contacts.SingleAsync(x=>x.Id == request.Id && x.Tenant.UniqueId == request.TenantUniqueId);
+
+
+
+                var entity = await _context.Contacts.SingleAsync(x => x.Id == request.Id && x.Tenant.UniqueId == request.TenantUniqueId);
 
                 entity.IsDeleted = true;
 
@@ -39,12 +42,12 @@ namespace ContactService.Features.Contacts
                 {
                     Payload = new
                     {
-                        Id = entity.Id,
+                        Id = request.Id,
                         CorrelationId = request.CorrelationId,
-                        TenantId = request.TenantUniqueId
-                    }
+                    },
+                    TenantUniqueId = request.TenantUniqueId
                 });
-                            
+
                 return new Response();
             }
 

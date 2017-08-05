@@ -1,3 +1,10 @@
+:host {
+    display:block;
+    content:contain;
+    margin: 0px 20px;
+}
+
+
 ce-login {
     margin:40px auto;
 }

@@ -1,8 +1,7 @@
-<ce-contact-paginated-list [contacts]="this.contacts$ | async"
-                           [contacts$]="this.contacts$"
+<!--<ce-contact-paginated-list [contacts]="this.contacts"                           
                            (delete)="tryToDelete($event)"
                            (edit)="tryToEdit($event)"
                            (filterKeyUp)="handleContactsFilterKeyUp($event)">
-</ce-contact-paginated-list>
+</ce-contact-paginated-list>-->
 <ce-contact-edit (tryToSave)="tryToSave($event)"                 
                  [contact]="contact"></ce-contact-edit>

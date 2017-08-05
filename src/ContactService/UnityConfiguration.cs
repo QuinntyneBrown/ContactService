@@ -35,6 +35,7 @@ namespace ContactService
                 && x.Name.Contains("Attribute") == false
                 && x.Name.EndsWith("Hub") == false
                 && x.Name.EndsWith("Message") == false
+                && x.Name == "MemoryCache" == false
                 && x.FullName.Contains("Data.Model") == false)
                 .ToList();
 

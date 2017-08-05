@@ -27,13 +27,13 @@ namespace ContactService.Features.Core
 
         public async Task<TResponse> FromCacheOrServiceAsync<TResponse>(Func<Task<TResponse>> action, string key, double cacheDuration)
         {
-            var cached = Get(key);
+            var cached = Get<TResponse>(key);
             if (cached == null)
             {
                 cached = await action();
                 Add<TResponse>(cached, key, cacheDuration);
             }
-            return (TResponse)cached;
+            return cached;
         }
 
         public virtual TResponse FromCacheOrService<TResponse>(Func<TResponse> action, string key)
@@ -49,13 +49,13 @@ namespace ContactService.Features.Core
 
         public async Task<TResponse> FromCacheOrServiceAsync<TResponse>(Func<Task<TResponse>> action, string key)
         {
-            var cached = Get(key);
+            var cached = Get<TResponse>(key);
             if (cached == null)
             {
                 cached = await action();
                 Add(cached, key);
             }
-            return (TResponse)cached;
+            return (TResponse)cached;            
         }
     }
 }

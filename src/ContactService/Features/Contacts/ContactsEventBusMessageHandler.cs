@@ -9,9 +9,9 @@ namespace ContactService.Features.Contacts
 
     public class ContactsEventBusMessageHandler: IContactsEventBusMessageHandler
     {
-        public ContactsEventBusMessageHandler(ICacheProvider cacheProvider)
+        public ContactsEventBusMessageHandler(ICache cache)
         {
-            _cache = cacheProvider.GetCache();
+            _cache = cache;
         }
 
         public void Handle(JObject message)
