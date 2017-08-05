@@ -1,6 +1,6 @@
 ﻿using ContactService.Features.Core;
 
-namespace ContactService.Features.Incidents
+namespace ContactService.Features.Contacts
 {
     public class AddedOrUpdatedContactMessage : BaseEventBusMessage
     {        

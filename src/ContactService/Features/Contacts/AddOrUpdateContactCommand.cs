@@ -1,7 +1,7 @@
-using MediatR;
 using ContactService.Data;
 using ContactService.Data.Model;
 using ContactService.Features.Core;
+using MediatR;
 using System;
 using System.Threading.Tasks;
 using System.Data.Entity;
@@ -21,9 +21,10 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, ICache cache)
+            public Handler(ICache cache, ContactServiceContext context, IQueueClient queueClient)
             {
                 _context = context;
+                _queueClient = queueClient;
                 _cache = cache;
             }
 
@@ -53,14 +54,21 @@ namespace ContactService.Features.Contacts
                 entity.StreetAddress = request.Contact.StreetAddress;
                 
                 await _context.SaveChangesAsync();
-                
 
-                _cache.Remove($"[Contacts] Get { request.TenantUniqueId}");
+                _queueClient.Send(new AddedOrUpdatedContactMessage()
+                {
+                    Payload = new {
+                        Entity = entity,
+                        CorrelationId = request.CorrelationId
+                    },
+                    TenantUniqueId = request.TenantUniqueId
+                });
 
                 return new Response();
             }
 
             private readonly ContactServiceContext _context;
+            private readonly IQueueClient _queueClient;
             private readonly ICache _cache;
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace ContactService.Features.Incidents
+﻿namespace ContactService.Features.Contacts
 {
     public class ContactsEventBusMessages
     {

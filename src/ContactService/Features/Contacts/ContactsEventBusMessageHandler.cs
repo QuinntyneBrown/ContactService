@@ -3,7 +3,7 @@ using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace ContactService.Features.Incidents
+namespace ContactService.Features.Contacts
 {
     public interface IContactsEventBusMessageHandler: IEventBusMessageHandler { }
 

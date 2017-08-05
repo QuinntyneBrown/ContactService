@@ -21,10 +21,10 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, ICache cache)
+            public Handler(ContactServiceContext context, IQueueClient queueClient)
             {
                 _context = context;
-                _cache = cache;
+                _queueClient = queueClient;
             }
 
             public async Task<Response> Handle(Request request)
@@ -35,13 +35,21 @@ namespace ContactService.Features.Contacts
 
                 await _context.SaveChangesAsync();
 
-                _cache.Remove($"[Contacts] Get { request.TenantUniqueId}");
-                
+                _queueClient.Send(new RemovedContactMessage()
+                {
+                    Payload = new
+                    {
+                        Id = entity.Id,
+                        CorrelationId = request.CorrelationId,
+                        TenantId = request.TenantUniqueId
+                    }
+                });
+                            
                 return new Response();
             }
 
-            private readonly ContactServiceContext _context;
-            private readonly ICache _cache;
+            private readonly ContactServiceContext _context;            
+            private readonly IQueueClient _queueClient;
         }
     }
 }
