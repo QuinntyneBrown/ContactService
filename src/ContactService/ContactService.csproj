@@ -6,8 +6,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -22,8 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
@@ -264,10 +262,6 @@
     <Content Include="ClientApp\app\contacts\contact-list-item.component.css">
       <DependentUpon>contact-list-item.component.html</DependentUpon>
     </Content>
-    <Content Include="ClientApp\app\contacts\contact-master-detail.component.css">
-      <DependentUpon>contact-master-detail.component.html</DependentUpon>
-    </Content>
-    <Content Include="ClientApp\app\contacts\contact-master-detail.component.html" />
     <Content Include="ClientApp\app\contacts\contact-paginated-list-page.component.css">
       <DependentUpon>contact-paginated-list-page.component.html</DependentUpon>
     </Content>
@@ -461,19 +455,12 @@
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-paginated-list.component.ts">
       <DependentUpon>contact-paginated-list.component.html</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-effects.ts" />
-    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-reducers-provider.ts" />
-    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-store.ts" />
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-edit.component.ts">
       <DependentUpon>contact-edit.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-list-item.component.ts">
       <DependentUpon>contact-list-item.component.html</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\app\contacts\contact-master-detail.component.ts">
-      <DependentUpon>contact-master-detail.component.html</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\app\contacts\contacts.actions.ts" />
     <TypeScriptCompile Include="ClientApp\app\environment.ts" />
     <TypeScriptCompile Include="ClientApp\app\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\notifications\index.ts" />
@@ -555,8 +542,7 @@
           <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl></CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

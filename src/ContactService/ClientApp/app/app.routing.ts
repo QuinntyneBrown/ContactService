@@ -1,7 +1,6 @@
 ﻿import {Routes, RouterModule} from '@angular/router';
 import {AuthGuardService} from "./shared";
 import {LoginPageComponent} from "./users/login-page.component";
-import {ContactMasterDetailComponent} from "./contacts/contact-master-detail.component";
 import {ContactPaginatedListPageComponent} from "./contacts/contact-paginated-list-page.component";
 import {ContactEditPageComponent} from "./contacts/contact-edit-page.component";
 import {SetTenantPageComponent} from "./tenants/set-tenant-page.component";
@@ -58,7 +57,6 @@ export const RoutingModule = RouterModule.forRoot([
 ]);
 
 export const routedComponents = [
-    ContactMasterDetailComponent,
     ContactEditPageComponent,
     ContactPaginatedListPageComponent,
     LoginPageComponent,

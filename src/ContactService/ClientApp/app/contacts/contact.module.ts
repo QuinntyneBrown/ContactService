@@ -7,12 +7,8 @@ import {SharedModule} from "../shared/shared.module";
 import {ContactEditComponent} from './contact-edit.component';
 import {ContactPaginatedListComponent} from './contact-paginated-list.component';
 import {ContactListItemComponent} from "./contact-list-item.component";
-import {ContactMasterDetailComponent} from "./contact-master-detail.component";
 
 import {ContactsService} from "./contacts.service";
-import {ContactsStore} from "./contacts-store";
-import {ContactsReducersProvider} from "./contacts-reducers-provider";
-import {ContactsEffects} from "./contacts-effects";
 
 const declarables = [
     ContactEditComponent,
@@ -21,10 +17,7 @@ const declarables = [
 ];
 
 const providers = [
-    ContactsService,
-    ContactsReducersProvider,
-    ContactsEffects,
-    ContactsStore
+    ContactsService,    
 ];
 
 @NgModule({
