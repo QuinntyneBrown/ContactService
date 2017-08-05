@@ -34,6 +34,7 @@ namespace ContactService
                 .Where(x => x.Name.Contains("Controller") == false
                 && x.Name.Contains("Attribute") == false
                 && x.Name.EndsWith("Hub") == false
+                && x.Name.EndsWith("Message") == false
                 && x.FullName.Contains("Data.Model") == false)
                 .ToList();
 
@@ -45,6 +46,7 @@ namespace ContactService
             var classes = AllClasses.FromAssemblies(typeof(T1).Assembly)
                 .Where(x => x.Name.Contains("Controller") == false
                 && x.Name.Contains("Attribute") == false
+                && x.Name.EndsWith("Message") == false
                 && x.FullName.Contains("Data.Model") == false)
                 .ToList();
 

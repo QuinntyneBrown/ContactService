@@ -9,6 +9,7 @@ import {LoginRedirectService} from "./services/login-redirect.service";
 import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
 import {Dispatcher} from "./services/dispatcher";
+import {TenantGuardService} from "./guards/tenant-guard.service";
 
 import {HeaderComponent} from "./components/header.component";
 import {PagerComponent} from "./components/pager.component";
@@ -23,7 +24,8 @@ const providers = [
     EventHub,
     AuthGuardService,
     AuthenticationService,
-    LoginRedirectService,    
+    LoginRedirectService,  
+    TenantGuardService,  
     Storage
 ];
 

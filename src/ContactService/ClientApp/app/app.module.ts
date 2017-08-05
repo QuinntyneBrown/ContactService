@@ -9,6 +9,7 @@ import {ContactsModule} from "../app/contacts";
 import {NotificationsModule} from "../app/notifications";
 import {SharedModule} from "../app/shared";
 import {UsersModule} from "../app/users/users.module";
+import {TenantsModule} from "../app/tenants/tenants.module";
 
 import {AppComponent} from './app.component';
 
@@ -36,6 +37,7 @@ const providers = [];
         ContactsModule,
         NotificationsModule,
         SharedModule,
+        TenantsModule,
         UsersModule
 
     ],

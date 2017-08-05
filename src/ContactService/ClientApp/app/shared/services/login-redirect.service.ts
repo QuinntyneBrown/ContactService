@@ -18,6 +18,10 @@ export class LoginRedirectService {
         this._router.navigate([this.loginUrl]);
     }
 
+    public redirectToSetTenant() {
+        this._router.navigate(["/tenants/set"]);
+    }
+
     public redirectPreLogin() {
         if (this.lastPath && this.lastPath != this.loginUrl) {
             this._router.navigate([this.lastPath]);

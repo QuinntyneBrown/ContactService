@@ -5,8 +5,6 @@ using ContactService.Features.Core;
 using System;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Microsoft.AspNet.SignalR;
-using ContactService.Events;
 
 namespace ContactService.Features.Contacts
 {
@@ -23,11 +21,10 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, ICache cache, IDispatcher dispatcher)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;
-                _dispatcher = dispatcher;
             }
 
             public async Task<Response> Handle(Request request)
@@ -57,7 +54,6 @@ namespace ContactService.Features.Contacts
                 
                 await _context.SaveChangesAsync();
                 
-                _dispatcher.Dispatch<EventHub>(new EntityAddedOrUpdatedEvent(request.CorrelationId, entity));
 
                 _cache.Remove($"[Contacts] Get { request.TenantUniqueId}");
 
@@ -66,7 +62,6 @@ namespace ContactService.Features.Contacts
 
             private readonly ContactServiceContext _context;
             private readonly ICache _cache;
-            private readonly IDispatcher _dispatcher;
         }
     }
 }

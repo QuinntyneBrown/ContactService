@@ -1,6 +1,5 @@
 using ContactService.Data;
 using ContactService.Features.Core;
-using ContactService.Events;
 using MediatR;
 using Microsoft.AspNet.SignalR;
 using System;
@@ -22,11 +21,10 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, ICache cache, IDispatcher dispatcher)
+            public Handler(ContactServiceContext context, ICache cache)
             {
                 _context = context;
                 _cache = cache;
-                _dispatcher = dispatcher;
             }
 
             public async Task<Response> Handle(Request request)
@@ -39,14 +37,11 @@ namespace ContactService.Features.Contacts
 
                 _cache.Remove($"[Contacts] Get { request.TenantUniqueId}");
                 
-                _dispatcher.Dispatch<EventHub>(new EntityDeletedEvent(request.CorrelationId, entity));
-
                 return new Response();
             }
 
             private readonly ContactServiceContext _context;
             private readonly ICache _cache;
-            private readonly IDispatcher _dispatcher;
         }
     }
 }

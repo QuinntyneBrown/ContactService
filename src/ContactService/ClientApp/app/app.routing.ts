@@ -4,16 +4,28 @@ import {LoginPageComponent} from "./users/login-page.component";
 import {ContactMasterDetailComponent} from "./contacts/contact-master-detail.component";
 import {ContactPaginatedListPageComponent} from "./contacts/contact-paginated-list-page.component";
 import {ContactEditPageComponent} from "./contacts/contact-edit-page.component";
+import {SetTenantPageComponent} from "./tenants/set-tenant-page.component";
+import {TenantGuardService} from "./shared/guards/tenant-guard.service";
 
 export const routes: Routes = [
     {
         path: '',
         component: ContactMasterDetailComponent,
-        canActivate:[AuthGuardService]        
+        canActivate: [
+            TenantGuardService,
+            AuthGuardService
+        ]        
+    },
+    {
+        path: 'tenants/set',
+        component: SetTenantPageComponent
     },
     {
         path: 'login',
-        component: LoginPageComponent
+        component: LoginPageComponent,
+        canActivate: [
+            TenantGuardService
+        ]
     }
 ];
 
@@ -25,5 +37,6 @@ export const routedComponents = [
     ContactMasterDetailComponent,
     ContactEditPageComponent,
     ContactPaginatedListPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    SetTenantPageComponent
 ];

@@ -90,7 +90,7 @@ export class SecuredHttpService {
     private getOAuthHeaders() {
         let headers = new Headers();        
         headers.append('Authorization', `Bearer ${this._token}`);
-        headers.append('Tenant', '489902a0-a39d-4556-94b4-544d33d5ff5b');
+        headers.append('Tenant', this._storage.get({ name: constants.TENANT }));
         return headers;
     }
 

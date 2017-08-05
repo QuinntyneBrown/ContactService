@@ -18,12 +18,12 @@ export class ContactPaginatedListComponent {
         this.edit = new EventEmitter();
         this.delete = new EventEmitter();
         this.filterKeyUp = new EventEmitter();
+        this.pagedList = toPageListFromInMemory([], this.pageNumber, this.pageSize);
     }
 
     ngOnInit() {
         this.contacts$.subscribe((value) => {            
-            this.pagedList = toPageListFromInMemory(value, this.pageNumber, this.pageSize);
-            this.pagedList._data = this.pagedList._data.slice(0);
+            this.pagedList = toPageListFromInMemory(value, this.pageNumber, this.pageSize);            
         });
     }
 
