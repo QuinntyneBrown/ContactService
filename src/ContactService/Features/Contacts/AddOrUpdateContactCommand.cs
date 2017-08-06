@@ -56,15 +56,7 @@ namespace ContactService.Features.Contacts
                 
                 await _context.SaveChangesAsync();
                 
-                _bus.Publish(new AddedOrUpdatedContactMessage()
-                {
-                    Payload = new
-                    {
-                        Entity = entity,
-                        CorrelationId = request.CorrelationId
-                    },
-                    TenantUniqueId = request.TenantUniqueId
-                });
+                _bus.Publish(new AddedOrUpdatedContactMessage(entity, request.CorrelationId, request.TenantUniqueId));
                 
                 return new Response();
             }

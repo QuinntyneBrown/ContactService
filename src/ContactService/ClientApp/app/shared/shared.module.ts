@@ -12,6 +12,7 @@ import {Storage} from "./services/storage.service";
 import {Dispatcher} from "./services/dispatcher";
 import {TenantGuardService} from "./guards/tenant-guard.service";
 
+import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {TenantInterceptor} from "./interceptors/tenant.interceptor";
 
@@ -33,7 +34,12 @@ const providers = [
     Storage,
     {
         provide: HTTP_INTERCEPTORS,
-        useClass: AuthenticationService,
+        useClass: JwtInterceptor,
+        multi: true
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
         multi: true
     },
     {
