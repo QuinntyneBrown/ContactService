@@ -28,7 +28,6 @@ namespace ContactService
             app.MapSignalR();
 
             app.Use(typeof(StatusMiddleware));
-            app.Use(typeof(TenantMiddleware));
 
             config.Filters.Add(new HandleErrorAttribute(container.Resolve<ILoggerFactory>()));
 
@@ -59,11 +58,10 @@ namespace ContactService
             jSettings.ContractResolver = new SignalRContractResolver();
             config.Formatters.JsonFormatter.SerializerSettings = jSettings;
 
-            var serializer = JsonSerializer.Create(jSettings);
-
+            
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
-            GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => serializer);
+            GlobalHost.DependencyResolver.Register(typeof(JsonSerializer), () => JsonSerializer.Create(jSettings));
 
             config.MapHttpAttributeRoutes();
         }

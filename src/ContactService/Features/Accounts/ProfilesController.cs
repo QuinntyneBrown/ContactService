@@ -11,26 +11,22 @@ namespace ContactService.Features.Accounts
     public class ProfilesController : BaseApiController
     {
         public ProfilesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+            :base(mediator) { }
 
         [Route("add")]
         [HttpPost]
         [ResponseType(typeof(AddOrUpdateProfileCommand.Response))]
         public async Task<IHttpActionResult> Add(AddOrUpdateProfileCommand.Request request)
         {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("update")]
         [HttpPut]
         [ResponseType(typeof(AddOrUpdateProfileCommand.Response))]
         public async Task<IHttpActionResult> Update(AddOrUpdateProfileCommand.Request request)
-        {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+        {            
+            return Ok(await Send(request));
         }
         
         [Route("get")]
@@ -39,9 +35,7 @@ namespace ContactService.Features.Accounts
         [ResponseType(typeof(GetProfilesQuery.Response))]
         public async Task<IHttpActionResult> Get()
         {
-            var request = new GetProfilesQuery.Request();
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await _mediator.Send(new GetProfilesQuery.Request()));
         }
 
         [Route("getById")]
@@ -49,8 +43,7 @@ namespace ContactService.Features.Accounts
         [ResponseType(typeof(GetProfileByIdQuery.Response))]
         public async Task<IHttpActionResult> GetById([FromUri]GetProfileByIdQuery.Request request)
         {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("remove")]
@@ -58,8 +51,7 @@ namespace ContactService.Features.Accounts
         [ResponseType(typeof(RemoveProfileCommand.Response))]
         public async Task<IHttpActionResult> Remove([FromUri]RemoveProfileCommand.Request request)
         {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         private readonly IMediator _mediator;

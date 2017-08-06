@@ -11,17 +11,14 @@ namespace ContactService.Features.Contacts
     public class ContactController : BaseApiController
     {
         public ContactController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+            :base(mediator) { }
 
         [Route("add")]
         [HttpPost]
         [ResponseType(typeof(AddOrUpdateContactCommand.Response))]
         public async Task<IHttpActionResult> Add(AddOrUpdateContactCommand.Request request)
-        {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            await _mediator.Send(request);
+        {            
+            await Send(request);
             return Ok();
         }
 
@@ -30,8 +27,7 @@ namespace ContactService.Features.Contacts
         [ResponseType(typeof(AddOrUpdateContactCommand.Response))]
         public async Task<IHttpActionResult> Update(AddOrUpdateContactCommand.Request request)
         {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
         
         [Route("get")]
@@ -40,9 +36,8 @@ namespace ContactService.Features.Contacts
         [ResponseType(typeof(GetContactsQuery.Response))]
         public async Task<IHttpActionResult> Get()
         {
-            var request = new GetContactsQuery.Request();
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+
+            return Ok(await Send(new GetContactsQuery.Request()));
         }
 
         [Route("getById")]
@@ -50,8 +45,7 @@ namespace ContactService.Features.Contacts
         [ResponseType(typeof(GetContactByIdQuery.Response))]
         public async Task<IHttpActionResult> GetById([FromUri]GetContactByIdQuery.Request request)
         {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("remove")]
@@ -59,10 +53,7 @@ namespace ContactService.Features.Contacts
         [ResponseType(typeof(RemoveContactCommand.Response))]
         public async Task<IHttpActionResult> Remove([FromUri]RemoveContactCommand.Request request)
         {
-            request.TenantUniqueId = Request.GetTenantUniqueId();
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
-
-        private readonly IMediator _mediator;
     }
 }

@@ -1,3 +1,4 @@
+using ContactService.Features.Core;
 using ContactService.Security;
 using MediatR;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ namespace ContactService.Features.Users
 {
     [Authorize]
     [RoutePrefix("api/users")]
-    public class UserController : ApiController
+    public class UsersController : BaseApiController
     {
-        public UserController(IMediator mediator, IUserManager userManager)
+        public UsersController(IMediator mediator, IUserManager userManager)
+            :base(mediator)
         {
-            _mediator = mediator;
             _userManager = userManager;
         }
 
@@ -22,8 +23,7 @@ namespace ContactService.Features.Users
         [ResponseType(typeof(AddOrUpdateUserCommand.Response))]
         public async Task<IHttpActionResult> Add(AddOrUpdateUserCommand.Request request)
         {
-            request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("update")]
@@ -31,8 +31,7 @@ namespace ContactService.Features.Users
         [ResponseType(typeof(AddOrUpdateUserCommand.Response))]
         public async Task<IHttpActionResult> Update(AddOrUpdateUserCommand.Request request)
         {
-            request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
         
         [Route("get")]
@@ -41,8 +40,7 @@ namespace ContactService.Features.Users
         [ResponseType(typeof(GetUsersQuery.Response))]
         public async Task<IHttpActionResult> Get([FromUri]GetUsersQuery.Request request)
         {
-            request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("getById")]
@@ -50,8 +48,7 @@ namespace ContactService.Features.Users
         [ResponseType(typeof(GetUserByIdQuery.Response))]
         public async Task<IHttpActionResult> GetById([FromUri]GetUserByIdQuery.Request request)
         {
-            request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("remove")]
@@ -59,8 +56,7 @@ namespace ContactService.Features.Users
         [ResponseType(typeof(RemoveUserCommand.Response))]
         public async Task<IHttpActionResult> Remove([FromUri]RemoveUserCommand.Request request)
         {
-            request.TenantId = (await _userManager.GetUserAsync(User)).TenantId;
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(request));
         }
 
         [Route("current")]
@@ -71,15 +67,13 @@ namespace ContactService.Features.Users
         {            
             if (!User.Identity.IsAuthenticated)
                 return Ok();
-            var request = new GetUserByUsernameQuery.Request();
-            request.Username = User.Identity.Name;
-            var user = await _userManager.GetUserAsync(User);
-            request.TenantId = user.TenantId;
             
-            return Ok(await _mediator.Send(request));
+            return Ok(await Send(new GetUserByUsernameQuery.Request()
+            {
+                Username = User.Identity.Name
+            }));
         }
-
-        protected readonly IMediator _mediator;
-        protected readonly IUserManager _userManager;
+        
+        private readonly IUserManager _userManager;
     }
 }
