@@ -17,6 +17,7 @@ import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {TenantInterceptor} from "./interceptors/tenant.interceptor";
 
 import {HeaderComponent} from "./components/header.component";
+import {LeftNavComponent} from "./components/left-nav.component";
 import {PagerComponent} from "./components/pager.component";
 import {TabContentComponent} from "./components/tab-content.component";
 import {TabTitleComponent} from "./components/tab-title.component";
@@ -51,6 +52,7 @@ const providers = [
 
 const declarables = [
     HeaderComponent,
+    LeftNavComponent,
     PagerComponent,
     TabContentComponent,
     TabTitleComponent,

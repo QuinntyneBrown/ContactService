@@ -6,8 +6,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2250BEF5-1F73-47F6-8C6C-8FFBFC22F496}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -22,8 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.4</TypeScriptToolsVersion>
     <TypeScriptEmitDecoratorMetadata>true</TypeScriptEmitDecoratorMetadata>
     <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
@@ -274,6 +272,9 @@
       <DependentUpon>header.component.html</DependentUpon>
     </Content>
     <Content Include="ClientApp\app\shared\components\header.component.html" />
+    <Content Include="ClientApp\app\shared\components\left-nav.component.css">
+      <DependentUpon>left-nav.component.html</DependentUpon>
+    </Content>
     <Content Include="ClientApp\app\shared\components\pager.component.css">
       <DependentUpon>pager.component.html</DependentUpon>
     </Content>
@@ -335,6 +336,7 @@
     <Content Include="ClientApp\app\shared\components\tab-title.component.html" />
     <Content Include="ClientApp\app\contacts\contact-edit-page.component.html" />
     <Content Include="ClientApp\app\contacts\contact-paginated-list-page.component.html" />
+    <Content Include="ClientApp\app\shared\components\left-nav.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -472,6 +474,9 @@
       <DependentUpon>header.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\shared\components\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\components\left-nav.component.ts">
+      <DependentUpon>left-nav.component.html</DependentUpon>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\shared\components\pager.component.ts">
       <DependentUpon>pager.component.html</DependentUpon>
     </TypeScriptCompile>
@@ -490,6 +495,7 @@
     <TypeScriptCompile Include="ClientApp\app\shared\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\interceptors\auth.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\interceptors\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\interceptors\jwt.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\interceptors\tenant.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\guards\auth-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\authentication.service.ts" />
@@ -551,8 +557,7 @@
           <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl></CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

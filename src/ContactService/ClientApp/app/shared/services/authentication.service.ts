@@ -3,22 +3,30 @@ import {HttpService} from "./http.service";
 import {Observable} from "rxjs";
 import {constants} from "../constants";
 import {Storage} from "./storage.service";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+
+function formEncode(data: any) {
+    var pairs = [];
+    for (var name in data) {
+        pairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
+    }
+    return pairs.join('&').replace(/%20/g, '+');
+}
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private _httpService: HttpService, private _storage: Storage) { }  
+    constructor(private _httpClient: HttpClient, private _storage: Storage) { }  
 
     public tryToLogin(options: any) {
         Object.assign(options, { grant_type: "password" });
-        
-        return this._httpService.postFormEncoded("/api/user/token", options)
-            .map(response => {
-                var accessToken = response.json()["access_token"];
+
+        const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+        return this._httpClient.post("api/user/token", formEncode(options), { headers })
+            .map((response) => {
+                const accessToken = response["access_token"];
                 this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: accessToken });
                 return accessToken;
-            })
-            .catch(err => {
-                return Observable.of(false);
             });
     }
 }

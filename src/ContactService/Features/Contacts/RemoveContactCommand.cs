@@ -1,8 +1,6 @@
 using ContactService.Data;
 using ContactService.Features.Core;
 using MediatR;
-using Microsoft.AspNet.SignalR;
-using Microsoft.ServiceBus.Messaging;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
@@ -37,10 +35,8 @@ namespace ContactService.Features.Contacts
                     entity.IsDeleted = true;
 
                     await _context.SaveChangesAsync();
-
-                    var client = TopicClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName);
                     
-                    _bus.Publish(new AddedOrUpdatedContactMessage()
+                    _bus.Publish(new RemovedContactMessage()
                     {
                         Payload = new
                         {
