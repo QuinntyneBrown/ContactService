@@ -1,28 +1,32 @@
 import {Injectable} from "@angular/core";
-import {SecuredHttpService} from "../shared/services/http.service";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class ContactsService {
-    constructor(private _http: SecuredHttpService) { }
+    constructor(private _httpClient: HttpClient) { }
 
     public addOrUpdate(options: {contact:any, correlationId?:string}) {
-        this._http
-            .post(`${this._baseUrl}api/contacts/add`, { contact: options.contact, correlationId: options.correlationId });
+        this._httpClient
+            .post(`${this._baseUrl}api/contacts/add`, { contact: options.contact, correlationId: options.correlationId })
+            .toPromise();
     }
 
     public get() {
-        return this._http
-            .get(`${this._baseUrl}api/contacts/get`);
+        return this._httpClient
+            .get<any>(`${this._baseUrl}api/contacts/get`)
+            .toPromise();
     }
 
     public getById(options: { id: number }) {
-        return this._http
-            .get(`${this._baseUrl}api/contacts/getById?id=${options.id}`)
+        return this._httpClient
+            .get<any>(`${this._baseUrl}api/contacts/getById?id=${options.id}`)
+            .toPromise();
     }
 
     public remove(options: { contact: any, correlationId?: any }) {       
-        this._http
-            .delete(`${this._baseUrl}api/contacts/remove?id=${options.contact.id}&correlationId=${options.correlationId}`);
+        this._httpClient
+            .delete(`${this._baseUrl}api/contacts/remove?id=${options.contact.id}&correlationId=${options.correlationId}`)
+            .toPromise();
     }
 
     public get _baseUrl() { return "/"; }

@@ -5,7 +5,6 @@ import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 
 import {AuthGuardService} from "./guards/auth-guard.service"
 import {AuthenticationService} from "./services/authentication.service";
-import {HttpService, SecuredHttpService} from "./services/http.service";
 import {LoginRedirectService} from "./services/login-redirect.service";
 import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
@@ -24,8 +23,6 @@ import {TabTitleComponent} from "./components/tab-title.component";
 import {TabsComponent} from "./components/tabs.component";
 
 const providers = [
-    HttpService,
-    SecuredHttpService,
     Dispatcher,
     EventHub,
     AuthGuardService,
