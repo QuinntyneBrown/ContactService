@@ -392,18 +392,17 @@
     <Compile Include="Features\Core\CacheProvider.cs" />
     <Compile Include="Features\Core\CoreConfiguration.cs" />
     <Compile Include="Features\Core\DateExtensions.cs" />
+    <Compile Include="Features\Core\EventBus.cs" />
     <Compile Include="Features\Core\EventHub.cs" />
-    <Compile Include="Features\Core\EventsQueueClient.cs" />
     <Compile Include="Features\Core\HandleError.cs" />
     <Compile Include="Features\Core\HttpRequestMessageExtensions.cs" />
     <Compile Include="Features\Core\ICache.cs" />
     <Compile Include="Features\Core\ICacheProvider.cs" />
-    <Compile Include="Features\Core\IEventBusMessage.cs" />
+    <Compile Include="Features\Core\EventBusMessage.cs" />
     <Compile Include="Features\Core\IEventBusMessageHandler.cs" />
     <Compile Include="Features\Core\ILogger.cs" />
     <Compile Include="Features\Core\ILoggerFactory.cs" />
     <Compile Include="Features\Core\ILoggerProvider.cs" />
-    <Compile Include="Features\Core\IQueueClient.cs" />
     <Compile Include="Features\Core\ITopicClient.cs" />
     <Compile Include="Features\Core\Logger.cs" />
     <Compile Include="Features\Core\LoggerFactory.cs" />
@@ -486,6 +485,7 @@
       <DependentUpon>tabs.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\shared\constants.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\guards\event-hub-connection-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\guards\tenant-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\interceptors\auth.interceptor.ts" />

@@ -8,4 +8,10 @@ namespace ContactService.Features.Core
         dynamic Payload { get; set; }
         Guid TenantUniqueId { get; set; }
     }
+
+    public class EventBusMessage: IEventBusMessage {
+        public string Type { get; set; }
+        public dynamic Payload { get; set; }
+        public Guid TenantUniqueId { get; set; }
+    }
 }

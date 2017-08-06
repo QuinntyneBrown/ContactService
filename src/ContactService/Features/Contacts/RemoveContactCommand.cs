@@ -22,40 +22,43 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ContactServiceContext context, IQueueClient queueClient)
+            public Handler(ContactServiceContext context, IEventBus bus)
             {
                 _context = context;
-                _queueClient = queueClient;
+                _bus = bus;
             }
 
             public async Task<Response> Handle(Request request)
             {
-
-
-
-                var entity = await _context.Contacts.SingleAsync(x => x.Id == request.Id && x.Tenant.UniqueId == request.TenantUniqueId);
-
-                entity.IsDeleted = true;
-
-                await _context.SaveChangesAsync();
-
-                var client = TopicClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName);
-
-                client.Send(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(new AddedOrUpdatedContactMessage()
+                try
                 {
-                    Payload = new
-                    {
-                        Id = request.Id,
-                        CorrelationId = request.CorrelationId,
-                    },
-                    TenantUniqueId = request.TenantUniqueId
-                })));
+                    var entity = await _context.Contacts.SingleAsync(x => x.Id == request.Id && x.Tenant.UniqueId == request.TenantUniqueId);
 
+                    entity.IsDeleted = true;
+
+                    await _context.SaveChangesAsync();
+
+                    var client = TopicClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName);
+                    
+                    _bus.Publish(new AddedOrUpdatedContactMessage()
+                    {
+                        Payload = new
+                        {
+                            Id = request.Id,
+                            CorrelationId = request.CorrelationId,
+                        },
+                        TenantUniqueId = request.TenantUniqueId
+                    });
+
+                }
+                catch (Exception exception) {
+                    throw exception;
+                }
                 return new Response();
             }
 
-            private readonly ContactServiceContext _context;            
-            private readonly IQueueClient _queueClient;
+            private readonly ContactServiceContext _context;
+            private readonly IEventBus _bus;       
         }
     }
 }

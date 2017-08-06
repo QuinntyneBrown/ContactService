@@ -22,11 +22,11 @@ namespace ContactService.Features.Contacts
 
         public class Handler : IAsyncRequestHandler<Request, Response>
         {
-            public Handler(ICache cache, ContactServiceContext context, IQueueClient queueClient)
+            public Handler(ICache cache, ContactServiceContext context, IEventBus bus)
             {
                 _context = context;
-                _queueClient = queueClient;
                 _cache = cache;
+                _bus = bus;
             }
 
             public async Task<Response> Handle(Request request)
@@ -55,10 +55,8 @@ namespace ContactService.Features.Contacts
                 entity.StreetAddress = request.Contact.StreetAddress;
                 
                 await _context.SaveChangesAsync();
-
-                var client = TopicClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName);
                 
-                client.Send(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(new AddedOrUpdatedContactMessage()
+                _bus.Publish(new AddedOrUpdatedContactMessage()
                 {
                     Payload = new
                     {
@@ -66,15 +64,14 @@ namespace ContactService.Features.Contacts
                         CorrelationId = request.CorrelationId
                     },
                     TenantUniqueId = request.TenantUniqueId
-                })));
-
-
+                });
+                
                 return new Response();
             }
 
-            private readonly ContactServiceContext _context;
-            private readonly IQueueClient _queueClient;
+            private readonly ContactServiceContext _context;            
             private readonly ICache _cache;
+            private readonly IEventBus _bus;
         }
     }
 }

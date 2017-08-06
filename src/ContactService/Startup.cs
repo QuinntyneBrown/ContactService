@@ -9,6 +9,7 @@ using Microsoft.ServiceBus.Messaging;
 using static Newtonsoft.Json.JsonConvert;
 using Newtonsoft.Json.Linq;
 using System;
+using Newtonsoft.Json;
 
 [assembly: OwinStartup(typeof(ContactService.Startup))]
 
@@ -33,9 +34,15 @@ namespace ContactService
                     try
                     {
                         var messageBody = ((BrokeredMessage)message).GetBody<string>();
-                        var messageBodyObject = DeserializeObject<JObject>(messageBody);
+                        var messageBodyObject = DeserializeObject<JObject>(messageBody, new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                            TypeNameHandling = TypeNameHandling.All
+                        });
                         contactsEventBusMessageHandler.Handle(messageBodyObject);
-                    } catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
 
                     }
