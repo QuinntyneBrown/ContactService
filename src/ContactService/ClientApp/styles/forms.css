@@ -6,11 +6,13 @@
     font-size: 1.125em;
     line-height: 2.25em;
     border: 0.5px solid #888;
+    border-radius:0px;
 }
 
 input[type=checkbox] {
     display: inline-block;
     width: 25px;
+    border-radius:0px;
 }
 
 textarea {

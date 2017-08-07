@@ -509,6 +509,7 @@
     <TypeScriptCompile Include="ClientApp\app\shared\guards\auth-guard.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\authentication.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\broadcast.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\services\error.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\login-redirect.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\services\event-hub.ts" />

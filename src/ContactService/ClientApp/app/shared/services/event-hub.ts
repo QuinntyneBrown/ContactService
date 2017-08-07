@@ -33,7 +33,7 @@ export class EventHub {
                 this._connection = this._connection || $.hubConnection(constants.HUB_URL);
                 this._connection.qs = { "Bearer": this._storage.get({ name: constants.ACCESS_TOKEN_KEY }) };
                 this._eventHub = this._connection.createHubProxy("eventHub");                
-                this._eventHub.on("events", this.events.next);                                             
+                this._eventHub.on("events", (value) => this.events.next(value));                                             
                 this._connection.start({ transport: 'webSockets' }).done(resolve);
             } else {
                 resolve();

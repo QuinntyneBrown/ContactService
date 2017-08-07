@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, HostBinding} from "@angular/core";
 import {Storage} from "./shared/services/storage.service";
 import {constants} from "./shared/constants";
 import {Observable} from "rxjs/Observable";
@@ -21,6 +21,7 @@ export class AppComponent {
             this.isAuthenticated =  accessToken != null && accessToken != "null";
         });        
     }
-    
+
+    @HostBinding("class.isAuthenticated")     
     public isAuthenticated:boolean;
 }
