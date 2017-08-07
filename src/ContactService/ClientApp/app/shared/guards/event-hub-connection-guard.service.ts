@@ -5,13 +5,16 @@ import { constants } from "../constants";
 import { EventHub } from "../services/event-hub";
 
 @Injectable()
-export class EventHubConnectionGuardService implements CanLoad {
+export class EventHubConnectionGuardService  {
     constructor(
         private _eventHub: EventHub,
         private _storage: Storage
     ) { }
 
-    public canLoad(): Promise<boolean> {
-        return this._eventHub.connect();
+    public canActivate(): Promise<boolean> {        
+        return new Promise(resolve =>
+            this._eventHub.connect().then(() => {
+                resolve(true);
+            }));    
     }
 }

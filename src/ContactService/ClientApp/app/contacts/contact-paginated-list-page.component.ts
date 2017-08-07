@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {ContactsService} from "./contacts.service";
 import {Router} from "@angular/router";
 import {pluckOut} from "../shared/utilities/pluck-out";
-import {Dispatcher} from "../shared/services/dispatcher";
+
 @Component({
     templateUrl: "./contact-paginated-list-page.component.html",
     styleUrls: ["./contact-paginated-list-page.component.css"],
@@ -11,14 +11,11 @@ import {Dispatcher} from "../shared/services/dispatcher";
 export class ContactPaginatedListPageComponent {
     constructor(
         private _contactsService: ContactsService,
-        private _dispatcher: Dispatcher<any>,
         private _router: Router
     ) { }
 
     public async ngOnInit() {
-        this.contacts = (await this._contactsService.get()).contacts;
-
-        this._dispatcher.subscribe(x => alert(JSON.stringify(x)));
+        this.contacts = (await this._contactsService.get()).contacts;        
     }
 
     public tryToDelete($event) {        

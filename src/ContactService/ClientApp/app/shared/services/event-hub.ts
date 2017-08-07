@@ -3,10 +3,9 @@ import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {constants} from "../constants";
 import {Storage} from "./storage.service";
-import {Dispatcher} from "./dispatcher";
 import "rxjs/add/observable/fromPromise";
 import "rxjs/add/operator/map";
-
+import {Subject} from "rxjs/Subject";
 declare var $: any;
 
 enum connectionState {
@@ -17,29 +16,32 @@ enum connectionState {
 
 @Injectable()
 export class EventHub {
-    private _eventHubProxy: any;
+    private _eventHub: any;
     private _connection: any;
     private _connectionState: connectionState = connectionState.disconnected;
-    private _connectingPromise: Promise<any>;
-    constructor(private _storage: Storage, private _dispatcher: Dispatcher<any>) { } 
+    private _connectPromise: Promise<any>;
+    public events: Subject<any> = new Subject();
+    constructor(private _storage: Storage) { } 
 
-    public connect() {
-        if (this._connectingPromise)
-            return this._connectingPromise;
+    public connect() {        
+        if (this._connectPromise)
+            return this._connectPromise;
 
-        this._connectingPromise = new Promise((resolve) => {
+        this._connectPromise = new Promise((resolve) => {
             if (this._connectionState === connectionState.disconnected) {
                 this._connection = this._connection || $.hubConnection(constants.HUB_URL);
                 this._connection.qs = { "Bearer": this._storage.get({ name: constants.ACCESS_TOKEN_KEY }) };
-                this._eventHubProxy = this._connection.createHubProxy("eventHub");
-                this._eventHubProxy.on("events", this._dispatcher.dispatch);
+                this._eventHub = this._connection.createHubProxy("eventHub");                
+                this._eventHub.on("events", (value) => {
+                    this.events.next(value);
+                });                             
                 this._connection.start().done(() => {
                     resolve();
-                    this._connectingPromise = null;
                 });
             } else {
                 resolve();
             }
         });
+        return this._connectPromise;
     }       
 }

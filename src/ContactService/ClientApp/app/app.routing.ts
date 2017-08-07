@@ -5,6 +5,7 @@ import {ContactPaginatedListPageComponent} from "./contacts/contact-paginated-li
 import {ContactEditPageComponent} from "./contacts/contact-edit-page.component";
 import {SetTenantPageComponent} from "./tenants/set-tenant-page.component";
 import {TenantGuardService} from "./shared/guards/tenant-guard.service";
+import {EventHubConnectionGuardService} from "./shared/guards/event-hub-connection-guard.service";
 
 export const routes: Routes = [
     {
@@ -12,15 +13,17 @@ export const routes: Routes = [
         component: ContactPaginatedListPageComponent,
         canActivate: [
             TenantGuardService,
-            AuthGuardService
-        ]        
+            AuthGuardService,
+            EventHubConnectionGuardService
+        ]     
     },
     {
         path: 'contacts',
         component: ContactPaginatedListPageComponent,
         canActivate: [
             TenantGuardService,
-            AuthGuardService
+            AuthGuardService,
+            EventHubConnectionGuardService
         ]
     },
     {
@@ -28,16 +31,19 @@ export const routes: Routes = [
         component: ContactEditPageComponent,
         canActivate: [
             TenantGuardService,
-            AuthGuardService
-        ]
+            AuthGuardService,
+            EventHubConnectionGuardService
+        ]        
     },
     {
         path: 'contacts/:id',
         component: ContactEditPageComponent,
         canActivate: [
             TenantGuardService,
-            AuthGuardService
-        ]
+            AuthGuardService,
+            EventHubConnectionGuardService
+        ],
+        canLoad: []
     },
     {
         path: 'tenants/set',

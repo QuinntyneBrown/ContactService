@@ -11,10 +11,9 @@ namespace ContactService.Features.Contacts
 {
     public class AddOrUpdateContactCommand
     {
-        public class Request : IRequest<Response>
+        public class Request : BaseRequest, IRequest<Response>
         {
-            public ContactApiModel Contact { get; set; }
-            public Guid TenantUniqueId { get; set; }
+            public ContactApiModel Contact { get; set; }            
             public Guid CorrelationId { get; set; }
         }
 

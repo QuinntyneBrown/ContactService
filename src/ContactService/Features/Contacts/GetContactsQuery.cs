@@ -11,9 +11,7 @@ namespace ContactService.Features.Contacts
 {
     public class GetContactsQuery
     {
-        public class Request : IRequest<Response> { 
-            public Guid TenantUniqueId { get; set; }       
-        }
+        public class Request : BaseRequest, IRequest<Response> { }
 
         public class Response
         {

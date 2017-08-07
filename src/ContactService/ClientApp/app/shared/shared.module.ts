@@ -3,13 +3,14 @@ import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 
-import {AuthGuardService} from "./guards/auth-guard.service"
 import {AuthenticationService} from "./services/authentication.service";
 import {LoginRedirectService} from "./services/login-redirect.service";
 import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
-import {Dispatcher} from "./services/dispatcher";
+
+import {AuthGuardService} from "./guards/auth-guard.service"
 import {TenantGuardService} from "./guards/tenant-guard.service";
+import {EventHubConnectionGuardService} from "./guards/event-hub-connection-guard.service";
 
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
@@ -23,12 +24,12 @@ import {TabTitleComponent} from "./components/tab-title.component";
 import {TabsComponent} from "./components/tabs.component";
 
 const providers = [
-    Dispatcher,
     EventHub,
     AuthGuardService,
     AuthenticationService,
     LoginRedirectService,  
     TenantGuardService,  
+    EventHubConnectionGuardService,
     Storage,
     {
         provide: HTTP_INTERCEPTORS,

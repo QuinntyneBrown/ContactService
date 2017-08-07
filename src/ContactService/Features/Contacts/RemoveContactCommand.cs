@@ -9,10 +9,9 @@ namespace ContactService.Features.Contacts
 {
     public class RemoveContactCommand
     {
-        public class Request : IRequest<Response>
+        public class Request : BaseRequest, IRequest<Response>
         {
-            public int Id { get; set; }
-            public Guid TenantUniqueId { get; set; } 
+            public int Id { get; set; }            
             public Guid CorrelationId { get; set; }
         }
 

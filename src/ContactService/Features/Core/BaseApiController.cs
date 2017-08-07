@@ -21,7 +21,7 @@ namespace ContactService.Features.Core
             }
         }
 
-        public Task<TResponse> Send<TResponse>(IRequest<TResponse> request)
+        public Task<TResponse> Send<TResponse>(IRequest<TResponse> request)            
         {
             (request as BaseRequest).TenantUniqueId = TenantUniqueId;
             return _mediator.Send(request);

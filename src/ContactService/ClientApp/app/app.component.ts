@@ -18,7 +18,9 @@ export class AppComponent {
             }
             const accessToken = this._storage.get({ name: constants.ACCESS_TOKEN_KEY });
             this.isAuthenticated =  accessToken != null && accessToken != "null";
-        });       
+        });
+
+        this._eventHub.events.subscribe(x => console.log(x));       
     }
     
     public isAuthenticated:boolean;

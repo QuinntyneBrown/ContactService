@@ -8,9 +8,9 @@ namespace ContactService.Features.Contacts
 {
     [System.Web.Http.Authorize]
     [RoutePrefix("api/contacts")]
-    public class ContactController : BaseApiController
+    public class ContactsController : BaseApiController
     {
-        public ContactController(IMediator mediator)
+        public ContactsController(IMediator mediator)
             :base(mediator) { }
 
         [Route("add")]
