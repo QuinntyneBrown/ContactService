@@ -1,0 +1,21 @@
+:host {
+    display:grid;
+    grid-template-columns:200px 1fr;
+    grid-template-rows: 42px 1fr;
+}
+
+
+ce-header {
+    grid-column:1/3;
+    grid-row:1;
+}
+
+.router-outlet-container {
+    grid-column:2;
+    grid-row:2;
+}
+
+ce-left-nav {
+    grid-column:1;
+    grid-row:2;
+}

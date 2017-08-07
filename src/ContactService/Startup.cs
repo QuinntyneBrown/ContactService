@@ -27,7 +27,7 @@ namespace ContactService
 
                 var contactsEventBusMessageHandler = container.Resolve<Features.Contacts.IContactsEventBusMessageHandler>();
                 
-                var client = SubscriptionClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName, "contact-service");
+                var client = SubscriptionClient.CreateFromConnectionString(CoreConfiguration.Config.EventQueueConnectionString, CoreConfiguration.Config.TopicName, "contact-service-dev");
 
                 client.OnMessage(message =>
                 {
