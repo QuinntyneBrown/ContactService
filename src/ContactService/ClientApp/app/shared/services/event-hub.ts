@@ -21,6 +21,7 @@ export class EventHub {
     private _connectionState: connectionState = connectionState.disconnected;
     private _connectPromise: Promise<any>;
     public events: Subject<any> = new Subject();
+
     constructor(private _storage: Storage) { } 
 
     public connect() {        
@@ -32,16 +33,20 @@ export class EventHub {
                 this._connection = this._connection || $.hubConnection(constants.HUB_URL);
                 this._connection.qs = { "Bearer": this._storage.get({ name: constants.ACCESS_TOKEN_KEY }) };
                 this._eventHub = this._connection.createHubProxy("eventHub");                
-                this._eventHub.on("events", (value) => {
-                    this.events.next(value);
-                });                             
-                this._connection.start({ transport: 'webSockets' }).done(() => {
-                    resolve();
-                });
+                this._eventHub.on("events", this.events.next);                                             
+                this._connection.start({ transport: 'webSockets' }).done(resolve);
             } else {
                 resolve();
             }
         });
         return this._connectPromise;
-    }       
+    }      
+
+    public disconnect() {
+        if (this._connection) {
+            this._connection.stop();
+            this._connectPromise = null;
+            this._connectionState = connectionState.disconnected;
+        }
+    } 
 }

@@ -7,6 +7,7 @@ import {AuthenticationService} from "./services/authentication.service";
 import {LoginRedirectService} from "./services/login-redirect.service";
 import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
+import {ErrorService} from "./services/error.service";
 
 import {AuthGuardService} from "./guards/auth-guard.service"
 import {TenantGuardService} from "./guards/tenant-guard.service";
@@ -27,6 +28,7 @@ const providers = [
     EventHub,
     AuthGuardService,
     AuthenticationService,
+    ErrorService,
     LoginRedirectService,  
     TenantGuardService,  
     EventHubConnectionGuardService,

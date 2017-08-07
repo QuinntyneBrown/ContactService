@@ -14,13 +14,12 @@ export class AppComponent {
     constructor(private _storage: Storage, private _router: Router, private _eventHub: EventHub) {
         this._router.events.subscribe(x => {
             if (x instanceof NavigationStart && x.url =="/login") {
-                this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: null });                
+                this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: null }); 
+                this._eventHub.disconnect();               
             }
             const accessToken = this._storage.get({ name: constants.ACCESS_TOKEN_KEY });
             this.isAuthenticated =  accessToken != null && accessToken != "null";
-        });
-
-        //this._eventHub.events.subscribe(x => console.log(x));       
+        });        
     }
     
     public isAuthenticated:boolean;

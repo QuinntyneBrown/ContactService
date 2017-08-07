@@ -16,7 +16,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
             return httpEvent;
         }, (error) => {
-            alert("????");
             if (error instanceof HttpErrorResponse && error.status === 401) {
                 this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: null });
                 this._loginRedirectService.redirectToLogin();
