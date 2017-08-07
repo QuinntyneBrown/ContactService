@@ -20,7 +20,7 @@ export class AppComponent {
             this.isAuthenticated =  accessToken != null && accessToken != "null";
         });
 
-        this._eventHub.events.subscribe(x => console.log(x));       
+        //this._eventHub.events.subscribe(x => console.log(x));       
     }
     
     public isAuthenticated:boolean;

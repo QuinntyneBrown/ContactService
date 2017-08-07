@@ -1,5 +1,8 @@
 <ce-header [isAuthenticated]="isAuthenticated" ></ce-header>
-<ce-left-nav *ngIf="isAuthenticated"></ce-left-nav>
+<ce-left-nav *ngIf="isAuthenticated">
+    <ce-contacts-left-nav>
+    </ce-contacts-left-nav>
+</ce-left-nav>
 <div class="router-outlet-container">
     <router-outlet></router-outlet>
 </div>

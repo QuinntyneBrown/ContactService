@@ -7,6 +7,7 @@ namespace ContactService.Features.Core
         string EventQueueConnectionString { get; set; }
         string EventQueueName { get; set; }
         string TopicName { get; set; }
+        string SubscriptionName { get; set; }
     }
 
     public class CoreConfiguration: ConfigurationSection, ICoreConfiguration
@@ -31,6 +32,13 @@ namespace ContactService.Features.Core
         {
             get { return (string)this["topicName"]; }
             set { this["topicName"] = value; }
+        }
+
+        [ConfigurationProperty("subscriptionName")]
+        public string SubscriptionName
+        {
+            get { return (string)this["subscriptionName"]; }
+            set { this["subscriptionName"] = value; }
         }
 
         public static ICoreConfiguration Config

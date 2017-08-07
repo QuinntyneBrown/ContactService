@@ -31,7 +31,6 @@ namespace ContactService.Features.Contacts
         }
         
         [Route("get")]
-        [AllowAnonymous]
         [HttpGet]
         [ResponseType(typeof(GetContactsQuery.Response))]
         public async Task<IHttpActionResult> Get()

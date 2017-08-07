@@ -13,8 +13,7 @@ export class ContactsService {
 
     public get() {
         return this._httpClient
-            .get<any>(`${this._baseUrl}api/contacts/get`)
-            .toPromise();
+            .get<any>(`${this._baseUrl}api/contacts/get`);
     }
 
     public getById(options: { id: number }) {

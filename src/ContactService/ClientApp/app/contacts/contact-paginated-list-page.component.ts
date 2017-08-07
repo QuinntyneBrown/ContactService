@@ -16,17 +16,18 @@ export class ContactPaginatedListPageComponent {
         private _contactsService: ContactsService,
         private _eventHub: EventHub,
         private _router: Router
-    ) { }
-
-    public async ngOnInit() {
-        this.contacts = (await this._contactsService.get()).contacts;  
-
+    ) {
         this.subscription = this._eventHub.events.subscribe(x => {            
-            this._contactsService.get().then(x => {
+            this._contactsService.get().toPromise().then(x => {
                 this.contacts = x.contacts;
                 this._changeDetectorRef.detectChanges();
+                console.log(x.contacts.length);
             });
         });      
+    }
+
+    public async ngOnInit() {
+        this.contacts = (await this._contactsService.get().toPromise()).contacts;          
     }
 
     public tryToDelete($event) {        

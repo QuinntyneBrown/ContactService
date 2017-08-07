@@ -35,15 +35,7 @@ namespace ContactService.Features.Contacts
 
                     await _context.SaveChangesAsync();
                     
-                    _bus.Publish(new RemovedContactMessage()
-                    {
-                        Payload = new
-                        {
-                            Id = request.Id,
-                            CorrelationId = request.CorrelationId,
-                        },
-                        TenantUniqueId = request.TenantUniqueId
-                    });
+                    _bus.Publish(new RemovedContactMessage(request.Id,request.CorrelationId,request.TenantUniqueId));
 
                 }
                 catch (Exception exception) {

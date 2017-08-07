@@ -35,7 +35,7 @@ export class EventHub {
                 this._eventHub.on("events", (value) => {
                     this.events.next(value);
                 });                             
-                this._connection.start().done(() => {
+                this._connection.start({ transport: 'webSockets' }).done(() => {
                     resolve();
                 });
             } else {
