@@ -15,7 +15,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 @Component({
     templateUrl: "./login.component.html",
     styleUrls: [
-        "../shared/styles/forms.css",
+        "../../styles/forms.css",
         "./login.component.css"
     ],
     selector: "ce-login"

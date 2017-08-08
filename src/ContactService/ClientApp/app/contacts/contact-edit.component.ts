@@ -15,8 +15,8 @@ import {FormGroup,FormControl,Validators} from "@angular/forms";
 @Component({
     templateUrl: "./contact-edit.component.html",
     styleUrls: [
-        "../shared/styles/forms.css",
-        "../shared/styles/edit.css",
+        "../../styles/forms.css",
+        "../../styles/edit.css",
         "./contact-edit.component.css"],
     selector: "ce-contact-edit"
 })

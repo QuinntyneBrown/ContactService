@@ -4,7 +4,7 @@ import {Component,Input,ViewEncapsulation,Output,EventEmitter} from "@angular/co
 @Component({
     templateUrl: "./contact-list-item.component.html",
     styleUrls: [
-        "../shared/styles/list-item.css",
+        "../../styles/list-item.css",
         "./contact-list-item.component.css"
     ],
     selector: "ce-contact-list-item",

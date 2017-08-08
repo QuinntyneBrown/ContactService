@@ -292,10 +292,6 @@
     <Content Include="ClientApp\app\shared\components\tabs.component.css">
       <DependentUpon>tabs.component.html</DependentUpon>
     </Content>
-    <Content Include="ClientApp\app\shared\styles\edit.css" />
-    <Content Include="ClientApp\app\shared\styles\forms.css" />
-    <Content Include="ClientApp\app\shared\styles\list-item.css" />
-    <Content Include="ClientApp\app\shared\styles\list.css" />
     <Content Include="ClientApp\app\tenants\set-tenant-form.component.css">
       <DependentUpon>set-tenant-form.component.html</DependentUpon>
     </Content>
@@ -316,7 +312,10 @@
       <DependentUpon>register-page.component.html</DependentUpon>
     </Content>
     <Content Include="ClientApp\app\users\register-page.component.html" />
+    <Content Include="ClientApp\styles\edit.css" />
     <Content Include="ClientApp\styles\forms.css" />
+    <Content Include="ClientApp\styles\list-item.css" />
+    <Content Include="ClientApp\styles\list.css" />
     <Content Include="dist\app.js" />
     <Content Include="dist\vendor.js" />
     <Content Include="index.html" />
@@ -326,12 +325,6 @@
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\contact-service - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\contact-service - Web Deploy.pubxml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <Content Include="ClientApp\app\contacts\contact-edit.component.html" />
     <Content Include="ClientApp\app\contacts\contact-list-item.component.html" />
     <Content Include="ClientApp\app\shared\components\pager.component.html" />

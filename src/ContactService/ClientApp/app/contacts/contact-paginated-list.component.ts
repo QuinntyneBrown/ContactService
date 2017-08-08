@@ -6,14 +6,13 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 @Component({
     templateUrl: "./contact-paginated-list.component.html",
     styleUrls: [
-        "../shared/styles/forms.css",
-        "../shared/styles/list.css",
+        "../../styles/forms.css",
+        "../../styles/list.css",
         "./contact-paginated-list.component.css"
     ],
     selector: "ce-contact-paginated-list"
 })
 export class ContactPaginatedListComponent { 
-
     constructor() {
         this.edit = new EventEmitter();
         this.delete = new EventEmitter();
