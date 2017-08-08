@@ -18,21 +18,26 @@ export class ContactPaginatedListPageComponent {
         private _router: Router
     ) {
         this.subscription = this._eventHub.events.subscribe(x => {            
-            this._contactsService.get().toPromise().then(x => {
-                this.contacts = x.contacts;
-                this._changeDetectorRef.detectChanges();
-                console.log(x.contacts.length);
+            this._contactsService.get().toPromise().then(x => {                
+                this.unfilteredContacts = x.contacts;
+                this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;                
+                this._changeDetectorRef.detectChanges();                
             });
         });      
     }
 
+    ngOnChanges() {
+        console.log("changes");
+    }
+
     public async ngOnInit() {
-        this.contacts = (await this._contactsService.get().toPromise()).contacts;          
+        this.unfilteredContacts = (await this._contactsService.get().toPromise()).contacts;   
+        this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;       
     }
 
     public tryToDelete($event) {        
-        this.contacts = pluckOut({
-            items: this.contacts,
+        this._contacts = pluckOut({
+            items: this._contacts,
             value: $event.detail.contact.id
         });
         this._contactsService.remove({ contact: $event.detail.contact });
@@ -45,6 +50,7 @@ export class ContactPaginatedListPageComponent {
     public handleContactsFilterKeyUp($event) {
         this.filterTerm = $event.detail.value;
         this.pageNumber = 1;
+        this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;        
     }
 
     ngOnDestroy() {
@@ -53,7 +59,13 @@ export class ContactPaginatedListPageComponent {
     }
 
     private subscription: Subscription;
-    public contacts: Array<any> = [];
+    public _contacts: Array<any> = [];
     public filterTerm: string;
     public pageNumber: number;
+
+    public contacts: Array<any> = [];
+    public unfilteredContacts: Array<any> = [];
+    public get filteredContacts() {
+        return this.unfilteredContacts.filter((x) => x.email.indexOf(this.filterTerm) > -1);
+    }
 }
