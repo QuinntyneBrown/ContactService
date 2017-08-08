@@ -5,5 +5,6 @@
     LOGIN_CREDENTIALS: "LOGIN_CREDENTIALS",
     CURRENT_PROFILE_KEY: "CURRENT_PROFILE_KEY",
     CURRENT_TEAM_KEY: "CURRENT_TEAM_KEY",
-    TENANT:"[ContactService] Tenant"
+    TENANT: "[ContactService] Tenant",
+    CORRELATION_IDS_KEY: "[ContactServuce] Correlation Ids"
 };

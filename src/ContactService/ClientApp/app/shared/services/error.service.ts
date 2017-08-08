@@ -9,7 +9,9 @@ import { constants } from "../constants";
 
 @Injectable()
 export class ErrorService {
-    constructor(private _loginRedirectService: LoginRedirectService, private _storage: Storage) { }
+    constructor(private _loginRedirectService: LoginRedirectService, private _storage: Storage) {
+        this.catchErrorResponse = this.catchErrorResponse.bind(this);
+    }
 
     public catchErrorResponse(error: any): ErrorObservable {
         if (error instanceof HttpErrorResponse && error.status === 401) {
