@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {ContactsService} from "./contacts.service";
 import {Router,ActivatedRoute} from "@angular/router";
+import {guid} from "../shared/utilities/guid";
 
 @Component({
     templateUrl: "./contact-edit-page.component.html",
@@ -20,7 +21,8 @@ export class ContactEditPageComponent {
     }
 
     public tryToSave($event) {
-        this._contactsService.addOrUpdate({ contact: $event.detail.contact });
+        const correlationId = guid();
+        this._contactsService.addOrUpdate({ contact: $event.detail.contact, correlationId });
         this._router.navigateByUrl("/contacts");
     }
 

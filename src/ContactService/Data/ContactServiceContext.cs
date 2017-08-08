@@ -18,9 +18,7 @@ namespace ContactService.Data
         DbSet<User> Users { get; set; }
         Task<int> SaveChangesAsync();
     }
-
-
-
+    
     public class ContactServiceContext: DbContext, IContactServiceContext
     {
         public ContactServiceContext()

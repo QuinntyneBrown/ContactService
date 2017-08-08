@@ -1,7 +1,6 @@
 using MediatR;
 using ContactService.Data;
 using ContactService.Features.Core;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;

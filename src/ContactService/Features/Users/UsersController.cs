@@ -12,11 +12,8 @@ namespace ContactService.Features.Users
     [RoutePrefix("api/users")]
     public class UsersController : BaseApiController
     {
-        public UsersController(IMediator mediator, IUserManager userManager)
-            :base(mediator)
-        {
-            _userManager = userManager;
-        }
+        public UsersController(IMediator mediator)
+            :base(mediator) { }
 
         [Route("add")]
         [HttpPost]
@@ -72,8 +69,6 @@ namespace ContactService.Features.Users
             {
                 Username = User.Identity.Name
             }));
-        }
-        
-        private readonly IUserManager _userManager;
+        }        
     }
 }
