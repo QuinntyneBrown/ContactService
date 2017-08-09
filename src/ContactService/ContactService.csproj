@@ -433,6 +433,8 @@
     <Compile Include="Security\Roles.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UnityConfiguration.cs" />
+    <Compile Include="Data\Model\Session.cs" />
+    <Compile Include="Security\AddSessionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\AWSSDK.S3.3.3.5.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />

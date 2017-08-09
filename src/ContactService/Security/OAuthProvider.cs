@@ -57,6 +57,17 @@ namespace ContactService.Security
             }            
         }
 
+        public override async Task TokenEndpointResponse(OAuthTokenEndpointResponseContext context)
+        {            
+            await _mediator.Send(new AddSessionCommand.Request() {
+                TenantUniqueId = new Guid(context.Request.Headers.Get("Tenant")),
+                StartedOn = context.Properties.IssuedUtc,
+                ExpiresOn = context.Properties.ExpiresUtc
+            });
+
+            await base.TokenEndpointResponse(context);
+        }
+
         protected IMediator _mediator { get; set; }
         protected IAuthConfiguration _authConfiguration { get { return _lazyAuthConfiguration.Value; } }
         protected Lazy<IAuthConfiguration> _lazyAuthConfiguration;
