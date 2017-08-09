@@ -18,7 +18,9 @@ namespace ContactService.Security
         {
             var identity = new ClaimsIdentity(_authConfiguration.AuthType);
             var username = context.OwinContext.Get<string>($"{_authConfiguration.AuthType}:username");
-            var response = await _mediator.Send(new GetClaimsForUserQuery.GetClaimsForUserRequest() { Username = username });
+            var tenantUniqueId = new Guid(context.Request.Headers.Get("Tenant"));
+
+            var response = await _mediator.Send(new GetClaimsForUserQuery.Request() { Username = username, TenantUniqueId = tenantUniqueId });
 
             foreach (var claim in response.Claims)
             {
@@ -33,7 +35,10 @@ namespace ContactService.Security
             {
                 var username = context.Parameters["username"];
                 var password = context.Parameters["password"];
-                var response = await _mediator.Send(new AuthenticateCommand.AuthenticateRequest() { Username = username, Password = password });
+                var tenantUniqueId = new Guid(context.Request.Headers.Get("Tenant"));
+
+                var response = await _mediator.Send(new AuthenticateCommand.Request() { Username = username, Password = password, TenantUniqueId = tenantUniqueId });
+
                 if (response.IsAuthenticated)
                 {
                     context.OwinContext.Set($"{_authConfiguration.AuthType}:username", username);
