@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {pluckOut} from "../shared/utilities/pluck-out";
 import {EventHub} from "../shared/services/event-hub";
 import {Subscription} from "rxjs/Subscription";
+import {CorrelationIdsList} from "../shared/services/correlation-ids-list";
 
 @Component({
     templateUrl: "./contact-paginated-list-page.component.html",
@@ -14,22 +15,23 @@ export class ContactPaginatedListPageComponent {
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _contactsService: ContactsService,
+        private _correlationIdsList: CorrelationIdsList,
         private _eventHub: EventHub,
         private _router: Router
     ) {
-        this.subscription = this._eventHub.events.subscribe(x => {            
-            this._contactsService.get().toPromise().then(x => {                
-                this.unfilteredContacts = x.contacts;
-                this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;                
-                this._changeDetectorRef.detectChanges();                
-            });
+        this.subscription = this._eventHub.events.subscribe(x => {      
+            if (this._correlationIdsList.hasId(x.payload.correlationId)) {
+                this._contactsService.get().toPromise().then(x => {
+                    this.unfilteredContacts = x.contacts;
+                    this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;
+                    this._changeDetectorRef.detectChanges();
+                });
+            } else {
+                alert("contact updated...refresh browser");
+            }
         });      
     }
-
-    ngOnChanges() {
-        console.log("changes");
-    }
-
+    
     public async ngOnInit() {
         this.unfilteredContacts = (await this._contactsService.get().toPromise()).contacts;   
         this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;       

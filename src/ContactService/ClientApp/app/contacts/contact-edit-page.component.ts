@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {ContactsService} from "./contacts.service";
 import {Router,ActivatedRoute} from "@angular/router";
 import {guid} from "../shared/utilities/guid";
+import {CorrelationIdsList} from "../shared/services/correlation-ids-list";
 
 @Component({
     templateUrl: "./contact-edit-page.component.html",
@@ -11,7 +12,8 @@ import {guid} from "../shared/utilities/guid";
 export class ContactEditPageComponent {
     constructor(private _contactsService: ContactsService,
         private _router: Router,
-        private _activatedRoute: ActivatedRoute
+        private _activatedRoute: ActivatedRoute,
+        private _correlationIdsList: CorrelationIdsList
     ) { }
 
     public async ngOnInit() {
@@ -21,7 +23,7 @@ export class ContactEditPageComponent {
     }
 
     public tryToSave($event) {
-        const correlationId = guid();
+        const correlationId = this._correlationIdsList.newId();
         this._contactsService.addOrUpdate({ contact: $event.detail.contact, correlationId });
         this._router.navigateByUrl("/contacts");
     }

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {ErrorService} from "../shared/services/error.service";
+import {Contact} from "./contact.model";
 
 @Injectable()
 export class ContactsService {
@@ -15,13 +16,13 @@ export class ContactsService {
 
     public get() {
         return this._httpClient
-            .get<any>(`${this._baseUrl}api/contacts/get`)
+            .get<{ contacts: Array<Contact>}>(`${this._baseUrl}api/contacts/get`)
             .catch(this._errorService.catchErrorResponse);
     }
 
     public getById(options: { id: number }) {
         return this._httpClient
-            .get<any>(`${this._baseUrl}api/contacts/getById?id=${options.id}`)
+            .get<{contact: Contact}>(`${this._baseUrl}api/contacts/getById?id=${options.id}`)
             .catch(this._errorService.catchErrorResponse)
             .toPromise();
     }

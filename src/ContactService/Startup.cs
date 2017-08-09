@@ -10,6 +10,7 @@ using static Newtonsoft.Json.JsonConvert;
 using Newtonsoft.Json.Linq;
 using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 [assembly: OwinStartup(typeof(ContactService.Startup))]
 
@@ -38,7 +39,8 @@ namespace ContactService
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                            TypeNameHandling = TypeNameHandling.All
+                            TypeNameHandling = TypeNameHandling.All,
+                            ContractResolver= new CamelCasePropertyNamesContractResolver()                            
                         });
                         contactsEventBusMessageHandler.Handle(messageBodyObject);
                     }

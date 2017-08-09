@@ -4,6 +4,7 @@ import {RouterModule} from "@angular/router";
 import {HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 
 import {AuthenticationService} from "./services/authentication.service";
+import {CorrelationIdsList} from "./services/correlation-ids-list";
 import {LoginRedirectService} from "./services/login-redirect.service";
 import {EventHub} from "./services/event-hub";
 import {Storage} from "./services/storage.service";
@@ -28,6 +29,7 @@ const providers = [
     EventHub,
     AuthGuardService,
     AuthenticationService,
+    CorrelationIdsList,
     ErrorService,
     LoginRedirectService,  
     TenantGuardService,  

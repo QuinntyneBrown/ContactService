@@ -1,5 +1,7 @@
 ﻿using ContactService.Features.Contacts;
 using Microsoft.ServiceBus.Messaging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 
 namespace ContactService.Features.Core
@@ -24,7 +26,13 @@ namespace ContactService.Features.Core
 
         public void Publish(IEventBusMessage message) {
             _topicClient
-                .SendAsync(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(message)))
+                .SendAsync(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(message, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    TypeNameHandling = TypeNameHandling.All,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                })))
                 .GetAwaiter()
                 .GetResult();
         }
