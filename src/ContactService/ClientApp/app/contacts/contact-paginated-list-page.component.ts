@@ -20,13 +20,14 @@ export class ContactPaginatedListPageComponent {
         private _router: Router
     ) {
         this.subscription = this._eventHub.events.subscribe(x => {      
-            if (this._correlationIdsList.hasId(x.payload.correlationId)) {
+            
+            if (this._correlationIdsList.hasId(x.payload.correlationId) && x.type == "[Contacts] ContactAddedOrUpdated") {
                 this._contactsService.get().toPromise().then(x => {
                     this.unfilteredContacts = x.contacts;
                     this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;
                     this._changeDetectorRef.detectChanges();
                 });
-            } else {
+            } else if (x.type == "[Contacts] ContactAddedOrUpdated") {
                 alert("contact updated...refresh browser");
             }
         });      
@@ -38,11 +39,16 @@ export class ContactPaginatedListPageComponent {
     }
 
     public tryToDelete($event) {        
-        this._contacts = pluckOut({
-            items: this._contacts,
+        const correlationId = this._correlationIdsList.newId();
+
+        this.unfilteredContacts = pluckOut({
+            items: this.unfilteredContacts,
             value: $event.detail.contact.id
         });
-        this._contactsService.remove({ contact: $event.detail.contact });
+
+        this.contacts = this.filterTerm != null ? this.filteredContacts : this.unfilteredContacts;
+        
+        this._contactsService.remove({ contact: $event.detail.contact, correlationId });
     }
 
     public tryToEdit($event) {

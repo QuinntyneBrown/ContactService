@@ -28,9 +28,6 @@ namespace ContactService.Features.Core
             _topicClient
                 .SendAsync(new BrokeredMessage(Newtonsoft.Json.JsonConvert.SerializeObject(message, new JsonSerializerSettings
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                    TypeNameHandling = TypeNameHandling.All,
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 })))
                 .GetAwaiter()

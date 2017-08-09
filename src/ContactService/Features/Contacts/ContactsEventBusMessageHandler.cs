@@ -20,14 +20,14 @@ namespace ContactService.Features.Contacts
         {
             try
             {
-                if ($"{message["Type"]}" == ContactsEventBusMessages.AddedOrUpdatedContactMessage)
+                if ($"{message["type"]}" == ContactsEventBusMessages.AddedOrUpdatedContactMessage)
                 {
-                    _cache.Remove($"[Contacts] Get {message["TenantUniqueId"]}");
+                    _cache.Remove($"[Contacts] Get {message["tenantUniqueId"]}");
                 }
 
-                if ($"{message["Type"]}" == ContactsEventBusMessages.RemovedContactMessage)
+                if ($"{message["type"]}" == ContactsEventBusMessages.RemovedContactMessage)
                 {
-                    _cache.Remove($"[Contacts] Get {message["TenantUniqueId"]}");
+                    _cache.Remove($"[Contacts] Get {message["tenantUniqueId"]}");
                 }
 
 

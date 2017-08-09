@@ -34,13 +34,18 @@ namespace ContactService.Features.Contacts
                     entity.IsDeleted = true;
 
                     await _context.SaveChangesAsync();
-                    
-                    _bus.Publish(new RemovedContactMessage(request.Id,request.CorrelationId,request.TenantUniqueId));
+
+
 
                 }
                 catch (Exception exception) {
-                    throw exception;
+
                 }
+
+                var message = new RemovedContactMessage(request.Id, request.CorrelationId, request.TenantUniqueId);
+
+                _bus.Publish(message);
+
                 return new Response();
             }
 
