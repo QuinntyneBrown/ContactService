@@ -1,15 +1,12 @@
 ﻿using System;
 using StackExchange.Redis;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using ContactService.Data.Model;
 
 namespace ContactService.Features.Core
 {
     public class RedisCache : Cache
     {
-        private static volatile ContactService.Features.Core.RedisCache _current = null;
+        private static volatile RedisCache _current = null;
         private IDatabase _database { get; set; }
         private ConnectionMultiplexer _connection { get; set; }
 
@@ -31,23 +28,31 @@ namespace ContactService.Features.Core
 
         public override void Add(object objectToCache, string key)
         {
-            _database.StringSet(key, JsonConvert.SerializeObject(objectToCache));
+            _database.StringSet(key, JsonConvert.SerializeObject(objectToCache, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                TypeNameHandling = TypeNameHandling.All,
+            }));
         }
 
         public override void Add<T>(object objectToCache, string key) => Add(objectToCache, key);
 
-
         public override void Add<T>(object objectToCache, string key, double cacheDuration)
         {
-            _database.StringSet(key, JsonConvert.SerializeObject(objectToCache), TimeSpan.FromMinutes(cacheDuration));
+            _database.StringSet(key, JsonConvert.SerializeObject(objectToCache, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                TypeNameHandling = TypeNameHandling.All
+            }), TimeSpan.FromMinutes(cacheDuration));
         }
 
         public override void ClearAll()
         {
-            var connection = Connection;
-            foreach (var endpoint in connection.GetEndPoints(true))
-            {                
-                var server = connection.GetServer(endpoint);
+            foreach (var endpoint in _connection.GetEndPoints(true))
+            {
+                var server = _connection.GetServer(endpoint);
                 server.FlushAllDatabases();
             }
         }
@@ -60,7 +65,7 @@ namespace ContactService.Features.Core
 
             if (redisValue.IsNull)
                 return default(T);
-            
+
             return JsonConvert.DeserializeObject<T>(redisValue
                                     , new JsonSerializerSettings
                                     {
@@ -74,9 +79,7 @@ namespace ContactService.Features.Core
         {
             try
             {
-                IDatabase cache = Connection.GetDatabase();
-
-                RedisValue redisValue = cache.StringGet(key);
+                RedisValue redisValue = _database.StringGet(key);
 
                 if (redisValue.IsNull)
                     return null;
@@ -89,29 +92,13 @@ namespace ContactService.Features.Core
                             TypeNameHandling = TypeNameHandling.All
                         });
 
-            }catch(Exception exception)
+            }
+            catch (Exception exception)
             {
                 throw exception;
             }
         }
 
-        public override void Remove(string key)
-        {
-            IDatabase cache = Connection.GetDatabase();
-            cache.KeyDelete(key);
-        }
-
-        private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-        {
-            return ConnectionMultiplexer.Connect(RedisCacheConfiguration.Config.ConnectionString);
-        });
-
-        public static ConnectionMultiplexer Connection
-        {
-            get
-            {
-                return lazyConnection.Value;
-            }
-        }
+        public override void Remove(string key) => _database.KeyDelete(key);
     }
 }

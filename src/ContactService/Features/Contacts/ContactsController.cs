@@ -15,13 +15,10 @@ namespace ContactService.Features.Contacts
 
         [Route("add")]
         [HttpPost]
+        [AllowAnonymous]
         [ResponseType(typeof(AddOrUpdateContactCommand.Response))]
-        public async Task<IHttpActionResult> Add(AddOrUpdateContactCommand.Request request)
-        {            
-            await Send(request);
-            return Ok();
-        }
-
+        public async Task<IHttpActionResult> Add(AddOrUpdateContactCommand.Request request) => Ok(await Send(request));
+        
         [Route("update")]
         [HttpPut]
         [ResponseType(typeof(AddOrUpdateContactCommand.Response))]

@@ -7,10 +7,12 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Swashbuckle.Application;
 using System;
+using System.Net.Http;
 using System.Reflection;
 using System.Web.Http;
 
@@ -24,6 +26,11 @@ namespace ContactService
         {
             WebApiUnityActionFilterProvider.RegisterFilterProviders(config);
             var container = GetContainer();
+
+            var httpClient = container.Resolve<HttpClient>();
+
+            var response = httpClient.GetAsync("http://identity.quinntynebrown.com/api/symetrickeys/get").Result;
+            var jObject = response.Content.ReadAsAsync<JObject>().Result;
 
             app.MapSignalR();
 
@@ -43,10 +50,8 @@ namespace ContactService
                 c.SingleApiVersion("v1", "ContactService");
             })
             .EnableSwaggerUi();
-
-            app.UseOAuthAuthorizationServer(new OAuthOptions(lazyAuthConfiguration, mediator));
-
-            app.UseJwtBearerAuthentication(new JwtOptions(lazyAuthConfiguration));
+        
+            app.UseJwtBearerAuthentication(new JwtOptions("all", "http://identity.quinntynebrown.com", $"{jObject["key"]}"));
 
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 

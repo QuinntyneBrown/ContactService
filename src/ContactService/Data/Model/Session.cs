@@ -18,9 +18,9 @@ namespace ContactService.Data.Model
         
         public string AccessToken { get; set; }
 
-        public DateTime? StartedOn { get; set; }
+        public DateTimeOffset? StartedOn { get; set; }
         
-        public DateTime? ExpiresOn { get; set; } 
+        public DateTimeOffset? ExpiresOn { get; set; } 
 
 		public DateTime CreatedOn { get; set; }
         

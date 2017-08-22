@@ -17,7 +17,10 @@ namespace ContactService
 
             container.RegisterType<HttpClient>(
                 new ContainerControlledLifetimeManager(),
-                new InjectionFactory(x => new HttpClient()));
+                new InjectionFactory(x => {
+
+                    return new HttpClient();
+                }));
 
             container.RegisterInstance(AuthConfiguration.LazyConfig);
 

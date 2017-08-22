@@ -21,7 +21,7 @@ export class AuthenticationService {
 
         const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-        return this._httpClient.post("api/user/token", formEncode(options), { headers })
+        return this._httpClient.post("api/users/token", formEncode(options), { headers })
             .map((response) => {
                 const accessToken = response["access_token"];
                 this._storage.put({ name: constants.ACCESS_TOKEN_KEY, value: accessToken });

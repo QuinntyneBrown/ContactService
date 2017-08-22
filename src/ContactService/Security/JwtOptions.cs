@@ -1,22 +1,17 @@
 using Microsoft.Owin.Security.Jwt;
-using System;
-using ContactService.Security;
 
 namespace ContactService.Security
 {
     public class JwtOptions : JwtBearerAuthenticationOptions
     {
-        public JwtOptions(Lazy<IAuthConfiguration> lazyAuthConfiguration)
+        public JwtOptions(string audience, string issuer, string symetricKey)
         {
-            _lazyAuthConfiguration = lazyAuthConfiguration;
-            AllowedAudiences = new[] { _authConfiguration.JwtAudience };
+            AllowedAudiences = new[] { audience };
             IssuerSecurityTokenProviders = new[] 
             {
-                new SymmetricKeyIssuerSecurityTokenProvider(_authConfiguration.JwtIssuer, _authConfiguration.JwtKey)
+                new SymmetricKeyIssuerSecurityTokenProvider(issuer,symetricKey)
             };
         }
-
-        protected IAuthConfiguration _authConfiguration { get { return _lazyAuthConfiguration.Value; } }
-        protected Lazy<IAuthConfiguration> _lazyAuthConfiguration;
+        
     }
 }
