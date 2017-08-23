@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 using static ContactService.Constants;
 
-namespace ContactService.Data.Model
+namespace ContactService.Model
 {
     [SoftDelete("IsDeleted")]
     public class Contact: ILoggable

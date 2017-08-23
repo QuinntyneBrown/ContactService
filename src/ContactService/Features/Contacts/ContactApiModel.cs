@@ -1,4 +1,4 @@
-using ContactService.Data.Model;
+using ContactService.Model;
 
 namespace ContactService.Features.Contacts
 {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Data.Entity;
+using ContactService.Model;
 
 namespace ContactService.Features.Contacts
 {
@@ -27,7 +28,7 @@ namespace ContactService.Features.Contacts
 
             public async Task<Response> Handle(Request request)
             {
-                var contacts = await _cache.FromCacheOrServiceAsync<List<Data.Model.Contact>>(() => _context.Contacts
+                var contacts = await _cache.FromCacheOrServiceAsync<List<Contact>>(() => _context.Contacts
                     .Include(x => x.Tenant)
                     .Where(x => x.Tenant.UniqueId == request.TenantUniqueId)
                     .ToListAsync(), $"[Contacts] Get {request.TenantUniqueId}");

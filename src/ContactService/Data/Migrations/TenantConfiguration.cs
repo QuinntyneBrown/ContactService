@@ -1,6 +1,6 @@
 using System.Data.Entity.Migrations;
 using ContactService.Data;
-using ContactService.Data.Model;
+using ContactService.Model;
 using System;
 
 namespace ContactService.Migrations

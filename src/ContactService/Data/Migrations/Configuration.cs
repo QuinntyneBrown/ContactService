@@ -14,8 +14,6 @@ namespace ContactService.Migrations
         protected override void Seed(ContactServiceContext context)
         {
             TenantConfiguration.Seed(context);
-            RoleConfiguration.Seed(context);
-            UserConfiguration.Seed(context);
         }
     }
 

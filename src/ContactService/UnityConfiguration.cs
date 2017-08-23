@@ -1,4 +1,5 @@
-using ContactService.Security;
+
+using ContactService.Features.Core;
 using MediatR;
 using Microsoft.Practices.Unity;
 using System;
@@ -22,7 +23,12 @@ namespace ContactService
                     return new HttpClient();
                 }));
 
-            container.RegisterInstance(AuthConfiguration.LazyConfig);
+            container.RegisterType<ICache>(
+                new ContainerControlledLifetimeManager(),
+                new InjectionFactory(x => {
+                    return new MemoryCache();
+                }));
+
 
             return container;
         }
@@ -38,8 +44,8 @@ namespace ContactService
                 && x.Name.Contains("Attribute") == false
                 && x.Name.EndsWith("Hub") == false
                 && x.Name.EndsWith("Message") == false
-                && x.Name == "MemoryCache" == false
-                && x.FullName.Contains("Data.Model") == false)
+                && x.Name.EndsWith("Cache") == false
+                && x.FullName.Contains("Model") == false)
                 .ToList();
 
             return container.RegisterClassesTypesAndInstances(classes);

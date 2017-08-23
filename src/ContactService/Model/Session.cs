@@ -1,24 +1,27 @@
 using System;
 using System.Collections.Generic;
 using ContactService.Data.Helpers;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ContactService.Data.Model
+using static ContactService.Constants;
+
+namespace ContactService.Model
 {
     [SoftDelete("IsDeleted")]
-    public class Profile: ILoggable
+    public class Session: ILoggable
     {
         public int Id { get; set; }
         
 		[ForeignKey("Tenant")]
         public int? TenantId { get; set; }
         
-		[Index("NameIndex", IsUnique = false)]
-        [Column(TypeName = "VARCHAR")]        
-		public string Name { get; set; }
+        public string AccessToken { get; set; }
 
-        public bool IsPrimary { get; set; }
+        public DateTimeOffset? StartedOn { get; set; }
         
+        public DateTimeOffset? ExpiresOn { get; set; } 
+
 		public DateTime CreatedOn { get; set; }
         
 		public DateTime LastModifiedOn { get; set; }

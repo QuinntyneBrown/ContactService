@@ -1,5 +1,5 @@
 using ContactService.Data;
-using ContactService.Data.Model;
+using ContactService.Model;
 using ContactService.Features.Core;
 using MediatR;
 using System;

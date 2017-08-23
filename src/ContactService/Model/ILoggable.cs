@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContactService.Data.Model
+namespace ContactService.Model
 {
     public interface ILoggable
     {

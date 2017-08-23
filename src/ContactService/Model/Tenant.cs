@@ -1,19 +1,19 @@
 using ContactService.Data.Helpers;
 using static ContactService.Constants;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ContactService.Data.Model
+namespace ContactService.Model
 {
     [SoftDelete("IsDeleted")]
-    public class Role: ILoggable
+    public class Tenant: ILoggable
     {
         public int Id { get; set; }
 
-        [ForeignKey("Tenant")]
-        public int? TenantId { get; set; }
+        [Index("UniqueIdIndex", IsUnique = true)]
+        [Column(TypeName = "UNIQUEIDENTIFIER")]
+        public Guid UniqueId { get; set; } = Guid.NewGuid();
 
         [Index("NameIndex", IsUnique = true)]
         [Column(TypeName = "VARCHAR")]
@@ -29,9 +29,5 @@ namespace ContactService.Data.Model
         public string LastModifiedBy { get; set; }
 
         public bool IsDeleted { get; set; }
-
-        public ICollection<User> Users { get; set; } = new HashSet<User>();
-
-        public virtual Tenant Tenant { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using ContactService.Features.Core;
-using ContactService.Security;
+
 using MediatR;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
 using Newtonsoft.Json;
@@ -43,7 +44,6 @@ namespace ContactService
             config.SuppressHostPrincipal();
 
             var mediator = container.Resolve<IMediator>();
-            Lazy<IAuthConfiguration> lazyAuthConfiguration = UnityConfiguration.GetContainer().Resolve<Lazy<IAuthConfiguration>>();
 
             config.EnableSwagger(c => {
                 c.UseFullTypeNameInSchemaIds();
@@ -70,6 +70,19 @@ namespace ContactService
 
             config.MapHttpAttributeRoutes();
         }
+    }
+
+    public class JwtOptions : JwtBearerAuthenticationOptions
+    {
+        public JwtOptions(string audience, string issuer, string symetricKey)
+        {
+            AllowedAudiences = new[] { audience };
+            IssuerSecurityTokenProviders = new[]
+            {
+                new SymmetricKeyIssuerSecurityTokenProvider(issuer,symetricKey)
+            };
+        }
+
     }
 
     public class SignalRContractResolver : IContractResolver
