@@ -270,9 +270,6 @@
     <Content Include="ClientApp\app\contacts\contact-paginated-list.component.css">
       <DependentUpon>contact-paginated-list.component.html</DependentUpon>
     </Content>
-    <Content Include="ClientApp\app\contacts\contacts-left-nav.component.css">
-      <DependentUpon>contacts-left-nav.component.html</DependentUpon>
-    </Content>
     <Content Include="ClientApp\app\shared\components\header.component.css">
       <DependentUpon>header.component.html</DependentUpon>
     </Content>
@@ -331,7 +328,6 @@
     <Content Include="ClientApp\app\contacts\contact-edit-page.component.html" />
     <Content Include="ClientApp\app\contacts\contact-paginated-list-page.component.html" />
     <Content Include="ClientApp\app\shared\components\left-nav.component.html" />
-    <Content Include="ClientApp\app\contacts\contacts-left-nav.component.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -424,9 +420,6 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\contacts\contact-list-item.component.ts">
       <DependentUpon>contact-list-item.component.html</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="ClientApp\app\contacts\contacts-left-nav.component.ts">
-      <DependentUpon>contacts-left-nav.component.html</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\app\environment.ts" />
     <TypeScriptCompile Include="ClientApp\app\index.ts" />

@@ -1,7 +1,14 @@
 <ce-header [isAuthenticated]="isAuthenticated" ></ce-header>
 <ce-left-nav *ngIf="isAuthenticated">
-    <ce-contacts-left-nav>
-    </ce-contacts-left-nav>
+    <h3>Contacts</h3>
+    <ul>
+        <li>
+            <a routerLink="/contacts/create">create</a>
+        </li>
+        <li>
+            <a routerLink="/contacts">list</a>
+        </li>
+    </ul>
 </ce-left-nav>
 <div class="router-outlet-container">
     <router-outlet></router-outlet>

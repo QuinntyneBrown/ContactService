@@ -1,50 +1,18 @@
 ﻿import {Routes, RouterModule} from '@angular/router';
 import {AuthGuardService} from "./shared/guards/auth-guard.service";
 import {LoginPageComponent} from "./users/login-page.component";
-import {ContactPaginatedListPageComponent} from "./contacts/contact-paginated-list-page.component";
-import {ContactEditPageComponent} from "./contacts/contact-edit-page.component";
 import {SetTenantPageComponent} from "./tenants/set-tenant-page.component";
 import {TenantGuardService} from "./shared/guards/tenant-guard.service";
 import {EventHubConnectionGuardService} from "./shared/guards/event-hub-connection-guard.service";
 
+import {CONTACT_ROUTES} from "./contacts/contact.module";
+
 export const routes: Routes = [
     {
         path: '',
-        component: ContactPaginatedListPageComponent,
-        canActivate: [
-            TenantGuardService,
-            AuthGuardService,
-            EventHubConnectionGuardService
-        ]     
-    },
-    {
-        path: 'contacts',
-        component: ContactPaginatedListPageComponent,
-        canActivate: [
-            TenantGuardService,
-            AuthGuardService,
-            EventHubConnectionGuardService
-        ]
-    },
-    {
-        path: 'contacts/create',
-        component: ContactEditPageComponent,
-        canActivate: [
-            TenantGuardService,
-            AuthGuardService,
-            EventHubConnectionGuardService
-        ]        
-    },
-    {
-        path: 'contacts/:id',
-        component: ContactEditPageComponent,
-        canActivate: [
-            TenantGuardService,
-            AuthGuardService,
-            EventHubConnectionGuardService
-        ],
-        canLoad: []
-    },
+        redirectTo: 'contacts',
+        pathMatch:'full'
+    },    
     {
         path: 'tenants/set',
         component: SetTenantPageComponent
@@ -59,12 +27,11 @@ export const routes: Routes = [
 ];
 
 export const RoutingModule = RouterModule.forRoot([
+    ...CONTACT_ROUTES,
     ...routes
 ]);
 
 export const routedComponents = [
-    ContactEditPageComponent,
-    ContactPaginatedListPageComponent,
     LoginPageComponent,
     SetTenantPageComponent
 ];
