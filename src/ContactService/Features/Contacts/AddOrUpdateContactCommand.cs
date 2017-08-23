@@ -5,7 +5,6 @@ using MediatR;
 using System;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Microsoft.ServiceBus.Messaging;
 
 namespace ContactService.Features.Contacts
 {

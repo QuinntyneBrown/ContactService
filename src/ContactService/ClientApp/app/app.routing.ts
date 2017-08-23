@@ -1,9 +1,7 @@
 ﻿import {Routes, RouterModule} from '@angular/router';
-import {AuthGuardService} from "./shared/guards/auth-guard.service";
 import {LoginPageComponent} from "./users/login-page.component";
 import {SetTenantPageComponent} from "./tenants/set-tenant-page.component";
 import {TenantGuardService} from "./shared/guards/tenant-guard.service";
-import {EventHubConnectionGuardService} from "./shared/guards/event-hub-connection-guard.service";
 
 import {CONTACT_ROUTES} from "./contacts/contact.module";
 
