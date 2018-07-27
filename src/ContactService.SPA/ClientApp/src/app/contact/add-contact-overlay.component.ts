@@ -22,10 +22,7 @@ export class AddContactOverlayComponent {
       this._contactService.getById({ contactId: this.contactId })
         .pipe(
           map(x => this.contact$.next(x)),
-          switchMap(x => this.contact$),
-          map(x => this.form.patchValue({
-            firstname: x.firstname
-          }))
+          switchMap(x => this.contact$)
         )
         .subscribe();
   }
@@ -44,20 +41,14 @@ export class AddContactOverlayComponent {
     this._overlay.close();
   }
 
-  public handleSaveClick() {
-    const contact = new Contact();
-    contact.contactId = this.contactId;
-    contact.firstname = this.form.value.firstname;
-    this._contactService.create({ contact })
+  public handleSaveClick($event) {
+
+    this._contactService.create({ contact: $event.contact })
       .pipe(
-        map(x => contact.contactId = x.contactId),
-        tap(x => this._overlay.close(contact)),
+        map(x => $event.contact.contactId = x.contactId),
+        tap(x => this._overlay.close($event.contact)),
         takeUntil(this.onDestroy)
       )
       .subscribe();
   }
-
-  public form: FormGroup = new FormGroup({
-    firstname: new FormControl(null, [])
-  });
 } 

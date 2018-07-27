@@ -1,0 +1,34 @@
+<form novalidate autocomplete="off" spellcheck="false" [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Firstname"
+           id="firstname"
+           formControlName="firstname">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Lastname"
+           id="lastname"
+           formControlName="lastname">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Company Name"
+           id="companyName"
+           formControlName="companyName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email"
+           id="email"
+           formControlName="email">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="handleSaveClick()">
+    Save
+  </button>
+
+  <button mat-raised-button (click)="cancel.emit()">
+    Cancel
+  </button>
+
+</form>
