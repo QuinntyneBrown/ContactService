@@ -1,0 +1,13 @@
+<section class="mat-typography">
+  <h2>Contacts</h2>
+</section>
+
+<section class="actions">
+  <button mat-button (click)="openOverlay()">
+    Add Contact
+  </button>
+</section>
+
+<app-grid [columns]="columns" [data]="contacts$ | async">
+
+</app-grid>

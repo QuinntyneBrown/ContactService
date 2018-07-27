@@ -1,0 +1,24 @@
+<h2>Add Contact</h2>
+
+<form novalidate autocomplete="off" spellcheck="false" [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Firstname"
+           id="firstname"
+           formControlName="firstname"
+           required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="handleSaveClick()">
+    Save
+  </button>
+
+  <button mat-raised-button (click)="handleCancelClick()">
+    Cancel
+  </button>
+
+</form>
+
+
+<mat-error *ngIf="errorMessage">
+  {{ errorMessage }}
+</mat-error>

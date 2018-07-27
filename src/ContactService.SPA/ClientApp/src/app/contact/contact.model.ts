@@ -1,4 +1,4 @@
 export class Contact {
   public contactId: string;
-  public name: string;
+  public firstname: string;
 }

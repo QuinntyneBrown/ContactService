@@ -24,7 +24,7 @@ export class AddContactOverlayComponent {
           map(x => this.contact$.next(x)),
           switchMap(x => this.contact$),
           map(x => this.form.patchValue({
-            name: x.name
+            firstname: x.firstname
           }))
         )
         .subscribe();
@@ -47,7 +47,7 @@ export class AddContactOverlayComponent {
   public handleSaveClick() {
     const contact = new Contact();
     contact.contactId = this.contactId;
-    contact.name = this.form.value.name;
+    contact.firstname = this.form.value.firstname;
     this._contactService.create({ contact })
       .pipe(
         map(x => contact.contactId = x.contactId),
@@ -58,6 +58,6 @@ export class AddContactOverlayComponent {
   }
 
   public form: FormGroup = new FormGroup({
-    name: new FormControl(null, [])
+    firstname: new FormControl(null, [])
   });
 } 
